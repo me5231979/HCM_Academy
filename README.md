@@ -16,6 +16,15 @@ Kept deliberately short:
 2. **Choose a topic**: a search box and topic filter buttons (built from the cards, so a new card gets a button automatically; give it a `data-short` label), then eight cards (Start Here plus seven topic areas), each listing its course and sub-course links.
 3. **Footer**: contact and accessibility statement.
 
+## Assessments and completion (mock-up)
+
+- **Pre-assessment** pops up on the first visit: one placeholder question per topic, not graded, and it lists the topics to start with.
+- **Course completion**: every course line is a button; clicking it toggles a green check circle (mock-up stand-in for finishing the real course).
+- **Final assessment** opens automatically once every course is complete (also from the progress panel). 90% or higher marks HCM Academy complete; below that offers a retake. Pass mark: `PASS` in the last script.
+- **Demo controls** in the progress panel: Mark all complete, Reset demo.
+- Progress is saved only in this browser (`localStorage` keys `hcm-pre`, `hcm-done`, `hcm-final`); nothing is sent anywhere.
+- To add real questions, replace `buildQs` placeholder text with a question bank per topic.
+
 ## Adding a course when it ships
 
 Each course line shows "Coming soon". When a course is live, replace that
