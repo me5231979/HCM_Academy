@@ -1,7 +1,7 @@
 # HCM Academy
 
 The landing page for Vanderbilt's HCM Academy: what the HCM role is, what the
-Academy is for, and the six topics with their courses.
+Academy is for, and the seven topics with their courses.
 
 Built with the Vanderbilt FLH course builder pattern, matching Working Smarter
 (`me5231979/Course_Library`, `learn/index.html`): same colors, type, header,
@@ -13,7 +13,7 @@ no build step, no backend. Fonts and lockups live in `assets/`.
 Kept deliberately short:
 
 1. **Hero**: what an HCM is (people embedded in the business who own the people work for their area) and what the Academy is for: learn, share, meet, get answers.
-2. **Choose a topic**: six cards, one per area, each listing its course and sub-course links.
+2. **Choose a topic**: seven cards, one per area, each listing its course and sub-course links.
 3. **Footer**: contact and accessibility statement.
 
 ## Adding a course when it ships
