@@ -82,6 +82,22 @@ header .cta:hover{ background:var(--highlight); }
 .links a{ color:var(--oak); font-weight:600; }
 .soon{ font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.05em; text-transform:uppercase; color:rgba(28,28,28,.72); white-space:nowrap; }
 
+/* finder: search and topic filter */
+.finder{ margin-top:28px; }
+.finder label{ display:block; color:var(--black); margin-bottom:8px; }
+.finder input{ width:100%; max-width:520px; font:inherit; font-size:1rem; padding:12px 14px; min-height:48px;
+  border:1px solid #B8AD98; border-radius:4px; background:#fff; color:var(--black); }
+.finder input::placeholder{ color:rgba(28,28,28,.6); }
+.chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+.chips button{ font:inherit; font-size:.875rem; min-height:44px; padding:8px 14px; border-radius:4px; cursor:pointer;
+  border:1px solid #B8AD98; background:#fff; color:var(--black); transition:background-color .2s, color .2s, border-color .2s; }
+.chips button:hover{ border-color:var(--oak); }
+.chips button[aria-pressed="true"]{ background:var(--black); border-color:var(--black); color:#fff; }
+.count{ margin-top:14px; font-size:.9rem; color:rgba(28,28,28,.75); }
+.none{ margin-top:24px; }
+.none button{ font:inherit; background:none; border:0; border-bottom:1px solid var(--oak); color:var(--oak); cursor:pointer; padding:2px 0; min-height:24px; }
+.card[hidden],.links li[hidden]{ display:none; }
+
 /* footer */
 footer{ padding:40px 0; text-align:center; }
 footer img{ width:90px; height:auto; margin:0 auto; }
@@ -128,8 +144,16 @@ footer a{ color:var(--gold); }
       <p class="mono eyebrow">Learn</p>
       <h2 id="topicsTitle">Choose a <em>topic</em>.</h2>
 
+      <div class="finder" id="finder" hidden>
+        <label class="mono" for="q">Search courses</label>
+        <input id="q" type="search" placeholder="Try FMLA, costing, or UKG" autocomplete="off" />
+        <div class="chips" id="chips" role="group" aria-label="Filter by topic"></div>
+        <p class="count" id="count" role="status" aria-live="polite"></p>
+      </div>
+      <p class="none" id="none" hidden>No courses match that search. <button type="button" id="clear">Clear search and filters</button></p>
+
       <div class="grid">
-        <article class="card" id="start">
+        <article class="card" id="start" data-short="Start Here">
           <span class="no" aria-hidden="true">00</span>
           <h3>Start Here: HCM Foundations</h3>
           <p>The structure, workflow, and responsibilities every HCM needs first.</p>
@@ -143,7 +167,7 @@ footer a{ color:var(--gold); }
           </ul>
         </article>
 
-        <article class="card" id="recruiting">
+        <article class="card" id="recruiting" data-short="Recruiting">
           <span class="no" aria-hidden="true">01</span>
           <h3>Recruitment &amp; Hiring</h3>
           <p>From an open role to an accepted offer, including student workers.</p>
@@ -152,7 +176,7 @@ footer a{ color:var(--gold); }
           </ul>
         </article>
 
-        <article class="card" id="payroll">
+        <article class="card" id="payroll" data-short="Payroll">
           <span class="no" aria-hidden="true">02</span>
           <h3>Payroll &amp; Timecards</h3>
           <p>Getting time approved and pay right every cycle.</p>
@@ -164,7 +188,7 @@ footer a{ color:var(--gold); }
           </ul>
         </article>
 
-        <article class="card" id="positions">
+        <article class="card" id="positions" data-short="Positions">
           <span class="no" aria-hidden="true">03</span>
           <h3>Onboarding, Offboarding, Transfers &amp; Managing Positions</h3>
           <p>Setting up positions and every move a person makes in them.</p>
@@ -176,7 +200,7 @@ footer a{ color:var(--gold); }
           </ul>
         </article>
 
-        <article class="card" id="leave">
+        <article class="card" id="leave" data-short="Leave">
           <span class="no" aria-hidden="true">04</span>
           <h3>Leave Management</h3>
           <p>Recording time away and leaves of absence.</p>
@@ -188,7 +212,7 @@ footer a{ color:var(--gold); }
           </ul>
         </article>
 
-        <article class="card" id="costing">
+        <article class="card" id="costing" data-short="Costing">
           <span class="no" aria-hidden="true">05</span>
           <h3>Costing Management</h3>
           <p>Charging each salary to the right account.</p>
@@ -199,13 +223,13 @@ footer a{ color:var(--gold); }
           </ul>
         </article>
 
-        <article class="card" id="students">
+        <article class="card" id="students" data-short="Students">
           <span class="no" aria-hidden="true">06</span>
           <h3>Student Hiring and Assignment Changes</h3>
           <p>Hiring student workers and changing their jobs between terms.</p>
         </article>
 
-        <article class="card" id="records">
+        <article class="card" id="records" data-short="Records &amp; Reporting">
           <span class="no" aria-hidden="true">07</span>
           <h3>Document Records &amp; Reporting</h3>
           <p>Keeping employee documents complete and pulling the reports your area needs.</p>
@@ -227,5 +251,50 @@ footer a{ color:var(--gold); }
     <p>HCM Academy &middot; An internal training prototype, not an official Vanderbilt University site. Built to meet WCAG 2.2 AA; if anything is hard to use, tell us: <a href="mailto:pcb@vanderbilt.edu">pcb@vanderbilt.edu</a></p>
   </div>
 </footer>
+<script>
+(function(){
+  'use strict';
+  var finder = document.getElementById('finder'), q = document.getElementById('q'),
+      chips = document.getElementById('chips'), count = document.getElementById('count'),
+      none = document.getElementById('none'), cards = Array.prototype.slice.call(document.querySelectorAll('.card')),
+      topic = 'all';
+
+  function norm(s){ return s.toLowerCase().replace(/\s+/g,' ').trim(); }
+  function addChip(id, label){
+    var b = document.createElement('button');
+    b.type = 'button'; b.dataset.topic = id; b.innerHTML = label;
+    b.setAttribute('aria-pressed', id === 'all' ? 'true' : 'false');
+    b.addEventListener('click', function(){ topic = id; update(); });
+    chips.appendChild(b);
+  }
+  addChip('all', 'All topics');
+  cards.forEach(function(c){ addChip(c.id, c.dataset.short); });
+
+  function update(){
+    var term = norm(q.value), courses = 0, shownCards = 0;
+    chips.querySelectorAll('button').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.topic === topic ? 'true' : 'false'); });
+    cards.forEach(function(c){
+      var inTopic = topic === 'all' || c.id === topic,
+          head = norm(c.querySelector('h3').textContent + ' ' + c.querySelector('p').textContent + ' ' + c.dataset.short),
+          headHit = !term || head.indexOf(term) > -1, lineHits = 0,
+          lis = c.querySelectorAll('.links li');
+      lis.forEach(function(li){
+        var hit = headHit || norm(li.textContent).indexOf(term) > -1;
+        li.hidden = !hit; if (hit) lineHits++;
+      });
+      var show = inTopic && (headHit || lineHits > 0);
+      c.hidden = !show;
+      if (show){ shownCards++; courses += lineHits; }
+    });
+    none.hidden = shownCards > 0;
+    count.textContent = shownCards === cards.length && !term ? 'Showing all ' + courses + ' courses.'
+      : 'Showing ' + courses + (courses === 1 ? ' course' : ' courses') + ' in ' + shownCards + (shownCards === 1 ? ' topic.' : ' topics.');
+  }
+  q.addEventListener('input', update);
+  document.getElementById('clear').addEventListener('click', function(){ q.value = ''; topic = 'all'; update(); q.focus(); });
+  finder.hidden = false;
+  update();
+})();
+</script>
 </body>
 </html>
