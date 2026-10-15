@@ -79,7 +79,8 @@ header .cta:hover{ background:var(--highlight); }
 .links li{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:10px 0; border-top:1px solid var(--gray); font-size:.95rem; font-weight:600; }
 .links li.sub{ font-weight:400; padding-left:16px; position:relative; }
 .links li.sub::before{ content:''; position:absolute; left:0; top:1.3em; width:8px; height:1px; background:var(--oak); }
-.links a{ color:var(--oak); font-weight:600; }
+.links a,.card p a{ color:var(--oak); font-weight:600; }
+.card p a{ word-break:break-word; }
 .soon{ font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.05em; text-transform:uppercase; color:rgba(28,28,28,.72); white-space:nowrap; }
 
 /* finder: search and topic filter */
@@ -170,8 +171,9 @@ footer a{ color:var(--gold); }
         <article class="card" id="recruiting" data-short="Recruiting">
           <span class="no" aria-hidden="true">01</span>
           <h3>Recruitment &amp; Hiring</h3>
-          <p>From an open role to an accepted offer, including student workers.</p>
+          <p>From an open role to an accepted offer, including student workers. A position can&rsquo;t be posted until you have the compensation memo from <a href="mailto:vu.compensation@vanderbilt.edu">vu.compensation@vanderbilt.edu</a>.</p>
           <ul class="links">
+            <li>Compensation Management: Getting the Compensation Memo <span class="soon">Coming soon</span></li>
             <li>Hiring and Adding Assignments <span class="soon">Coming soon</span></li>
           </ul>
         </article>
