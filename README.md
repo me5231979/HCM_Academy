@@ -1,7 +1,7 @@
 # HCM Academy
 
-The landing page for Vanderbilt's HCM Academy: what Human Capital Management is,
-a "find your course" task picker, and the six learning areas with their courses.
+The landing page for Vanderbilt's HCM Academy: what the HCM role is, what the
+Academy is for, and the six topics with their courses.
 
 Built with the Vanderbilt FLH course builder pattern, matching Working Smarter
 (`me5231979/Course_Library`, `learn/index.html`): same colors, type, header,
@@ -21,9 +21,9 @@ Kept deliberately short:
 Each course line shows "Coming soon". When a course is live, replace that
 `<span class="soon">Coming soon</span>` with `<a href="courses/<slug>/">Open</a>`.
 
-## Open placeholders
+## Contact
 
-Search `[EDIT]` in `index.html`: contact address.
+pcb@vanderbilt.edu
 
 ## Accessibility and brand gate
 
