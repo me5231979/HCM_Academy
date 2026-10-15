@@ -4,1085 +4,198 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>HCM Academy · Vanderbilt University</title>
-<meta name="description" content="HCM Academy is Vanderbilt&#39;s learning home for Human Capital Management: recruiting, payroll, positions, leave, costing, and student hiring, one course at a time." />
+<meta name="description" content="HCM Academy: the place for Vanderbilt&#39;s HCMs to learn, share, meet, and get answers about the work they do in their role." />
 <meta name="theme-color" content="#1C1C1C" />
-<meta property="og:title" content="HCM Academy · Vanderbilt University" />
-<meta property="og:description" content="Learn the HCM work that hires, pays, and supports Vanderbilt&#39;s people." />
-<meta property="og:type" content="website" />
-
 <!--
-  ══════════════════════════════════════════════════════════════════════════
-  HCM ACADEMY LANDING PAGE · CUSTOMIZE ME
-  Built on the Working Smarter pattern (me5231979/Course_Library, learn/index.html):
-  same tokens, theme scopes, nav, hero, manifesto, Chancellor's charge, numbered
-  progression, concept blocks, bridges, flip cards, router, closing CTA and footer.
-  Everything marked [EDIT] is placeholder content. Search "[EDIT]" and swap in:
-    · System name (Oracle HCM Cloud is assumed; confirm)
-    · Audience line in the hero             · Contact mailto (footer + menu)
-    · Course links: each .course card ships as "In development". When a course
-      is live, replace its <span class="c-status"> with the <a class="btn"> shown
-      in the comment inside that card. See README.md.
-  Brand: approved Vanderbilt palette only (black #1C1C1C, white, Flat Gold #CFAE70,
-  Oak #946E24 on light grounds, Cream, Sand, Gray, Highlight). No red anywhere;
-  state is carried by words and icons.
-  Nothing on this page is stored or sent. No cookies, no localStorage, no analytics.
-  This is an internal training prototype, NOT an official Vanderbilt site.
-  ══════════════════════════════════════════════════════════════════════════
+  HCM ACADEMY LANDING PAGE
+  Vanderbilt FLH look (Working Smarter tokens, type, header, footer).
+  To publish a course: replace its <span class="soon">Coming soon</span> with
+  <a href="courses/<slug>/">Open</a>. Search "[EDIT]" for placeholders.
+  Nothing on this page is stored or sent.
 -->
-
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
-<link rel="icon" href="assets/img/favicon-96.png" sizes="96x96" type="image/png" />
-<script>document.documentElement.classList.add('js');</script>
-
 <style>
-/* Self-hosted brand faces (no third-party font CDN). */
-@font-face{font-family:'Libre Caslon Display';font-style:normal;font-weight:400;font-display:swap;
-  src:url('assets/fonts/libre-caslon-display-latin-400-normal.woff2') format('woff2');}
-@font-face{font-family:'Libre Caslon Display';font-style:italic;font-weight:400;font-display:swap;
-  src:url('assets/fonts/libre-caslon-text-latin-400-italic.woff2') format('woff2');}
-@font-face{font-family:'Libre Caslon Text';font-style:normal;font-weight:400;font-display:swap;
-  src:url('assets/fonts/libre-caslon-text-latin-400-normal.woff2') format('woff2');}
-@font-face{font-family:'Libre Caslon Text';font-style:italic;font-weight:400;font-display:swap;
-  src:url('assets/fonts/libre-caslon-text-latin-400-italic.woff2') format('woff2');}
-@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;
-  src:url('assets/fonts/inter-latin-400-normal.woff2') format('woff2');}
-@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;
-  src:url('assets/fonts/inter-latin-500-normal.woff2') format('woff2');}
-@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;
-  src:url('assets/fonts/inter-latin-600-normal.woff2') format('woff2');}
-@font-face{font-family:'Antonio';font-style:normal;font-weight:700;font-display:swap;
-  src:url('assets/fonts/antonio-latin-700-normal.woff2') format('woff2');}
+@font-face{font-family:'Libre Caslon Display';font-weight:400;font-display:swap;src:url('assets/fonts/libre-caslon-display-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Libre Caslon Text';font-style:italic;font-weight:400;font-display:swap;src:url('assets/fonts/libre-caslon-text-latin-400-italic.woff2') format('woff2');}
+@font-face{font-family:'Inter';font-weight:400;font-display:swap;src:url('assets/fonts/inter-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Inter';font-weight:600;font-display:swap;src:url('assets/fonts/inter-latin-600-normal.woff2') format('woff2');}
+@font-face{font-family:'Antonio';font-weight:700;font-display:swap;src:url('assets/fonts/antonio-latin-700-normal.woff2') format('woff2');}
 
-/* ═══════════════════ TOKENS ═══════════════════ */
 :root{
-  --vu-black:#1C1C1C; --vu-white:#FFFFFF;
-  --vu-gold:#CFAE70; --vu-highlight:#ECB748; --vu-oak:#946E24;
-  --vu-cream:#F5F3EF; --vu-sand:#E0D5C0;
-  --vu-gray-l:#E4E4E4; --vu-gray-d:#777777;
-  --vu-sky:#B3C9CD; --vu-sage:#8BA18E;
+  --black:#1C1C1C; --gold:#CFAE70; --highlight:#ECB748; --oak:#946E24; --cream:#F5F3EF; --sand:#E0D5C0; --gray:#E4E4E4;
+  --serif:'Libre Caslon Display','Times New Roman',serif; --serif-i:'Libre Caslon Text','Times New Roman',serif;
+  --sans:'Inter',Arial,system-ui,sans-serif; --cond:'Antonio','Arial Narrow',sans-serif;
   --metal:linear-gradient(135deg,#FEEEB6 0%,#CFAE70 45%,#B49248 100%);
-  --maxw:1200px; --r:4px;
-  --ease:cubic-bezier(.33,1,.68,1);
-  --serif:'Libre Caslon Display','Libre Caslon Text','Times New Roman',serif;
-  --serif-i:'Libre Caslon Text','Times New Roman',serif;
-  --sans:'Inter',Arial,system-ui,sans-serif;
-  --cond:'Antonio','Arial Narrow',Impact,sans-serif;
 }
-/* theme scopes: every component reads these vars, so each section theme recolors everything */
-.th-dark{
-  background:var(--vu-black); color:#FFFFFF;
-  --tx:#FFFFFF; --tx2:rgba(255,255,255,.76); --tx3:rgba(255,255,255,.66);
-  --bd:rgba(255,255,255,.15); --bdg:rgba(207,174,112,.35);
-  --card:#262624; --card2:#212120;
-  --eyebrow:#CFAE70; --link:#CFAE70; --strong:#ECB748; --focus:#ECB748;
-  --btn-bg:#CFAE70; --btn-tx:#1C1C1C; --btn-hv:#ECB748;
-}
-.th-light, .th-cream{
-  background:var(--vu-white); color:var(--vu-black);
-  --tx:#1C1C1C; --tx2:rgba(28,28,28,.80); --tx3:rgba(28,28,28,.70);
-  --bd:#E4E4E4; --bdg:rgba(148,110,36,.45);
-  --card:#FFFFFF; --card2:#F5F3EF;
-  --eyebrow:#946E24; --link:#946E24; --strong:#946E24; --focus:#946E24;
-  --btn-bg:#1C1C1C; --btn-tx:#FFFFFF; --btn-hv:#946E24;
-}
-.th-cream{ background:var(--vu-cream); --card2:#FFFFFF; --bd:#E0D5C0; }
-/* Oak on Cream measures 4.19:1, under AA. Cream grounds carry labels in black and keep gold as the tick and rules. */
-.th-cream{ --eyebrow:#1C1C1C; --link:#1C1C1C; --strong:#1C1C1C; --focus:#1C1C1C; }
-.th-cream .course, .th-cream .route-opts button, .th-cream .evidence{ --eyebrow:#946E24; --link:#946E24; --strong:#946E24; --focus:#946E24; }
-
 *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
-html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; scroll-padding-top:118px; }
-body{ font-family:var(--sans); font-size:1.0625rem; background:var(--vu-black); color:#fff; line-height:1.6;
-  overflow-x:hidden; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; min-height:100dvh; }
-h1,h2{ font-family:var(--serif); font-weight:400; line-height:1.1; letter-spacing:-.01em; color:var(--tx,#fff); }
-h3,h4{ font-family:var(--sans); font-weight:600; line-height:1.3; letter-spacing:-.01em; color:var(--tx,#fff); }
-h1 em,h2 em{ font-family:var(--serif-i); font-style:italic; font-weight:400; letter-spacing:0; }
-p{ max-width:65ch; }
-a{ color:inherit; text-decoration:none; } img{ max-width:100%; display:block; height:auto; }
-button{ font:inherit; color:inherit; }
-::selection{ background:rgba(207,174,112,.55); color:#1C1C1C; }
-:focus-visible{ outline:2px solid var(--focus,#ECB748); outline-offset:3px; border-radius:2px; }
-.wrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:clamp(16px,5vw,48px); }
-.skip{ position:absolute; left:-999px; top:10px; z-index:400; background:var(--vu-gold); color:#1C1C1C; padding:12px 20px; border-radius:var(--r); font-weight:500; }
+html{ scroll-behavior:smooth; scroll-padding-top:90px; }
+body{ font-family:var(--sans); font-size:1.0625rem; line-height:1.6; color:var(--black); background:#fff; -webkit-font-smoothing:antialiased; }
+a{ color:inherit; }
+:focus-visible{ outline:2px solid var(--oak); outline-offset:3px; border-radius:2px; }
+.dark :focus-visible{ outline-color:var(--highlight); }
+.wrap{ max-width:1120px; margin-inline:auto; padding-inline:clamp(16px,5vw,48px); }
+.skip{ position:absolute; left:-999px; top:10px; z-index:10; background:var(--gold); color:var(--black); padding:12px 20px; border-radius:4px; }
 .skip:focus{ left:16px; }
-.sr{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+.mono{ font-family:var(--cond); font-weight:700; font-size:.8125rem; letter-spacing:.05em; text-transform:uppercase; }
+h1,h2,h3{ font-family:var(--serif); font-weight:400; line-height:1.15; }
+h1 em,h2 em{ font-family:var(--serif-i); font-style:italic; }
 
-/* Antonio microlabel */
-.mono{ font-family:var(--cond); font-weight:700; font-size:.8125rem; letter-spacing:.04em; text-transform:uppercase; color:var(--eyebrow,#CFAE70); }
-.eyebrow{ display:inline-flex; align-items:center; gap:12px; }
-.eyebrow .tick{ width:26px; height:2px; background:var(--vu-gold); flex-shrink:0; }
-.you-are{ display:block; font-family:var(--cond); font-weight:700; font-size:.75rem; letter-spacing:.05em; text-transform:uppercase; color:var(--tx3); margin-bottom:14px; }
+/* header */
+header{ position:sticky; top:0; z-index:5; background:var(--black); border-bottom:1px solid rgba(207,174,112,.2); }
+header .wrap{ display:flex; align-items:center; justify-content:space-between; gap:16px; height:76px; }
+.logo{ display:flex; align-items:center; gap:14px; text-decoration:none; }
+.logo img{ height:36px; width:auto; }
+.logo span{ color:var(--gold); border-left:1px solid rgba(207,174,112,.35); padding-left:14px; white-space:nowrap; }
+header .cta{ background:var(--gold); color:var(--black); text-decoration:none; font-weight:600; font-size:.9rem; padding:11px 20px; border-radius:4px; white-space:nowrap; }
+header .cta:hover{ background:var(--highlight); }
 
-/* metallic headline: white words, gold italic emphasis */
-.metal{ color:var(--vu-white); }
-.metal em{ color:var(--vu-gold); font-style:italic; }
+/* hero: the HCM role and what the Academy is for */
+.dark{ background:var(--black); color:#fff; }
+.hero{ padding:clamp(56px,9vw,104px) 0 clamp(56px,8vw,88px); }
+.hero .mono{ color:var(--gold); }
+.hero h1{ font-size:clamp(2.3rem,5.5vw,4.2rem); margin-top:18px; max-width:18ch; }
+.hero h1 em{ color:var(--gold); }
 @supports ((-webkit-background-clip:text) or (background-clip:text)){
-  .metal em{ background:var(--metal); -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent; padding-bottom:.14em; margin-bottom:-.14em; }
+  .hero h1 em{ background:var(--metal); -webkit-background-clip:text; background-clip:text; color:transparent; padding-bottom:.12em; }
 }
+.hero p{ color:rgba(255,255,255,.82); font-size:1.125rem; max-width:62ch; margin-top:20px; }
+.hero p b{ color:#fff; font-weight:600; }
+.pillars{ list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:36px; }
+.pillars li{ border-top:2px solid var(--gold); padding-top:14px; }
+.pillars .mono{ display:block; font-size:.95rem; color:var(--gold); }
+.pillars span:last-child{ display:block; color:rgba(255,255,255,.78); font-size:.92rem; margin-top:4px; }
 
-/* ═══════════════════ NAV ═══════════════════ */
-header.nav{ position:fixed; inset:0 0 auto 0; z-index:200; background:var(--vu-black); border-bottom:1px solid transparent; transition:border-color .3s; }
-header.nav.scrolled{ border-bottom-color:rgba(207,174,112,.2); }
-header.nav .wrap{ max-width:1440px; }
-header.nav .bar{ display:flex; align-items:center; justify-content:space-between; gap:clamp(16px,2vw,36px); height:96px; }
-.logo{ display:flex; align-items:center; gap:16px; flex-shrink:1; min-width:0; }
-.logo img{ height:44px; width:auto; display:block; }
-.logo .lname{ font-family:var(--cond); font-weight:700; font-size:.85rem; letter-spacing:.06em; text-transform:uppercase; color:var(--vu-gold);
-  border-left:1px solid rgba(207,174,112,.35); padding-left:16px; white-space:nowrap; }
-nav.links{ display:flex; align-items:center; flex-wrap:nowrap; gap:clamp(0px,.4vw,8px); }
-nav.links a{ position:relative; padding:10px clamp(8px,.8vw,14px); color:#fff; font-size:.9rem; font-weight:500; letter-spacing:.02em; white-space:nowrap; }
-nav.links a::after{ content:''; position:absolute; left:12px; right:12px; bottom:5px; height:2px; background:var(--vu-gold);
-  transform:scaleX(0); transform-origin:left; transition:transform .2s var(--ease); }
-nav.links a:hover::after,nav.links a:focus-visible::after{ transform:scaleX(1); }
-nav.links a.nav-cta{ margin-left:clamp(8px,1vw,18px); color:#1C1C1C; min-height:48px; padding:12px clamp(18px,1.6vw,26px); letter-spacing:0; }
-nav.links a.nav-cta::after{ display:none; }
-.menu-btn{ display:none; background:transparent; border:1px solid rgba(255,255,255,.25); color:#fff;
-  width:46px; height:46px; border-radius:var(--r); cursor:pointer; place-items:center; align-content:center; }
-.menu-btn .b{ display:block; width:18px; height:2px; background:currentColor; transition:transform .3s var(--ease),opacity .2s; }
-.menu-btn .b + .b{ margin-top:4px; }
-body.menu-open .menu-btn .b1{ transform:translateY(6px) rotate(45deg); }
-body.menu-open .menu-btn .b2{ opacity:0; }
-body.menu-open .menu-btn .b3{ transform:translateY(-6px) rotate(-45deg); }
-.mobile-menu{ position:fixed; inset:0; z-index:150; background:var(--vu-black); overflow-y:auto;
-  display:flex; flex-direction:column; padding:96px clamp(24px,8vw,60px) 56px;
-  opacity:0; visibility:hidden; transition:opacity .3s var(--ease), visibility 0s .3s; }
-.mobile-menu::before,.mobile-menu::after{ content:''; display:block; margin:auto; }
-body.menu-open .mobile-menu{ opacity:1; visibility:visible; transition:opacity .3s var(--ease); }
-body.menu-open{ overflow:hidden; }
-.mobile-menu a.mlink{ font-family:var(--serif); font-size:clamp(1.4rem,6vw,2.2rem); color:#fff;
-  padding:12px 0; border-bottom:1px solid rgba(255,255,255,.12); display:flex; align-items:baseline; gap:18px; }
-.mobile-menu a.mlink .mono{ font-size:.75rem; color:var(--vu-gold); min-width:2ch; }
-.mobile-menu .mfoot{ margin-top:30px; color:rgba(255,255,255,.66); font-size:.85rem; }
+/* topics */
+.topics{ padding:clamp(56px,8vw,96px) 0; background:var(--cream); }
+.topics .eyebrow{ color:var(--black); display:flex; align-items:center; gap:12px; }
+.topics .eyebrow::before{ content:''; width:26px; height:2px; background:var(--gold); }
+.topics h2{ font-size:clamp(1.9rem,4vw,2.8rem); margin-top:14px; }
+.grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:36px; align-items:start; }
+.card{ background:#fff; border:1px solid var(--sand); border-top:3px solid var(--gold); border-radius:4px; padding:24px 22px; display:flex; flex-direction:column; }
+.card .no{ font-family:var(--cond); font-weight:700; font-size:2rem; line-height:1; color:var(--oak); }
+.card h3{ font-size:1.4rem; margin-top:12px; }
+.card p{ color:rgba(28,28,28,.8); font-size:.95rem; margin-top:8px; }
+.links{ list-style:none; margin-top:18px; }
+.links li{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:10px 0; border-top:1px solid var(--gray); font-size:.95rem; font-weight:600; }
+.links li.sub{ font-weight:400; padding-left:16px; position:relative; }
+.links li.sub::before{ content:''; position:absolute; left:0; top:1.3em; width:8px; height:1px; background:var(--oak); }
+.links a{ color:var(--oak); font-weight:600; }
+.soon{ font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.05em; text-transform:uppercase; color:rgba(28,28,28,.72); white-space:nowrap; }
 
-/* ═══════════════════ BUTTONS ═══════════════════ */
-.btn{ display:inline-flex; align-items:center; justify-content:center; gap:10px; font-family:var(--sans); font-size:.95rem; font-weight:500;
-  min-height:48px; padding:12px 26px; border-radius:var(--r); cursor:pointer; border:1px solid transparent; text-align:center;
-  transition:background-color .2s ease-out, border-color .2s ease-out, color .2s ease-out; }
-.btn svg{ width:17px; height:17px; flex-shrink:0; }
-.btn-primary{ background:var(--btn-bg); color:var(--btn-tx); }
-.btn-primary:hover{ background:var(--btn-hv); color:var(--btn-tx); }
-.btn-gold{ background:var(--vu-gold); color:#1C1C1C; }
-.btn-gold:hover{ background:var(--vu-highlight); }
-.btn-ghost{ background:transparent; color:var(--tx,#fff); border-color:var(--bd,rgba(255,255,255,.25)); }
-.btn-ghost:hover{ border-color:var(--strong,#CFAE70); color:var(--strong,#CFAE70); }
-.btn-sm{ min-height:44px; padding:9px 18px; font-size:.875rem; }
+/* footer */
+footer{ padding:40px 0; text-align:center; }
+footer img{ width:90px; height:auto; margin:0 auto; }
+footer p{ color:rgba(255,255,255,.7); font-size:.83rem; max-width:620px; margin:14px auto 0; }
+footer a{ color:var(--gold); }
 
-/* ═══════════════════ HERO ═══════════════════ */
-.hero{ position:relative; min-height:100svh; display:flex; flex-direction:column; justify-content:center; padding:150px 0 96px; overflow:hidden; }
-.hero-mark{ position:absolute; right:-6vw; bottom:-4vw; width:min(62vw,820px); opacity:.07; pointer-events:none; }
-.hero-scrim{ position:absolute; inset:0; background:radial-gradient(ellipse at 80% 20%,rgba(207,174,112,.10),transparent 60%); pointer-events:none; }
-.hero .wrap{ position:relative; z-index:2; }
-.hero h1{ font-size:clamp(2.6rem,7vw,5.5rem); line-height:1.05; margin-top:28px; max-width:1000px; }
-.hero .hello{ font-family:var(--serif); font-size:1.375rem; color:#fff; margin-top:26px; }
-.hero .lead{ font-size:1.125rem; color:rgba(255,255,255,.80); max-width:60ch; margin-top:18px; }
-.hero .lead b{ color:#fff; font-weight:600; }
-.hero .outcomes{ list-style:none; margin-top:16px; display:flex; flex-direction:column; gap:8px; max-width:62ch; }
-.hero .outcomes li{ position:relative; padding-left:24px; color:var(--tx2); font-size:1.02rem; line-height:1.55; }
-.hero .outcomes li::before{ content:""; position:absolute; left:0; top:.68em; width:12px; height:2px; background:var(--vu-gold); }
-.hero .outcomes b{ color:#fff; font-weight:600; }
-.hero .meta-line{ font-family:var(--cond); font-weight:700; font-size:.8125rem; letter-spacing:.03em; text-transform:uppercase;
-  color:rgba(255,255,255,.66); margin-top:26px; max-width:none; }
-.hero .meta-line b{ color:var(--vu-gold); font-weight:700; }
-.hero .cta-row{ display:flex; flex-wrap:wrap; gap:14px; margin-top:32px; }
-
-/* ═══════════════════ TOPIC BAR ═══════════════════ */
-.topics{ padding:40px 0 36px; border-bottom:1px solid var(--vu-gray-l); }
-.topics .tlabel{ text-align:center; margin:0 auto 20px; color:#1C1C1C; max-width:none; }
-.marquee{ position:relative; overflow:hidden;
-  mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
-.marquee .track{ display:flex; width:max-content; animation:mq 44s linear infinite; }
-.marquee:hover .track{ animation-play-state:paused; }
-.marquee .set{ display:flex; align-items:center; flex-shrink:0; }
-.marquee .it{ display:inline-flex; align-items:center; padding-inline:18px; font-family:var(--cond); font-weight:700; font-size:1.05rem;
-  letter-spacing:.05em; text-transform:uppercase; color:rgba(28,28,28,.72); white-space:nowrap; }
-.marquee .it::after{ content:''; width:5px; height:5px; background:var(--vu-gold); margin-left:36px; flex-shrink:0; }
-@keyframes mq{ to{ transform:translateX(-50%) } }
-
-/* ═══════════════════ MANIFESTO ═══════════════════ */
-.manifesto{ padding:clamp(80px,12vw,160px) 0; }
-.creed{ font-family:var(--serif); font-size:clamp(1.5rem,3vw,2.5rem); line-height:1.35; color:#1C1C1C; max-width:30ch; margin-top:26px; }
-.creed em{ font-family:var(--serif-i); font-style:italic; }
-
-/* ═══════════════════ SECTIONS / SHARED ═══════════════════ */
-section{ position:relative; padding:clamp(64px,10vw,140px) 0; }
-.th-light + .th-light,.th-light + .th-cream,.th-cream + .th-light,.th-cream + .th-cream{ border-top:1px solid var(--vu-gray-l); }
-.sec-head{ max-width:840px; margin-bottom:clamp(36px,6vw,60px); }
-.sec-head h2{ font-size:clamp(2rem,4.5vw,3.5rem); margin-top:18px; }
-.sec-head p{ color:var(--tx2); margin-top:18px; font-size:1.125rem; }
-.sec-head p b{ color:var(--tx); font-weight:600; }
-.chip{ display:inline-flex; align-items:center; gap:8px; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.05em; text-transform:uppercase;
-  color:var(--tx2); border:1px solid var(--bd); border-radius:var(--r); padding:6px 12px; white-space:nowrap; }
-.chip svg{ width:13px; height:13px; }
-.module{ margin-top:clamp(44px,6vw,72px); }
-.module-head{ display:block; margin-bottom:24px; }
-.module-head .mno{ display:block; font-family:var(--cond); font-weight:700; font-size:.78rem; letter-spacing:.05em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:10px; }
-.module-head h3{ font-family:var(--serif); font-weight:400; font-size:clamp(1.45rem,2.8vw,2.1rem); line-height:1.15; }
-.module-head h3 em{ font-family:var(--serif-i); font-style:italic; }
-.module-head p{ color:var(--tx2); max-width:66ch; margin-top:12px; }
-
-/* concept block: the mental model, "The idea" */
-.concept{ margin:0 0 8px; padding:2px 0 2px 20px; border-left:3px solid var(--vu-gold); max-width:780px; }
-.concept .c-label{ display:block; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.07em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:8px; }
-.concept p{ color:var(--tx2); font-size:.9875rem; line-height:1.75; max-width:68ch; }
-.concept p b{ color:var(--tx); font-weight:600; }
-
-/* bridge: one connective sentence handing a section to the next */
-.bridge{ display:flex; align-items:baseline; flex-wrap:wrap; gap:10px 18px; margin-top:clamp(44px,6vw,64px); padding-top:24px; border-top:1px solid var(--bd); }
-.bridge .b-label{ display:inline-flex; align-items:center; gap:10px; font-family:var(--cond); font-weight:700; font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; color:var(--eyebrow); }
-.bridge .b-label::before{ content:''; width:26px; height:2px; background:var(--vu-gold); }
-.bridge p{ font-family:var(--serif); font-size:clamp(1.05rem,2.2vw,1.3rem); line-height:1.45; color:var(--tx); max-width:none; }
-.bridge p em{ font-family:var(--serif-i); font-style:italic; color:var(--strong); }
-.bridge a{ color:var(--link); border-bottom:1px solid var(--bdg); }
-
-/* evidence block */
-.evidence{ margin-top:24px; border:1px solid var(--bd); border-left:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card); padding:20px 22px; max-width:820px; }
-.evidence .e-label{ display:block; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.07em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:10px; }
-.evidence p{ color:var(--tx2); font-size:.9375rem; line-height:1.75; max-width:none; }
-.evidence p b{ color:var(--tx); font-weight:600; }
-.evidence .e-src{ display:block; margin-top:12px; padding-top:10px; border-top:1px solid var(--bd); font-size:.83rem; color:var(--tx3); }
-.evidence a{ color:var(--link); border-bottom:1px solid var(--bdg); }
-
-/* principle cards */
-.resp-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-.resp-grid.four{ grid-template-columns:repeat(4,1fr); }
-.principle{ border:1px solid var(--bd); border-radius:var(--r); background:var(--card); padding:26px 24px; }
-.principle .p-ic{ width:46px; height:46px; border-radius:var(--r); display:grid; place-items:center; margin-bottom:18px;
-  background:rgba(207,174,112,.14); border:1px solid var(--bdg); color:var(--eyebrow); }
-.principle .p-ic svg{ width:23px; height:23px; }
-.principle h3{ font-size:1.12rem; }
-.principle p{ color:var(--tx2); font-size:.9375rem; margin-top:10px; }
-
-/* numbered progression: the six learning areas */
-.hw-list{ margin-top:14px; border-top:1px solid var(--vu-gray-l); }
-.hw-step{ display:grid; grid-template-columns:130px 1fr auto; gap:16px 32px; align-items:baseline; padding:30px 0; border-bottom:1px solid var(--vu-gray-l); }
-.hw-step .hw-no{ font-family:var(--cond); font-weight:700; font-size:clamp(2.4rem,5vw,3.2rem); line-height:1; color:var(--vu-oak); letter-spacing:.02em; }
-.th-dark .hw-step .hw-no{ color:var(--vu-gold); }
-.hw-step h3{ font-family:var(--serif); font-weight:400; font-size:clamp(1.3rem,2.4vw,1.75rem); }
-.hw-step h3 a{ border-bottom:1px solid transparent; transition:border-color .2s ease-out, color .2s ease-out; }
-.hw-step h3 a:hover{ color:var(--strong); border-bottom-color:var(--bdg); }
-.hw-step p{ color:var(--tx2); margin-top:8px; max-width:60ch; }
-.hw-step .subs{ list-style:none; display:flex; flex-wrap:wrap; gap:6px 8px; margin-top:12px; }
-.hw-step .subs li{ font-size:.85rem; color:var(--tx2); border:1px solid var(--bd); border-radius:var(--r); padding:4px 10px; background:var(--card2); }
-.hw-step .chip{ justify-self:end; }
-.acr-line{ margin-top:clamp(40px,6vw,64px); padding:22px 0; border-top:1px solid var(--vu-gray-l); border-bottom:1px solid var(--vu-gray-l);
-  text-align:center; font-family:var(--serif); font-size:clamp(1.02rem,2vw,1.3rem); color:#1C1C1C; letter-spacing:.02em; max-width:none; }
-.acr-line b{ font-weight:400; color:var(--vu-oak); }
-
-/* flip cards: the HCM vocabulary */
-.flip-grid{ list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
-.fcard button{ width:100%; height:100%; min-height:210px; border:1px solid var(--bd); border-radius:var(--r); background:var(--card);
-  cursor:pointer; text-align:left; padding:24px 22px; display:flex; flex-direction:column; transition:border-color .2s ease-out, background-color .2s ease-out; }
-.fcard button:hover{ border-color:var(--bdg); }
-.fcard button[aria-pressed="true"]{ border-color:var(--bdg); background:var(--card2); }
-.fcard .face{ display:flex; flex-direction:column; flex:1; }
-.fcard .face.back{ display:none; }
-.fcard button[aria-pressed="true"] .face.front{ display:none; }
-.fcard button[aria-pressed="true"] .face.back{ display:flex; }
-.fcard .abbr-ic{ width:30px; height:30px; color:var(--vu-oak); flex-shrink:0; }
-.th-dark .fcard .abbr-ic{ color:var(--vu-gold); }
-.fcard h4{ font-size:1.08rem; margin-top:12px; color:var(--tx); }
-.fcard .def{ color:var(--tx2); font-size:.9rem; margin-top:8px; }
-.fcard .hint{ margin-top:auto; padding-top:18px; display:inline-flex; align-items:center; gap:8px;
-  font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.05em; text-transform:uppercase; color:var(--eyebrow); }
-.fcard .hint svg{ width:13px; height:13px; }
-.fcard .back .tag{ font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.05em; text-transform:uppercase; color:var(--eyebrow); }
-.fcard .back p{ color:var(--tx2); font-size:.9rem; margin-top:12px; }
-.fcard .back p b{ color:var(--tx); font-weight:600; }
-
-/* ── ROUTER: "find your course" task picker ── */
-.route{ border:1px solid var(--bd); border-left:3px solid var(--vu-gold); border-radius:var(--r); background:var(--card2); padding:clamp(20px,3.5vw,36px); }
-.route-qt{ font-weight:600; color:var(--tx); font-size:1rem; }
-.route-opts{ list-style:none; display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-top:14px; }
-.route-opts button{ width:100%; height:100%; text-align:left; border:1px solid var(--bd); background:var(--card); color:var(--tx2);
-  border-radius:var(--r); min-height:48px; padding:12px 16px; font-size:.9375rem; line-height:1.45; cursor:pointer;
-  transition:border-color .2s ease-out,color .2s ease-out,background-color .2s ease-out; }
-.route-opts button:hover{ border-color:var(--bdg); color:var(--tx); }
-.route-opts button[aria-pressed="true"]{ border-color:var(--strong); color:var(--tx); background:rgba(207,174,112,.16); font-weight:600; }
-.route-out{ margin-top:24px; padding-top:22px; border-top:1px solid var(--bd); }
-.route-out[hidden]{ display:none; }
-.route-out .mono{ display:block; }
-.route-out h3{ font-family:var(--serif); font-weight:400; font-size:clamp(1.3rem,2.4vw,1.7rem); margin-top:10px; }
-.route-out p{ color:var(--tx2); margin-top:8px; }
-.route-out .btn{ margin-top:16px; }
-.route-hint{ font-size:.875rem; color:var(--tx3); margin-top:16px; }
-
-/* ═══════════════════ AREA SECTIONS + COURSE CARDS ═══════════════════ */
-.area-grid{ display:grid; grid-template-columns:1fr 1fr; gap:24px clamp(24px,4vw,56px); align-items:start; }
-.learn-list{ list-style:none; margin-top:4px; }
-.learn-list li{ position:relative; padding:10px 0 10px 24px; border-top:1px solid var(--bd); color:var(--tx2); font-size:.9575rem; }
-.learn-list li:first-child{ border-top:0; }
-.learn-list li::before{ content:""; position:absolute; left:0; top:1.25em; width:12px; height:2px; background:var(--vu-gold); }
-.ll-head{ display:block; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.07em; text-transform:uppercase; color:var(--eyebrow); margin-bottom:6px; }
-.courses{ display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr)); gap:14px; margin-top:8px; }
-.course{ display:flex; flex-direction:column; border:1px solid var(--bd); border-radius:var(--r); background:var(--card); padding:24px 22px; }
-.course.main{ border-top:3px solid var(--vu-gold); }
-.course.sub{ border-top:3px solid var(--vu-sand); }
-.course .c-kind{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--eyebrow); }
-.course h3{ font-family:var(--serif); font-weight:400; font-size:1.35rem; line-height:1.2; margin-top:10px; color:var(--tx); }
-.course p{ color:var(--tx2); font-size:.9375rem; margin-top:10px; }
-.course .c-foot{ margin-top:auto; padding-top:20px; display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
-.c-status{ display:inline-flex; align-items:center; gap:8px; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.05em;
-  text-transform:uppercase; color:var(--tx2); border:1px dashed var(--bdg); border-radius:var(--r); padding:8px 12px; }
-.c-status svg{ width:14px; height:14px; color:var(--eyebrow); }
-
-/* ═══════════════════ CLOSING + FOOTER ═══════════════════ */
-.cta{ text-align:center; padding:clamp(64px,9vw,120px) 0; border-top:1px solid rgba(207,174,112,.2); }
-.cta .eyebrow{ justify-content:center; }
-.cta h2{ font-size:clamp(2.1rem,5vw,3.8rem); max-width:18ch; margin:18px auto 0; }
-.cta p{ color:rgba(255,255,255,.76); margin:20px auto 0; max-width:50ch; }
-.cta .btn-gold{ margin-top:32px; }
-.send-sign{ font-family:var(--serif-i); font-style:italic; font-size:clamp(1.15rem,2.4vw,1.5rem); color:#fff; margin:clamp(32px,5vh,48px) auto 0; max-width:none; }
-footer{ background:var(--vu-black); color:#fff; border-top:1px solid rgba(207,174,112,.2); padding:clamp(36px,5vw,52px) 0 36px; --focus:#ECB748; }
-.fcenter{ text-align:center; }
-.fcenter img{ margin:0 auto; }
-.fprogram{ font-family:var(--cond); font-weight:700; font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; color:var(--vu-gold); margin:18px auto 0; max-width:none; }
-.flegal{ color:rgba(255,255,255,.66); font-size:.83rem; margin:16px auto 0; max-width:680px; }
-.flegal a{ color:var(--vu-gold); border-bottom:1px solid rgba(207,174,112,.4); }
-.flegal b{ color:#fff; font-weight:600; }
-
-/* ═══════════════════ RESPONSIVE ═══════════════════ */
-@media (max-width:1280px){
-  .logo img{ height:40px; }
-  nav.links a{ font-size:.86rem; }
-}
-@media (max-width:1199px){
-  nav.links{ display:none; } .menu-btn{ display:grid; }
-}
-@media (max-width:1024px){
-  .flip-grid,.resp-grid.four{ grid-template-columns:1fr 1fr; }
-}
-@media (max-width:960px){
-  header.nav .bar{ height:72px; }
-  .logo img{ height:34px; }
-  .logo .lname{ font-size:.75rem; padding-left:12px; }
-  html{ scroll-padding-top:92px; }
-  .mobile-menu{ padding-top:84px; }
-  .resp-grid{ grid-template-columns:1fr 1fr; }
-  .area-grid{ grid-template-columns:1fr; }
-  .hw-step{ grid-template-columns:80px 1fr; }
-  .hw-step .chip{ grid-column:2; justify-self:start; }
-}
-@media (max-width:640px){
-  .flip-grid,.resp-grid,.resp-grid.four,.route-opts{ grid-template-columns:1fr; }
-  .hw-step{ grid-template-columns:1fr; gap:8px; padding:24px 0; }
-  .hw-step .chip{ grid-column:auto; }
-  .logo img{ height:28px; }
-  .fcard button{ min-height:0; }
-}
-@media (max-width:420px){
-  .logo .lname{ display:none; }
-  .hero .cta-row .btn{ flex:1; }
-}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{ animation:none !important; transition:none !important; }
-  html{ scroll-behavior:auto !important; }
-  .marquee .track{ animation:none !important; flex-wrap:wrap; width:auto; justify-content:center; }
-  .marquee .set:nth-child(2){ display:none; }
-}
-@media print{
-  header.nav,.mobile-menu,.skip,.marquee{ display:none !important; }
-  section{ padding:24px 0; }
-}
+@media (max-width:960px){ .grid{ grid-template-columns:1fr 1fr; } .pillars{ grid-template-columns:1fr 1fr; } }
+@media (max-width:640px){ .grid{ grid-template-columns:1fr; } .logo img{ height:28px; } }
+@media (max-width:420px){ .logo span{ display:none; } .pillars{ grid-template-columns:1fr; } }
+@media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
 </style>
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
 
-<!-- ═══════════════════ NAV ═══════════════════ -->
-<header class="nav" id="nav">
+<header>
   <div class="wrap">
-    <div class="bar">
-      <a class="logo" href="#top" aria-label="Vanderbilt University, HCM Academy home">
-        <img src="assets/img/vu-lockup-white.png" alt="Vanderbilt University" width="169" height="44" decoding="async" />
-        <span class="lname" aria-hidden="true">HCM Academy</span>
-      </a>
-      <nav class="links" aria-label="Primary">
-        <a href="#role">What HCM is</a>
-        <a href="#recruiting">Recruiting</a>
-        <a href="#payroll">Payroll</a>
-        <a href="#positions">Positions</a>
-        <a href="#leave">Leave</a>
-        <a href="#costing">Costing</a>
-        <a href="#students">Students</a>
-        <a class="btn btn-gold btn-sm nav-cta" href="#find">Find your course</a>
-      </nav>
-      <button class="menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-        <span class="b b1" aria-hidden="true"></span><span class="b b2" aria-hidden="true"></span><span class="b b3" aria-hidden="true"></span>
-      </button>
-    </div>
+    <a class="logo" href="#main" aria-label="HCM Academy, Vanderbilt University, home">
+      <img src="assets/img/vu-lockup-white.png" alt="" width="138" height="36" />
+      <span class="mono" aria-hidden="true">HCM Academy</span>
+    </a>
+    <a class="cta" href="#topics">Browse courses</a>
   </div>
 </header>
 
-<!-- mobile overlay menu -->
-<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-  <a class="mlink" href="#role"><span class="mono" aria-hidden="true">&middot;</span>What HCM is</a>
-  <a class="mlink" href="#find"><span class="mono" aria-hidden="true">&middot;</span>Find your course</a>
-  <a class="mlink" href="#recruiting"><span class="mono">01</span>Recruitment &amp; Hiring</a>
-  <a class="mlink" href="#payroll"><span class="mono">02</span>Payroll &amp; Timecards</a>
-  <a class="mlink" href="#positions"><span class="mono">03</span>Onboarding, Transfers &amp; Positions</a>
-  <a class="mlink" href="#leave"><span class="mono">04</span>Leave Management</a>
-  <a class="mlink" href="#costing"><span class="mono">05</span>Costing Management</a>
-  <a class="mlink" href="#students"><span class="mono">06</span>Student Hiring</a>
-  <div class="mfoot">Questions: matthew.estes@vanderbilt.edu <!-- [EDIT: swap to program alias when created] --></div>
-</nav>
-
-<main id="main" tabindex="-1"><span id="top"></span>
-
-<!-- ═══════════════════ HERO: the role of HCM ═══════════════════ -->
-<section class="hero th-dark" aria-labelledby="heroTitle">
-  <img class="hero-mark" src="assets/img/vu-v-icon.png" alt="" aria-hidden="true" width="1102" height="818" />
-  <div class="hero-scrim" aria-hidden="true"></div>
-  <div class="wrap">
-    <span class="mono">Vanderbilt University &middot; HCM Academy</span>
-    <h1 class="metal" id="heroTitle">Every Vanderbilt job runs through <em>HCM</em>.</h1>
-    <p class="hello">Welcome to HCM Academy.</p>
-    <p class="lead"><b>HCM stands for Human Capital Management.</b> It is the system, and the everyday work around it, that Vanderbilt uses to hire people, pay them, track their time and leave, and keep every job and funding source accurate. <!-- [EDIT: confirm system name] -->At Vanderbilt that work happens in Oracle HCM Cloud. If you post a job, approve a timecard, set up a position, or move someone to a new department, you are doing HCM work, and the record you leave behind decides whether a person is paid correctly and charged to the right account.</p>
-    <p class="lead">HCM Academy is where you learn that work, one task at a time. By the end of the series, you will be able to:</p>
-    <ul class="outcomes" aria-label="By the end of the series, you will be able to">
-      <li><b>Explain</b> how a position, an assignment, and a person record fit together, and why the order you enter them matters</li>
-      <li><b>Complete</b> the common transactions in your role, from a new requisition to an ended assignment, correctly the first time</li>
-      <li><b>Connect</b> each change you make to what it touches downstream: pay, benefits, leave, and funding</li>
-      <li><b>Find</b> the right course, guide, or contact for the task in front of you</li>
-    </ul>
-    <p class="meta-line"><b>Six learning areas</b> &middot; self-paced &middot; built for HR partners, business officers, and managers <!-- [EDIT: confirm audience] --> &middot; nothing on this page is tracked</p>
-    <div class="cta-row">
-      <a class="btn btn-gold" href="#find">Find your course
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a class="btn btn-ghost" href="#role">What HCM is</a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ TOPIC BAR ═══════════════════ -->
-<div class="topics th-light" role="img" aria-label="One record, six learning areas. Topics: requisitions, offers, timecards, compensation, positions, assignment changes, terminations, leave of absence, costing and funding, student employment">
-  <div class="wrap"><p class="tlabel mono">One record. Six learning areas.</p></div>
-  <div class="marquee" aria-hidden="true">
-    <div class="track">
-      <div class="set">
-        <span class="it">Requisitions</span><span class="it">Offers</span><span class="it">Timecards</span><span class="it">Compensation</span><span class="it">Positions</span><span class="it">Assignment changes</span><span class="it">Terminations</span><span class="it">Leave of absence</span><span class="it">Costing &amp; funding</span><span class="it">Student employment</span>
-      </div>
-      <div class="set">
-        <span class="it">Requisitions</span><span class="it">Offers</span><span class="it">Timecards</span><span class="it">Compensation</span><span class="it">Positions</span><span class="it">Assignment changes</span><span class="it">Terminations</span><span class="it">Leave of absence</span><span class="it">Costing &amp; funding</span><span class="it">Student employment</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════ MANIFESTO ═══════════════════ -->
-<section id="start" class="manifesto th-cream" aria-label="Our belief">
-  <div class="wrap">
-    <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">The belief</span></span>
-    <p class="creed">Every paycheck, every new hire, and every grant charge starts with one person entering it right. HCM Academy exists so the people doing that work feel <em>confident, accurate, and supported.</em></p>
-  </div>
-</section>
-
-<!-- ═══════════════════ THE CHANCELLOR'S CHARGE ═══════════════════
-     Required in every course in the collection. Text is verbatim from Working
-     Smarter except the two course-specific slots: "How this academy delivers"
-     and the "your place in it" sentences of the flywheel block. -->
-<section id="mission" class="th-dark" aria-label="The Chancellor&rsquo;s charge">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">The institutional why &middot; Crescere aude</span></span>
-      <h2>Vanderbilt will define the great university of the 21st Century and <em>be it.</em></h2>
-      <p>That is Chancellor Diermeier&rsquo;s institutional vision, one sentence with no hedge in it. The how is equally blunt: operate at <b>uncommon speed, agility, and scale</b> to address society&rsquo;s challenges through education and research, and help <b>reclaim the essential role of leading research universities in driving American prosperity</b>. Our motto has always been the dare, <em>Crescere aude</em>, dare to grow.</p>
-    </div>
-    <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Areas of Focus</span></span>
-    <h3 style="font-size:1.35rem;margin:10px 0 18px">Three ways Vanderbilt delivers on the vision</h3>
-    <div class="resp-grid">
-      <article class="principle">
-        <span class="mono" style="display:block;font-size:.72rem;letter-spacing:.07em;margin-bottom:12px">1</span>
-        <h3>Exceptional Core Operations</h3>
-        <p>With speed, agility and scale, Vanderbilt will distinguish itself with innovative and impactful capabilities to ensure that we have the talent, resources and reputation necessary to deliver on our vision.</p>
-      </article>
-      <article class="principle">
-        <span class="mono" style="display:block;font-size:.72rem;letter-spacing:.07em;margin-bottom:12px">2</span>
-        <h3>Bold Strategic Initiatives</h3>
-        <p>With &ldquo;exceptional core operations&rdquo; as our fuel, Vanderbilt will pursue increasingly bold initiatives that enable and enhance the reach and impact of our education and research mission.</p>
-      </article>
-      <article class="principle">
-        <span class="mono" style="display:block;font-size:.72rem;letter-spacing:.07em;margin-bottom:12px">3</span>
-        <h3>Values Leadership</h3>
-        <p>Through strategic advocacy efforts and modeling the role of an essential research university, Vanderbilt will stimulate industry change and combat existential threats to our education and research mission.</p>
-      </article>
-    </div>
-    <div class="evidence">
-      <span class="e-label">How HCM Academy delivers</span>
-      <p>HCM is Exceptional Core Operations in its most literal form. A clean hire, an on-time timecard, and a salary charged to the right grant are the talent and resources the vision depends on. Each course here makes one of those transactions faster to do and harder to get wrong.</p>
-    </div>
-    <div class="evidence">
-      <span class="e-label">The reputation flywheel</span>
-      <p>Reputation and resources feed each other in a loop: reputation attracts <b>talent, funding, partnerships, and access</b>, which build the reputation. The university spins that flywheel with <b>execution with ambition, values-driven leadership, and athletics momentum</b>. Here&rsquo;s your place in it: talent arrives through the hires you process, and funding stays trusted when every salary lands on the account that should pay it. People who are paid right and on time stay, and the wheel keeps turning from your desk.</p>
-      <span class="e-src">&ldquo;Daring to Grow&rdquo;, Chancellor Diermeier, Vanderbilt University (July 2022): <a href="https://news.vanderbilt.edu/2022/07/01/daring-to-grow-together-we-are-building-the-great-university-of-the-21st-century/">the vision statement this page draws from</a></span>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ THE ROLE OF HCM ═══════════════════ -->
-<section id="role" class="th-light" aria-labelledby="roleTitle">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="you-are">You are here &middot; Before the courses</span>
-      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">What HCM is &middot; The big picture</span></span>
-      <h2 id="roleTitle">The role of <em>HCM</em>.</h2>
-      <p>Think of HCM as Vanderbilt&rsquo;s single record of who works here, what job they hold, what they are paid, and who pays for it. Payroll, benefits, leave, and financial reporting all read from that one record, so a change you make in one place shows up everywhere else.</p>
-    </div>
-    <div class="concept">
-      <span class="c-label">The idea</span>
-      <p>Most HCM problems are <b>timing and order problems</b>. A position has to exist before you can hire into it. An assignment change needs the right effective date before payroll runs. Costing has to change when the funding changes. Learn the order, and most of the work gets simpler.</p>
-    </div>
-
-    <div class="module">
-      <div class="module-head">
-        <span class="mno">What HCM does</span>
-        <h3>Four jobs the system does for <em>you</em>.</h3>
-      </div>
-      <div class="resp-grid four">
-        <article class="principle">
-          <span class="p-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></span>
-          <h3>Keeps the record</h3>
-          <p>One person record holds each employee&rsquo;s job, position, department, manager, pay, and work history.</p>
-        </article>
-        <article class="principle">
-          <span class="p-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg></span>
-          <h3>Pays people</h3>
-          <p>Timecards, salary, and one-time payments flow from the record into each payroll run.</p>
-        </article>
-        <article class="principle">
-          <span class="p-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H7"/></svg></span>
-          <h3>Charges the right account</h3>
-          <p>Costing sends each salary dollar to the department, fund, or grant that should pay it.</p>
-        </article>
-        <article class="principle">
-          <span class="p-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></span>
-          <h3>Protects people</h3>
-          <p>Leave, eligibility, and approvals keep Vanderbilt in step with policy and the law.</p>
-        </article>
-      </div>
-    </div>
-
-    <div class="module">
-      <div class="module-head">
-        <span class="mno">Try it &middot; Eight words you will hear</span>
-        <h3>Learn the <em>vocabulary</em>.</h3>
-        <p>Every course uses these terms. Select a card to see why it matters in your work.</p>
-      </div>
-      <ul class="flip-grid" role="list" id="vocab">
-        <li class="fcard"><button type="button" aria-pressed="false">
-          <span class="face front"><svg class="abbr-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
-            <h4>Person record</h4><span class="def">Who someone is: name, contact details, and identifiers. One per person, for life.</span>
-            <span class="hint">Why it matters <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
-          <span class="face back"><span class="tag">Person record &middot; Why it matters</span><p>A rehire or a student who becomes staff should keep the <b>same</b> person record. Creating a second one splits their history and can break pay and benefits.</p></span>
-        </button></li>
-        <li class="fcard"><button type="button" aria-pressed="false">
-          <span class="face front"><svg class="abbr-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M8 9V6a4 4 0 0 1 8 0v3"/></svg>
-            <h4>Position</h4><span class="def">A budgeted seat in a department. It exists whether or not anyone is in it.</span>
-            <span class="hint">Why it matters <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
-          <span class="face back"><span class="tag">Position &middot; Why it matters</span><p>You hire <b>into</b> a position. If the position is wrong, every hire into it inherits the mistake.</p></span>
-        </button></li>
-        <li class="fcard"><button type="button" aria-pressed="false">
-          <span class="face front"><svg class="abbr-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            <h4>Assignment</h4><span class="def">The link between a person and a position: where they work, for whom, and on what terms.</span>
-            <span class="hint">Why it matters <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
-          <span class="face back"><span class="tag">Assignment &middot; Why it matters</span><p>Transfers, manager changes, and ending a job are all <b>assignment</b> changes. The person record stays the same.</p></span>
-        </button></li>
-        <li class="fcard"><button type="button" aria-pressed="false">
-          <span class="face front"><svg class="abbr-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
-            <h4>Job</h4><span class="def">The generic role and its pay grade, shared by many positions across the university.</span>
-            <span class="hint">Why it matters <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
-          <span class="face back"><span class="tag">Job &middot; Why it matters</span><p>The job sets the pay range and whether the role is <b>exempt or non-exempt</b>, which decides whether someone submits a timecard.</p></span>
-        </button></li>
-        <li class="fcard"><button type="button" aria-pressed="false">
-          <span class="face front"><svg class="abbr-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
-            <h4>Requisition</h4><span class="def">An approved request to fill an open position, which becomes the job posting.</span>
-            <span class="hint">Why it matters <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
-          <span class="face back"><span class="tag">Requisition &middot; Why it matters</span><p>The requisition carries the position&rsquo;s details into the offer. Check it before it posts and the offer comes out <b>right</b>.</p></span>
-        </button></li>
-        <li class="fcard"><button type="button" aria-pressed="false">
-          <span class="face front"><svg class="abbr-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
-            <h4>Timecard</h4><span class="def">The hours a non-exempt employee worked in a pay period, submitted and then approved.</span>
-            <span class="hint">Why it matters <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
-          <span class="face back"><span class="tag">Timecard &middot; Why it matters</span><p>An unapproved timecard at the payroll deadline can mean a <b>late or short</b> paycheck for someone on your team.</p></span>
-        </button></li>
-        <li class="fcard"><button type="button" aria-pressed="false">
-          <span class="face front"><svg class="abbr-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
-            <h4>Absence</h4><span class="def">Recorded time away: vacation, sick time, or a protected leave of absence.</span>
-            <span class="hint">Why it matters <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
-          <span class="face back"><span class="tag">Absence &middot; Why it matters</span><p>The absence type decides pay, benefit, and legal protections. Picking the <b>right type</b> matters as much as the dates.</p></span>
-        </button></li>
-        <li class="fcard"><button type="button" aria-pressed="false">
-          <span class="face front"><svg class="abbr-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M12 3v18M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H7"/></svg>
-            <h4>Costing</h4><span class="def">The accounts that pay a person&rsquo;s salary, often split by percentage across several sources.</span>
-            <span class="hint">Why it matters <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span>
-          <span class="face back"><span class="tag">Costing &middot; Why it matters</span><p>When a grant ends and costing does not change, salary keeps landing there and has to be <b>moved after the fact</b>.</p></span>
-        </button></li>
+<main id="main">
+  <section class="hero dark" aria-labelledby="heroTitle">
+    <div class="wrap">
+      <p class="mono">Vanderbilt University &middot; HCM Academy</p>
+      <h1 id="heroTitle">The people behind every hire, paycheck, and <em>change</em>.</h1>
+      <p><b>HCMs work inside the business.</b> They sit in schools, departments, and units across Vanderbilt, close to the managers and employees they support, and they own the people work for their area: hiring, pay and timecards, positions and transfers, leave, costing, and student jobs.</p>
+      <p>HCM Academy is your place as an HCM. Come here to learn the work, share what works, meet the people doing the same job across campus, and get answers when something comes up.</p>
+      <ul class="pillars" aria-label="What HCM Academy is for">
+        <li><span class="mono">Learn</span><span>Courses for each part of the role</span></li>
+        <li><span class="mono">Share</span><span>Tips and fixes from other HCMs</span></li>
+        <li><span class="mono">Meet</span><span>The HCM community across campus</span></li>
+        <li><span class="mono">Get answers</span><span>Help with the work in front of you</span></li>
       </ul>
     </div>
+  </section>
 
-    <div class="module">
-      <div class="module-head">
-        <span class="mno">How HCM Academy works</span>
-        <h3>Six areas, one employee <em>lifecycle</em>.</h3>
-        <p>Each area follows a part of an employee&rsquo;s time at Vanderbilt. Start with the area that matches your work today; you can take them in any order.</p>
-      </div>
-      <div class="hw-list">
-        <div class="hw-step"><span class="hw-no" aria-hidden="true">01</span>
-          <div><h3><a href="#recruiting">Recruitment &amp; Hiring</a></h3><p>From an open position to an accepted offer.</p></div>
-          <span class="chip">1 course</span></div>
-        <div class="hw-step"><span class="hw-no" aria-hidden="true">02</span>
-          <div><h3><a href="#payroll">Payroll &amp; Timecards</a></h3><p>Getting hours approved and pay right every cycle.</p>
-            <ul class="subs" aria-label="Includes"><li>Compensation Management</li></ul></div>
-          <span class="chip">2 courses</span></div>
-        <div class="hw-step"><span class="hw-no" aria-hidden="true">03</span>
-          <div><h3><a href="#positions">Onboarding, Offboarding, Transfers &amp; Managing Positions</a></h3><p>The life of a position and the people who fill it.</p>
-            <ul class="subs" aria-label="Includes"><li>Creating and Position Updates</li><li>Assignment Changes</li><li>Offboarding</li></ul></div>
-          <span class="chip">4 courses</span></div>
-        <div class="hw-step"><span class="hw-no" aria-hidden="true">04</span>
-          <div><h3><a href="#leave">Leave Management</a></h3><p>Recording time away and protected leave with care.</p></div>
-          <span class="chip">1 course</span></div>
-        <div class="hw-step"><span class="hw-no" aria-hidden="true">05</span>
-          <div><h3><a href="#costing">Costing Management</a></h3><p>Sending each salary dollar to the right account.</p></div>
-          <span class="chip">1 course</span></div>
-        <div class="hw-step"><span class="hw-no" aria-hidden="true">06</span>
-          <div><h3><a href="#students">Student Hiring and Assignment Changes</a></h3><p>Student jobs that follow the academic calendar.</p></div>
-          <span class="chip">1 course</span></div>
-      </div>
-      <p class="acr-line">Enter it once. Enter it <b>right.</b></p>
-    </div>
+  <section class="topics" id="topics" aria-labelledby="topicsTitle">
+    <div class="wrap">
+      <p class="mono eyebrow">Learn</p>
+      <h2 id="topicsTitle">Choose a <em>topic</em>.</h2>
 
-    <div class="bridge"><span class="b-label">Up next</span><p>Not sure where to start? Tell us the task in front of you and we will point you to a <em>course</em>.</p></div>
-  </div>
-</section>
-
-<!-- ═══════════════════ FIND YOUR COURSE (router) ═══════════════════ -->
-<section id="find" class="th-cream" aria-labelledby="findTitle">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="you-are">You are here &middot; Find your course</span>
-      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Start with the task</span></span>
-      <h2 id="findTitle">What do you need to do <em>today</em>?</h2>
-      <p>Pick the task closest to yours. We will show you which learning area covers it and take you there.</p>
-    </div>
-    <div class="route">
-      <p class="route-qt" id="routeQ">I need to&hellip;</p>
-      <ul class="route-opts" role="list" aria-labelledby="routeQ" id="routeOpts">
-        <li><button type="button" aria-pressed="false" data-go="recruiting">Post a job or move a candidate to an offer</button></li>
-        <li><button type="button" aria-pressed="false" data-go="payroll">Fix or approve a timecard before payroll</button></li>
-        <li><button type="button" aria-pressed="false" data-go="compensation">Change someone&rsquo;s pay rate or make a one-time payment</button></li>
-        <li><button type="button" aria-pressed="false" data-go="positions">Get a new employee ready for their first day</button></li>
-        <li><button type="button" aria-pressed="false" data-go="position-updates">Create a new position or update an existing one</button></li>
-        <li><button type="button" aria-pressed="false" data-go="assignment-changes">Move someone to a new job, manager, or department</button></li>
-        <li><button type="button" aria-pressed="false" data-go="offboarding">Process a resignation or end an assignment</button></li>
-        <li><button type="button" aria-pressed="false" data-go="leave">Record time off or a leave of absence</button></li>
-        <li><button type="button" aria-pressed="false" data-go="costing">Change which account or grant pays a salary</button></li>
-        <li><button type="button" aria-pressed="false" data-go="students">Hire a student worker or change a student job</button></li>
-      </ul>
-      <div class="route-out" id="routeOut" hidden>
-        <span class="mono" id="routeArea"></span>
-        <h3 id="routeTitle" tabindex="-1"></h3>
-        <p id="routeWhy"></p>
-        <a class="btn btn-primary" id="routeGo" href="#areas">Go to this area
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-      <p class="route-hint">Your choice is not saved or sent anywhere.</p>
-      <p class="sr" id="routeStatus" role="status" aria-live="polite"></p>
-    </div>
-    <noscript><p class="route-hint">Use the learning area links in the menu above to jump to any course.</p></noscript>
-  </div>
-</section>
-
-<span id="areas"></span>
-
-<!-- ═══════════════════ AREA 01 · RECRUITMENT & HIRING ═══════════════════ -->
-<section id="recruiting" class="th-light" aria-labelledby="a1Title">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="you-are">Learning area 01 of 06</span>
-      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Area 01 &middot; Recruitment &amp; Hiring</span></span>
-      <h2 id="a1Title">From open position to accepted <em>offer</em>.</h2>
-      <p>Recruiting covers the request to fill a position, the job posting, reviewing applicants, interviews, and the offer a candidate accepts. Details entered here travel with the new hire into pay, benefits, and funding.</p>
-    </div>
-    <div class="area-grid">
-      <div class="concept">
-        <span class="c-label">The idea</span>
-        <p>Build the <b>position</b> first, then the <b>requisition</b>, then the <b>offer</b>. Each step copies details from the one before it, so a mistake early on shows up in every step after.</p>
-      </div>
-      <div>
-        <span class="ll-head">What you will practice</span>
-        <ul class="learn-list">
-          <li>Open a requisition against the right position</li>
-          <li>Move candidates through each hiring stage</li>
-          <li>Extend an offer and hand the new hire off to onboarding</li>
-        </ul>
-      </div>
-    </div>
-    <div class="module">
-      <div class="module-head"><span class="mno">Courses in this area</span></div>
-      <div class="courses">
-        <article class="course main">
-          <span class="c-kind">Course 01</span>
+      <div class="grid">
+        <article class="card" id="recruiting">
+          <span class="no" aria-hidden="true">01</span>
           <h3>Recruitment &amp; Hiring</h3>
-          <p>Requisitions, postings, candidate stages, and offers, start to finish.</p>
-          <div class="c-foot">
-            <span class="c-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>In development</span>
-            <!-- [EDIT: when live] <a class="btn btn-primary btn-sm" href="courses/recruitment-hiring/">Start course</a> -->
-          </div>
+          <p>From an open role to an accepted offer.</p>
+          <ul class="links">
+            <li>Recruitment &amp; Hiring <span class="soon">Coming soon</span></li>
+          </ul>
         </article>
-      </div>
-    </div>
-    <div class="bridge"><span class="b-label">Next area</span><p>Once someone is hired, the next question is getting them paid on <em>time</em>. <a href="#payroll">Go to Payroll &amp; Timecards</a></p></div>
-  </div>
-</section>
 
-<!-- ═══════════════════ AREA 02 · PAYROLL & TIMECARDS ═══════════════════ -->
-<section id="payroll" class="th-cream" aria-labelledby="a2Title">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="you-are">Learning area 02 of 06</span>
-      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Area 02 &middot; Payroll &amp; Timecards</span></span>
-      <h2 id="a2Title">Getting people paid right, on <em>time</em>.</h2>
-      <p>Hourly staff record their time, managers approve it, and payroll processes it on a fixed schedule. Salaried pay, rate changes, and one-time payments flow from the same record.</p>
-    </div>
-    <div class="area-grid">
-      <div class="concept">
-        <span class="c-label">The idea</span>
-        <p>Payroll pays <b>what the record says</b>. Most pay problems trace back to a timecard that was late, unapproved, or coded wrong, or to a job or pay record that was out of date when payroll ran.</p>
-      </div>
-      <div>
-        <span class="ll-head">What you will practice</span>
-        <ul class="learn-list">
-          <li>Review, correct, and approve timecards before the deadline</li>
-          <li>Read the payroll calendar and know your cutoffs</li>
-          <li>Process pay rate changes and one-time payments</li>
-        </ul>
-      </div>
-    </div>
-    <div class="module">
-      <div class="module-head"><span class="mno">Courses in this area</span></div>
-      <div class="courses">
-        <article class="course main">
-          <span class="c-kind">Course 02</span>
+        <article class="card" id="payroll">
+          <span class="no" aria-hidden="true">02</span>
           <h3>Payroll &amp; Timecards</h3>
-          <p>Timecard entry and approval, payroll deadlines, and fixing common errors.</p>
-          <div class="c-foot">
-            <span class="c-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>In development</span>
-            <!-- [EDIT: when live] <a class="btn btn-primary btn-sm" href="courses/payroll-timecards/">Start course</a> -->
-          </div>
+          <p>Getting time approved and pay right every cycle.</p>
+          <ul class="links">
+            <li>Payroll &amp; Timecards <span class="soon">Coming soon</span></li>
+            <li class="sub">Compensation Management <span class="soon">Coming soon</span></li>
+          </ul>
         </article>
-        <article class="course sub" id="compensation">
-          <span class="c-kind">Course 02a &middot; Sub-course</span>
-          <h3>Compensation Management</h3>
-          <p>Salary changes, pay rates, and one-time payments, and how each one reaches payroll.</p>
-          <div class="c-foot">
-            <span class="c-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>In development</span>
-            <!-- [EDIT: when live] <a class="btn btn-primary btn-sm" href="courses/compensation-management/">Start course</a> -->
-          </div>
-        </article>
-      </div>
-    </div>
-    <div class="bridge"><span class="b-label">Next area</span><p>Pay follows the job, so next we look at the positions and assignments behind <em>it</em>. <a href="#positions">Go to Onboarding, Transfers &amp; Positions</a></p></div>
-  </div>
-</section>
 
-<!-- ═══════════════════ AREA 03 · ONBOARDING, OFFBOARDING, TRANSFERS & POSITIONS ═══════════════════ -->
-<section id="positions" class="th-light" aria-labelledby="a3Title">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="you-are">Learning area 03 of 06</span>
-      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Area 03 &middot; Onboarding, Offboarding, Transfers &amp; Managing Positions</span></span>
-      <h2 id="a3Title">Every job lives in a <em>position</em>.</h2>
-      <p>Positions are the budgeted seats in a department. Assignments connect a person to a position. This area covers the life of both: setting up a seat, bringing someone into it, moving them, and closing things out when they leave.</p>
-    </div>
-    <div class="area-grid">
-      <div class="concept">
-        <span class="c-label">The idea</span>
-        <p>Picture the position as the <b>chair</b> and the assignment as the <b>person sitting in it</b>. You can change the chair, move the person to a different chair, or have them stand up and leave. Each of those is a different transaction with its own effective date.</p>
-      </div>
-      <div>
-        <span class="ll-head">What you will practice</span>
-        <ul class="learn-list">
-          <li>Prepare a new hire&rsquo;s record and first-day tasks</li>
-          <li>Create a position or update its details</li>
-          <li>Process transfers, manager changes, and other assignment changes</li>
-          <li>Process terminations and end assignments cleanly</li>
-        </ul>
-      </div>
-    </div>
-    <div class="module">
-      <div class="module-head"><span class="mno">Courses in this area</span></div>
-      <div class="courses">
-        <article class="course main">
-          <span class="c-kind">Course 03</span>
+        <article class="card" id="positions">
+          <span class="no" aria-hidden="true">03</span>
           <h3>Onboarding, Offboarding, Transfers &amp; Managing Positions</h3>
-          <p>The overview: how positions, assignments, and the person record work together across an employee&rsquo;s time here.</p>
-          <div class="c-foot">
-            <span class="c-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>In development</span>
-            <!-- [EDIT: when live] <a class="btn btn-primary btn-sm" href="courses/onboarding-positions/">Start course</a> -->
-          </div>
+          <p>Setting up positions and every move a person makes in them.</p>
+          <ul class="links">
+            <li>Overview <span class="soon">Coming soon</span></li>
+            <li class="sub">Creating and Position Updates <span class="soon">Coming soon</span></li>
+            <li class="sub">Assignment Changes <span class="soon">Coming soon</span></li>
+            <li class="sub">Offboarding (terms, ending assignments) <span class="soon">Coming soon</span></li>
+          </ul>
         </article>
-        <article class="course sub" id="position-updates">
-          <span class="c-kind">Course 03a &middot; Sub-course</span>
-          <h3>Creating and Position Updates</h3>
-          <p>Create new positions and update existing ones: job, department, hours, and reporting line.</p>
-          <div class="c-foot">
-            <span class="c-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>In development</span>
-            <!-- [EDIT: when live] <a class="btn btn-primary btn-sm" href="courses/position-updates/">Start course</a> -->
-          </div>
-        </article>
-        <article class="course sub" id="assignment-changes">
-          <span class="c-kind">Course 03b &middot; Sub-course</span>
-          <h3>Assignment Changes</h3>
-          <p>Transfers, promotions, manager changes, and other updates to the job a person holds.</p>
-          <div class="c-foot">
-            <span class="c-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>In development</span>
-            <!-- [EDIT: when live] <a class="btn btn-primary btn-sm" href="courses/assignment-changes/">Start course</a> -->
-          </div>
-        </article>
-        <article class="course sub" id="offboarding">
-          <span class="c-kind">Course 03c &middot; Sub-course</span>
-          <h3>Offboarding</h3>
-          <p>Terminations and ending assignments: effective dates, final pay, and what happens to the position.</p>
-          <div class="c-foot">
-            <span class="c-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>In development</span>
-            <!-- [EDIT: when live] <a class="btn btn-primary btn-sm" href="courses/offboarding/">Start course</a> -->
-          </div>
-        </article>
-      </div>
-    </div>
-    <div class="bridge"><span class="b-label">Next area</span><p>Between hiring and leaving, people need time away, and that has to be recorded with <em>care</em>. <a href="#leave">Go to Leave Management</a></p></div>
-  </div>
-</section>
 
-<!-- ═══════════════════ AREA 04 · LEAVE MANAGEMENT ═══════════════════ -->
-<section id="leave" class="th-cream" aria-labelledby="a4Title">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="you-are">Learning area 04 of 06</span>
-      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Area 04 &middot; Leave Management</span></span>
-      <h2 id="a4Title">Time away, tracked with <em>care</em>.</h2>
-      <p>Leave covers everyday absences like vacation and sick time, and protected leaves of absence such as FMLA. It also covers the return to work, when the record has to be closed out.</p>
-    </div>
-    <div class="area-grid">
-      <div class="concept">
-        <span class="c-label">The idea</span>
-        <p>Leave touches <b>pay, benefits, and legal protections</b> at the same time. Enter it promptly, choose the right absence type, and close it out when the employee comes back.</p>
-      </div>
-      <div>
-        <span class="ll-head">What you will practice</span>
-        <ul class="learn-list">
-          <li>Record and approve absences with the right type</li>
-          <li>Read balances and accruals</li>
-          <li>Start, extend, and close a leave of absence</li>
-        </ul>
-      </div>
-    </div>
-    <div class="module">
-      <div class="module-head"><span class="mno">Courses in this area</span></div>
-      <div class="courses">
-        <article class="course main">
-          <span class="c-kind">Course 04</span>
+        <article class="card" id="leave">
+          <span class="no" aria-hidden="true">04</span>
           <h3>Leave Management</h3>
-          <p>Absence entry, balances, leaves of absence, and the return to work.</p>
-          <div class="c-foot">
-            <span class="c-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>In development</span>
-            <!-- [EDIT: when live] <a class="btn btn-primary btn-sm" href="courses/leave-management/">Start course</a> -->
-          </div>
+          <p>Recording time away and leaves of absence.</p>
+          <ul class="links">
+            <li>Leave Management <span class="soon">Coming soon</span></li>
+          </ul>
         </article>
-      </div>
-    </div>
-    <div class="bridge"><span class="b-label">Next area</span><p>Every hour paid, worked or on leave, is charged to an <em>account</em>. <a href="#costing">Go to Costing Management</a></p></div>
-  </div>
-</section>
 
-<!-- ═══════════════════ AREA 05 · COSTING MANAGEMENT ═══════════════════ -->
-<section id="costing" class="th-light" aria-labelledby="a5Title">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="you-are">Learning area 05 of 06</span>
-      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Area 05 &middot; Costing Management</span></span>
-      <h2 id="a5Title">Follow each salary dollar to its <em>account</em>.</h2>
-      <p>Costing tells the system which departments, funds, or grants pay for a person&rsquo;s salary, and in what share. It matters most when funding changes: a new grant, a grant ending, or a split between departments.</p>
-    </div>
-    <div class="area-grid">
-      <div class="concept">
-        <span class="c-label">The idea</span>
-        <p>Costing answers one question: <b>who pays for this work?</b> When the answer changes, the costing has to change too, with the right effective date. Otherwise salary lands on the wrong account and has to be moved later.</p>
-      </div>
-      <div>
-        <span class="ll-head">What you will practice</span>
-        <ul class="learn-list">
-          <li>Read a costing setup and its percentage splits</li>
-          <li>Update costing when funding starts, ends, or changes</li>
-          <li>Spot costing that will expire before it causes a problem</li>
-        </ul>
-      </div>
-    </div>
-    <div class="module">
-      <div class="module-head"><span class="mno">Courses in this area</span></div>
-      <div class="courses">
-        <article class="course main">
-          <span class="c-kind">Course 05</span>
+        <article class="card" id="costing">
+          <span class="no" aria-hidden="true">05</span>
           <h3>Costing Management</h3>
-          <p>Salary costing, funding splits, effective dates, and grant end dates.</p>
-          <div class="c-foot">
-            <span class="c-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>In development</span>
-            <!-- [EDIT: when live] <a class="btn btn-primary btn-sm" href="courses/costing-management/">Start course</a> -->
-          </div>
+          <p>Charging each salary to the right account.</p>
+          <ul class="links">
+            <li>Costing Management <span class="soon">Coming soon</span></li>
+          </ul>
         </article>
-      </div>
-    </div>
-    <div class="bridge"><span class="b-label">Next area</span><p>Student jobs use every piece above, with a few rules of their <em>own</em>. <a href="#students">Go to Student Hiring</a></p></div>
-  </div>
-</section>
 
-<!-- ═══════════════════ AREA 06 · STUDENT HIRING ═══════════════════ -->
-<section id="students" class="th-cream" aria-labelledby="a6Title">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="you-are">Learning area 06 of 06</span>
-      <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Area 06 &middot; Student Hiring and Assignment Changes</span></span>
-      <h2 id="a6Title">Student jobs, from start to <em>finish</em>.</h2>
-      <p>Student employment has its own rules: eligibility checks, limits on hours during the term, Federal Work-Study funding, and jobs that end with the semester. This area covers hiring students and changing their assignments as the year moves on.</p>
-    </div>
-    <div class="area-grid">
-      <div class="concept">
-        <span class="c-label">The idea</span>
-        <p>Student jobs follow the <b>academic calendar</b>. Check eligibility before the start date, give every assignment an end date, and update the record when the semester or the funding changes.</p>
-      </div>
-      <div>
-        <span class="ll-head">What you will practice</span>
-        <ul class="learn-list">
-          <li>Hire a student into the right position and job type</li>
-          <li>Set up Work-Study and other student funding</li>
-          <li>Change, extend, or end a student assignment between terms</li>
-        </ul>
-      </div>
-    </div>
-    <div class="module">
-      <div class="module-head"><span class="mno">Courses in this area</span></div>
-      <div class="courses">
-        <article class="course main">
-          <span class="c-kind">Course 06</span>
+        <article class="card" id="students">
+          <span class="no" aria-hidden="true">06</span>
           <h3>Student Hiring and Assignment Changes</h3>
-          <p>Student eligibility, hiring, Work-Study, and assignment changes across terms.</p>
-          <div class="c-foot">
-            <span class="c-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>In development</span>
-            <!-- [EDIT: when live] <a class="btn btn-primary btn-sm" href="courses/student-hiring/">Start course</a> -->
-          </div>
+          <p>Hiring student workers and changing their jobs between terms.</p>
+          <ul class="links">
+            <li>Student Hiring and Assignment Changes <span class="soon">Coming soon</span></li>
+          </ul>
         </article>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ CLOSING ═══════════════════ -->
-<section class="cta th-dark" aria-label="Closing">
-  <div class="wrap">
-    <span class="eyebrow"><span class="tick" aria-hidden="true"></span><span class="mono">Where to begin</span></span>
-    <h2 class="metal">Start with the task in <em>front</em> of you.</h2>
-    <p>Pick the area that matches your work this week. Courses open here as they are released, so check back as the series grows.</p>
-    <a class="btn btn-gold" href="#find">Find your course
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    <p class="send-sign">The people behind the paycheck.</p>
-  </div>
-</section>
+  </section>
 </main>
 
-<!-- ═══════════════════ FOOTER ═══════════════════ -->
-<footer>
+<footer class="dark">
   <div class="wrap">
-    <div class="fcenter">
-      <img src="assets/img/vu-centered-white.png" alt="Vanderbilt University" width="100" height="104" loading="lazy" decoding="async" />
-      <p class="fprogram">HCM Academy &middot; Enter it once, enter it right</p>
-      <p class="flegal">&copy; <span id="yr">2026</span> HCM Academy &middot; Vanderbilt. An internal training prototype, <b>not an official Vanderbilt University site</b>. Oracle and Oracle HCM Cloud are trademarks of their owner. This page stores nothing and sends nothing.</p>
-      <p class="flegal"><b>Accessibility:</b> HCM Academy is built to meet WCAG 2.2 Level AA. If anything here is hard to use, tell us and we will fix it or get you the content another way: <a href="mailto:matthew.estes@vanderbilt.edu">matthew.estes@vanderbilt.edu</a> <!-- [EDIT: swap contact to program alias when created] --></p>
-    </div>
+    <img src="assets/img/vu-centered-white.png" alt="Vanderbilt University" width="90" height="94" loading="lazy" />
+    <p>HCM Academy &middot; An internal training prototype, not an official Vanderbilt University site. Built to meet WCAG 2.2 AA; if anything is hard to use, tell us: <a href="mailto:matthew.estes@vanderbilt.edu">matthew.estes@vanderbilt.edu</a> <!-- [EDIT: program contact] --></p>
   </div>
 </footer>
-
-<script>
-(function(){
-  'use strict';
-  var doc = document, body = doc.body;
-
-  /* links that leave the page open in a new tab */
-  doc.querySelectorAll('a[href]').forEach(function(a){
-    var h = a.getAttribute('href');
-    if (h && h.charAt(0) !== '#' && h.indexOf('mailto:') !== 0){ a.target = '_blank'; a.rel = 'noopener'; }
-  });
-
-  var yr = doc.getElementById('yr'); if (yr) yr.textContent = new Date().getFullYear();
-
-  /* nav border on scroll */
-  var nav = doc.getElementById('nav');
-  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 8); }
-  window.addEventListener('scroll', onScroll, { passive:true }); onScroll();
-
-  /* mobile menu: focus moves in, Escape closes, focus returns to the button */
-  var btn = doc.getElementById('menuBtn'), menu = doc.getElementById('mobileMenu');
-  function setMenu(open){
-    body.classList.toggle('menu-open', open);
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    menu.querySelectorAll('a').forEach(function(a){ a.tabIndex = open ? 0 : -1; });
-    if (open){ var f = menu.querySelector('a'); if (f) f.focus(); }
-  }
-  menu.querySelectorAll('a').forEach(function(a){
-    a.tabIndex = -1;
-    a.addEventListener('click', function(){ setMenu(false); });
-  });
-  btn.addEventListener('click', function(){ setMenu(!body.classList.contains('menu-open')); });
-  doc.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && body.classList.contains('menu-open')){ setMenu(false); btn.focus(); }
-  });
-  window.matchMedia('(min-width:1200px)').addEventListener('change', function(m){ if (m.matches) setMenu(false); });
-
-  /* in-page links move focus to the target section heading, for keyboard and screen reader users */
-  doc.querySelectorAll('a[href^="#"]').forEach(function(a){
-    a.addEventListener('click', function(){
-      var id = a.getAttribute('href').slice(1); if (!id) return;
-      var t = doc.getElementById(id); if (!t) return;
-      var h = t.querySelector('h1,h2,h3,h4') || t;
-      if (!h.hasAttribute('tabindex')) h.setAttribute('tabindex','-1');
-      setTimeout(function(){ h.focus({ preventScroll:true }); }, 0);
-    });
-  });
-
-  /* vocabulary flip cards */
-  doc.querySelectorAll('#vocab .fcard button').forEach(function(b){
-    b.addEventListener('click', function(){
-      b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
-    });
-  });
-
-  /* find your course router */
-  var ROUTES = {
-    'recruiting':        { area:'Area 01', title:'Recruitment & Hiring', why:'Requisitions, postings, candidate stages, and offers all live here.' },
-    'payroll':           { area:'Area 02', title:'Payroll & Timecards', why:'Timecard review, approval, and payroll deadlines are covered in this course.' },
-    'compensation':      { area:'Area 02 · Sub-course', title:'Compensation Management', why:'Pay rate changes and one-time payments, and how they reach payroll.' },
-    'positions':         { area:'Area 03', title:'Onboarding, Offboarding, Transfers & Managing Positions', why:'The overview course walks through setting up a new employee for day one.' },
-    'position-updates':  { area:'Area 03 · Sub-course', title:'Creating and Position Updates', why:'Creating positions and changing their job, department, hours, or reporting line.' },
-    'assignment-changes':{ area:'Area 03 · Sub-course', title:'Assignment Changes', why:'Transfers, promotions, and manager changes are assignment changes.' },
-    'offboarding':       { area:'Area 03 · Sub-course', title:'Offboarding', why:'Terminations and ending assignments, with the right dates and final pay.' },
-    'leave':             { area:'Area 04', title:'Leave Management', why:'Absence types, balances, and leaves of absence through the return to work.' },
-    'costing':           { area:'Area 05', title:'Costing Management', why:'Changing the accounts, funds, or grants that pay a salary.' },
-    'students':          { area:'Area 06', title:'Student Hiring and Assignment Changes', why:'Student eligibility, Work-Study, and changes between terms.' }
-  };
-  var opts = doc.querySelectorAll('#routeOpts button'), out = doc.getElementById('routeOut'),
-      rArea = doc.getElementById('routeArea'), rTitle = doc.getElementById('routeTitle'),
-      rWhy = doc.getElementById('routeWhy'), rGo = doc.getElementById('routeGo'), rStatus = doc.getElementById('routeStatus');
-  opts.forEach(function(b){
-    b.addEventListener('click', function(){
-      var r = ROUTES[b.dataset.go]; if (!r) return;
-      opts.forEach(function(o){ o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
-      rArea.textContent = r.area; rTitle.textContent = r.title; rWhy.textContent = r.why;
-      rGo.setAttribute('href', '#' + b.dataset.go);
-      rGo.firstChild.nodeValue = 'Go to ' + r.title + ' ';
-      out.hidden = false;
-      rStatus.textContent = 'Suggested: ' + r.title + '. ' + r.why;
-    });
-  });
-})();
-</script>
 </body>
 </html>

@@ -11,37 +11,20 @@ no build step, no backend. Fonts and lockups live in `assets/`.
 
 ## Structure
 
-| Section | Anchor | Notes |
-| --- | --- | --- |
-| Hero: the role of HCM | `#top` | What HCM is, Bloom's-verb outcomes for the series |
-| Belief | `#start` | Manifesto creed |
-| Chancellor's charge | `#mission` | Required in every course; two slots adapted for HCM |
-| What HCM is | `#role` | Four jobs, eight-term flip-card vocabulary, six-area lifecycle |
-| Find your course | `#find` | Ten-task router that points to an area or sub-course |
-| 01 Recruitment & Hiring | `#recruiting` | |
-| 02 Payroll & Timecards | `#payroll` | Sub: Compensation Management `#compensation` |
-| 03 Onboarding, Offboarding, Transfers & Managing Positions | `#positions` | Subs: `#position-updates`, `#assignment-changes`, `#offboarding` |
-| 04 Leave Management | `#leave` | |
-| 05 Costing Management | `#costing` | |
-| 06 Student Hiring and Assignment Changes | `#students` | |
+Kept deliberately short:
+
+1. **Hero**: what an HCM is (people embedded in the business who own the people work for their area) and what the Academy is for: learn, share, meet, get answers.
+2. **Choose a topic**: six cards, one per area, each listing its course and sub-course links.
+3. **Footer**: contact and accessibility statement.
 
 ## Adding a course when it ships
 
-Each course card carries an "In development" status and a commented-out link.
-When a course is live:
-
-1. Build it in `courses/<slug>/index.html` with the vu-course-builder skill.
-2. In `index.html`, find the card (search the slug, e.g. `courses/leave-management/`).
-3. Replace the `<span class="c-status">…</span>` with the commented `<a class="btn btn-primary btn-sm" …>Start course</a>` and remove the comment.
-
-Planned slugs: `recruitment-hiring`, `payroll-timecards`, `compensation-management`,
-`onboarding-positions`, `position-updates`, `assignment-changes`, `offboarding`,
-`leave-management`, `costing-management`, `student-hiring`.
+Each course line shows "Coming soon". When a course is live, replace that
+`<span class="soon">Coming soon</span>` with `<a href="courses/<slug>/">Open</a>`.
 
 ## Open placeholders
 
-Search `[EDIT]` in `index.html`: system name (Oracle HCM Cloud assumed), hero
-audience line, contact address.
+Search `[EDIT]` in `index.html`: contact address.
 
 ## Accessibility and brand gate
 
