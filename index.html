@@ -70,7 +70,7 @@ header .cta:hover{ background:var(--highlight); }
 .topics .eyebrow{ color:var(--black); display:flex; align-items:center; gap:12px; }
 .topics .eyebrow::before{ content:''; width:26px; height:2px; background:var(--gold); }
 .topics h2{ font-size:clamp(1.9rem,4vw,2.8rem); margin-top:14px; }
-.grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:36px; align-items:start; }
+.grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:36px; align-items:start; }
 .card{ background:#fff; border:1px solid var(--sand); border-top:3px solid var(--gold); border-radius:4px; padding:24px 22px; display:flex; flex-direction:column; }
 .card .no{ font-family:var(--cond); font-weight:700; font-size:2rem; line-height:1; color:var(--oak); }
 .card h3{ font-size:1.4rem; margin-top:12px; }
@@ -118,6 +118,7 @@ header .cta:hover{ background:var(--highlight); }
 .passed[hidden]{ display:none; }
 :root{ --done:#2E7D32; }
 .links li.cbtn{ padding:0; }
+.links li.cbtn.sub{ padding-left:18px; }
 .links li.cbtn.sub::before{ top:1.55em; }
 .course-btn{ all:unset; box-sizing:border-box; display:flex; align-items:baseline; gap:10px; width:100%; padding:10px 0; cursor:pointer; font:inherit; color:inherit; }
 .course-btn:focus-visible{ outline:2px solid var(--oak); outline-offset:2px; }
@@ -151,13 +152,31 @@ dialog.modal::backdrop{ background:rgba(28,28,28,.72); }
 .result.pass .score{ color:var(--done); }
 .result ul{ margin:10px 0 0 18px; font-size:.92rem; }
 
+.links li.group{ font-weight:600; color:var(--black); padding-bottom:4px; }
+.subhead{ font-family:var(--serif); font-weight:400; font-size:1.15rem; margin-top:22px; padding-top:16px; border-top:2px solid var(--sand); }
+.lbl{ font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--black) !important; margin-top:16px !important; }
+.sect:first-of-type .subhead{ margin-top:18px; }
+.card .links{ margin-top:6px; }
+.aids-wrap{ margin-top:12px; border:1px solid var(--gray); border-radius:4px; background:var(--cream); }
+.aids-wrap summary{ cursor:pointer; padding:10px 12px; font-size:.9rem; font-weight:600; min-height:44px; display:flex; align-items:center; }
+.aids-wrap summary:focus-visible{ outline:2px solid var(--oak); outline-offset:2px; }
+.aids-wrap .aids{ padding:0 12px 8px; }
+.aids{ list-style:none; }
+.aids li{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:8px 0; border-top:1px solid var(--gray); font-size:.9rem; }
+.aids li[hidden],.sect[hidden]{ display:none; }
+.allres{ margin-top:40px; background:#fff; border:1px solid var(--sand); border-top:3px solid var(--gold); border-radius:4px; padding:26px 24px; }
+.allres h2{ font-size:clamp(1.6rem,3.4vw,2.2rem); margin-top:12px; }
+.allres > p:not(.mono){ color:rgba(28,28,28,.8); margin-top:8px; }
+.allres .aids{ margin-top:14px; columns:2; column-gap:32px; }
+.allres .aids li{ break-inside:avoid; }
+@media (max-width:760px){ .allres .aids{ columns:1; } }
 /* footer */
 footer{ padding:40px 0; text-align:center; }
 footer img{ width:90px; height:auto; margin:0 auto; }
 footer p{ color:rgba(255,255,255,.7); font-size:.83rem; max-width:620px; margin:14px auto 0; }
 footer a{ color:var(--gold); }
 
-@media (max-width:960px){ .grid{ grid-template-columns:1fr 1fr; } .pillars{ grid-template-columns:1fr 1fr; } }
+@media (max-width:960px){ .grid{ grid-template-columns:1fr; } .pillars{ grid-template-columns:1fr 1fr; } }
 @media (max-width:640px){ .grid{ grid-template-columns:1fr; } .logo img{ height:28px; } }
 @media (max-width:420px){ .logo span{ display:none; } .pillars{ grid-template-columns:1fr; } }
 @media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
@@ -199,7 +218,7 @@ footer a{ color:var(--gold); }
 
       <div class="finder" id="finder" hidden>
         <label class="mono" for="q">Search courses</label>
-        <input id="q" type="search" placeholder="Try FMLA, costing, or UKG" autocomplete="off" />
+        <input id="q" type="search" placeholder="Try FMLA, requisition, or UKG" autocomplete="off" />
         <div class="chips" id="chips" role="group" aria-label="Filter by topic"></div>
         <p class="count" id="count" role="status" aria-live="polite"></p>
       </div>
@@ -227,91 +246,230 @@ footer a{ color:var(--gold); }
           <span class="no" aria-hidden="true">00</span>
           <h3>Start Here: HCM Foundations</h3>
           <p>The structure, workflow, and responsibilities every HCM needs first.</p>
-          <ul class="links">
-            <li>HCM Structure and Key Concepts <span class="soon">Coming soon</span></li>
-            <li>HCM Workflow and Worklists <span class="soon">Coming soon</span></li>
-            <li>Quick Actions and Viewing Person and Employment Information <span class="soon">Coming soon</span></li>
-            <li>The Shared Administrative Calendar <span class="soon">Coming soon</span></li>
-            <li>Confidentiality and Secure Access Agreement (annual) <span class="soon">Coming soon</span></li>
-            <li>FERPA Tutorial for Staff <span class="soon">Coming soon</span></li>
-          </ul>
+          <div class="sect">
+            <p class="lbl">Training topics</p>
+            <ul class="links">
+              <li>HCM Structure and Key Concepts <span class="soon">Coming soon</span></li>
+              <li>HCM Workflow and Worklists <span class="soon">Coming soon</span></li>
+              <li>Quick Actions and Viewing Person and Employment Information <span class="soon">Coming soon</span></li>
+              <li>The Shared Administrative Calendar <span class="soon">Coming soon</span></li>
+              <li>Confidentiality and Secure Access Agreement (annual) <span class="soon">Coming soon</span></li>
+              <li>FERPA Tutorial for Staff <span class="soon">Coming soon</span></li>
+            </ul>
+          </div>
         </article>
 
         <article class="card" id="recruiting" data-short="Recruiting">
           <span class="no" aria-hidden="true">01</span>
           <h3>Recruitment &amp; Hiring</h3>
           <p>From an open role to an accepted offer.</p>
-          <ul class="links">
-            <li>Compensation Management: Getting the Compensation Memo <span class="soon">Coming soon</span></li>
-            <li>Hiring and Adding Assignments <span class="soon">Coming soon</span></li>
-          </ul>
+          <div class="sect">
+            <p class="lbl">Training topics</p>
+            <ul class="links">
+              <li>Compensation Management: Getting the Compensation Memo <span class="soon">Coming soon</span></li>
+              <li>Job Architecture overview and how it impacts recruiting decisions <span class="soon">Coming soon</span></li>
+              <li>When to create a new position vs. update an existing position <span class="soon">Coming soon</span></li>
+              <li>Direct Hire vs. Recruit-to-Hire (ORC) and when each should be used <span class="soon">Coming soon</span></li>
+              <li>Pending Worker conversions <span class="soon">Coming soon</span></li>
+              <li class="group">Hiring scenarios by worker type</li>
+              <li class="sub">Staff <span class="soon">Coming soon</span></li>
+              <li class="sub">Faculty <span class="soon">Coming soon</span></li>
+              <li class="sub">Student Workers <span class="soon">Coming soon</span></li>
+              <li class="sub">Interns (Paid and Unpaid) <span class="soon">Coming soon</span></li>
+              <li class="sub">Union Employees <span class="soon">Coming soon</span></li>
+              <li class="sub">Non-Workers <span class="soon">Coming soon</span></li>
+              <li>When to add an Assignment vs. create a Work Relationship <span class="soon">Coming soon</span></li>
+            </ul>
+            <details class="aids-wrap"><summary>Job aids &amp; resources (4)</summary>
+              <ul class="aids">
+                <li>Requisition creation checklist (including the required Job Description and Pre-Search Memo to attach when creating a requisition) <span class="soon">Coming soon</span></li>
+                <li>Position Management decision tree (Create vs. Update Position) <span class="soon">Coming soon</span></li>
+                <li>Hiring scenario guide by worker type <span class="soon">Coming soon</span></li>
+                <li>Default expense account entry guide <span class="soon">Coming soon</span></li>
+              </ul>
+            </details>
+          </div>
         </article>
 
         <article class="card" id="payroll" data-short="Payroll">
           <span class="no" aria-hidden="true">02</span>
           <h3>Payroll &amp; Timecards</h3>
           <p>Getting time approved and pay right every cycle.</p>
-          <ul class="links">
-            <li>UKG: Managing Timecards, Time Off, and Schedules (HCM) <span class="soon">Coming soon</span></li>
-            <li>UKG: Timecards, Time Off, and Schedules for Managers <span class="soon">Coming soon</span></li>
-            <li>UKG: Employee Timecards and Time Off <span class="soon">Coming soon</span></li>
-            <li class="sub">Off-Cycle Pay Requests <span class="soon">Coming soon</span></li>
-            <li class="sub">Compensation Management <span class="soon">Coming soon</span></li>
-          </ul>
+          <div class="sect">
+            <p class="lbl">Training topics</p>
+            <ul class="links">
+              <li>UKG: Managing Timecards, Time Off, and Schedules (HCM) <span class="soon">Coming soon</span></li>
+              <li>UKG: Timecards, Time Off, and Schedules for Managers <span class="soon">Coming soon</span></li>
+              <li>UKG: Employee Timecards and Time Off <span class="soon">Coming soon</span></li>
+              <li class="sub">Off-Cycle Pay Requests <span class="soon">Coming soon</span></li>
+            </ul>
+          </div>
+          <div class="sect">
+            <h4 class="subhead">Compensation Management</h4>
+            <p class="lbl">Training topics</p>
+            <ul class="links">
+              <li>Salary changes and individual compensation actions <span class="soon">Coming soon</span></li>
+              <li>Compensation impacts on payroll processing <span class="soon">Coming soon</span></li>
+            </ul>
+            <details class="aids-wrap"><summary>Job aids &amp; resources (3)</summary>
+              <ul class="aids">
+                <li>Step-by-step guide for updating employee timesheets <span class="soon">Coming soon</span></li>
+                <li>Approving timecards on behalf of managers <span class="soon">Coming soon</span></li>
+                <li>Compensation change processing guide <span class="soon">Coming soon</span></li>
+              </ul>
+            </details>
+          </div>
         </article>
 
         <article class="card" id="positions" data-short="Positions">
           <span class="no" aria-hidden="true">03</span>
           <h3>Onboarding, Offboarding, Transfers &amp; Managing Positions</h3>
           <p>Setting up positions and every move a person makes in them.</p>
-          <ul class="links">
-            <li>Overview: Creating and Managing Assignments <span class="soon">Coming soon</span></li>
-            <li class="sub">Creating and Position Updates <span class="soon">Coming soon</span></li>
-            <li class="sub">Assignment Changes <span class="soon">Coming soon</span></li>
-            <li class="sub">Offboarding (terms, ending assignments) <span class="soon">Coming soon</span></li>
-          </ul>
+          <div class="sect">
+            <h4 class="subhead">Position Management</h4>
+            <p class="lbl">Training topics</p>
+            <ul class="links">
+              <li>Creating positions <span class="soon">Coming soon</span></li>
+              <li>Updating positions <span class="soon">Coming soon</span></li>
+              <li>Position management best practices <span class="soon">Coming soon</span></li>
+            </ul>
+            <details class="aids-wrap"><summary>Job aids &amp; resources (2)</summary>
+              <ul class="aids">
+                <li>Position creation guide <span class="soon">Coming soon</span></li>
+                <li>Position update checklist <span class="soon">Coming soon</span></li>
+              </ul>
+            </details>
+          </div>
+          <div class="sect">
+            <h4 class="subhead">Assignment Changes</h4>
+            <p class="lbl">Training topics</p>
+            <ul class="links">
+              <li>Transfers <span class="soon">Coming soon</span></li>
+              <li>Location changes <span class="soon">Coming soon</span></li>
+              <li>Manager changes <span class="soon">Coming soon</span></li>
+              <li>Assignment update scenarios <span class="soon">Coming soon</span></li>
+            </ul>
+            <details class="aids-wrap"><summary>Job aids &amp; resources (2)</summary>
+              <ul class="aids">
+                <li>Assignment change decision tree <span class="soon">Coming soon</span></li>
+                <li>Common transaction scenarios reference guide <span class="soon">Coming soon</span></li>
+              </ul>
+            </details>
+          </div>
+          <div class="sect">
+            <h4 class="subhead">Offboarding</h4>
+            <p class="lbl">Training topics</p>
+            <ul class="links">
+              <li>Voluntary and involuntary terminations <span class="soon">Coming soon</span></li>
+              <li>Ending assignments vs. terminating employment <span class="soon">Coming soon</span></li>
+              <li class="sub">How to handle a termination when an employee has multiple assignments <span class="soon">Coming soon</span></li>
+              <li>Offboarding process requirements <span class="soon">Coming soon</span></li>
+            </ul>
+            <details class="aids-wrap"><summary>Job aids &amp; resources (2)</summary>
+              <ul class="aids">
+                <li>Offboarding checklist <span class="soon">Coming soon</span></li>
+                <li>Termination processing guide <span class="soon">Coming soon</span></li>
+              </ul>
+            </details>
+          </div>
         </article>
 
         <article class="card" id="leave" data-short="Leave">
           <span class="no" aria-hidden="true">04</span>
           <h3>Leave Management</h3>
           <p>Recording time away and leaves of absence.</p>
-          <ul class="links">
-            <li>Leave Actions and Reasons <span class="soon">Coming soon</span></li>
-            <li>FMLA and Related System Actions <span class="soon">Coming soon</span></li>
-            <li>Other Leaves and Related System Actions <span class="soon">Coming soon</span></li>
-            <li>Managing Exempt Time Off in Oracle <span class="soon">Coming soon</span></li>
-          </ul>
+          <div class="sect">
+            <p class="lbl">Training topics</p>
+            <ul class="links">
+              <li>Leave status updates <span class="soon">Coming soon</span></li>
+              <li>Entering and managing FMLA/TMLA transactions (continuous vs. intermittent) <span class="soon">Coming soon</span></li>
+              <li>Differences in processing leaves for monthly vs. biweekly employees <span class="soon">Coming soon</span></li>
+              <li>Leave administration workflows within Oracle <span class="soon">Coming soon</span></li>
+              <li>Managing Exempt Time Off in Oracle <span class="soon">Coming soon</span></li>
+            </ul>
+            <details class="aids-wrap"><summary>Job aids &amp; resources (4)</summary>
+              <ul class="aids">
+                <li>Leave Management quick reference guide <span class="soon">Coming soon</span></li>
+                <li>Leave types and required documentation matrix <span class="soon">Coming soon</span></li>
+                <li>FMLA/TMLA processing guide <span class="soon">Coming soon</span></li>
+                <li>Leave status update instructions <span class="soon">Coming soon</span></li>
+              </ul>
+            </details>
+          </div>
         </article>
 
         <article class="card" id="costing" data-short="Costing">
           <span class="no" aria-hidden="true">05</span>
           <h3>Costing Management</h3>
           <p>Charging each salary to the right account.</p>
-          <ul class="links">
-            <li>The Costing Process and Guidelines <span class="soon">Coming soon</span></li>
-            <li>Costing at the Assignment vs. Element Level <span class="soon">Coming soon</span></li>
-            <li>Creating and Editing Costing Entries <span class="soon">Coming soon</span></li>
-          </ul>
+          <div class="sect">
+            <p class="lbl">Training topics</p>
+            <ul class="links">
+              <li>Costing fundamentals <span class="soon">Coming soon</span></li>
+              <li>How employee costing impacts payroll and financial reporting <span class="soon">Coming soon</span></li>
+              <li>When and where to update costing in Oracle <span class="soon">Coming soon</span></li>
+            </ul>
+            <details class="aids-wrap"><summary>Job aids &amp; resources (3)</summary>
+              <ul class="aids">
+                <li>Employee costing update guide <span class="soon">Coming soon</span></li>
+                <li>Costing validation checklist <span class="soon">Coming soon</span></li>
+                <li>Common costing scenarios and examples <span class="soon">Coming soon</span></li>
+              </ul>
+            </details>
+          </div>
         </article>
 
-        <article class="card" id="students" data-short="Students">
+        <article class="card" id="students" data-short="Students &amp; Faculty">
           <span class="no" aria-hidden="true">06</span>
-          <h3>Student Hiring and Assignment Changes</h3>
-          <p>Hiring student workers and changing their jobs between terms.</p>
+          <h3>Student &amp; Faculty Hiring and Assignment Changes</h3>
+          <p>Hiring students and faculty and changing their assignments.</p>
+          <div class="sect">
+            <p class="lbl">Training topics</p>
+            <ul class="links">
+              <li>Student hiring process and requirements <span class="soon">Coming soon</span></li>
+              <li>Faculty hiring process and requirements <span class="soon">Coming soon</span></li>
+              <li>Student and faculty assignment changes <span class="soon">Coming soon</span></li>
+              <li>Oracle transactions and approvals for these populations <span class="soon">Coming soon</span></li>
+            </ul>
+            <details class="aids-wrap"><summary>Job aids &amp; resources (4)</summary>
+              <ul class="aids">
+                <li>Student hiring guide <span class="soon">Coming soon</span></li>
+                <li>Faculty hiring guide <span class="soon">Coming soon</span></li>
+                <li>Assignment change reference for students and faculty <span class="soon">Coming soon</span></li>
+                <li>Common scenarios and troubleshooting guide <span class="soon">Coming soon</span></li>
+              </ul>
+            </details>
+          </div>
         </article>
 
         <article class="card" id="records" data-short="Records &amp; Reporting">
           <span class="no" aria-hidden="true">07</span>
           <h3>Document Records &amp; Reporting</h3>
           <p>Keeping employee documents complete and pulling the reports your area needs.</p>
-          <ul class="links">
-            <li>Introduction to BI Reporting and the Departmental Playbook <span class="soon">Coming soon</span></li>
-            <li>Reporting 101 <span class="soon">Coming soon</span></li>
-            <li>Reporting 201 <span class="soon">Coming soon</span></li>
-            <li>Reporting 301 <span class="soon">Coming soon</span></li>
-          </ul>
+          <div class="sect">
+            <p class="lbl">Training topics</p>
+            <ul class="links">
+              <li>Introduction to BI Reporting and the Departmental Playbook <span class="soon">Coming soon</span></li>
+              <li>Reporting 101 <span class="soon">Coming soon</span></li>
+              <li>Reporting 201 <span class="soon">Coming soon</span></li>
+              <li>Reporting 301 <span class="soon">Coming soon</span></li>
+            </ul>
+          </div>
         </article>
+      </div>
+      <div class="allres" id="resources">
+        <p class="mono eyebrow">Get answers</p>
+        <h2>Help for every <em>topic</em>.</h2>
+        <p>Alongside instructor-led and virtual training, each topic will have these resources.</p>
+        <ul class="aids">
+          <li>Decision trees for common transaction choices <span class="soon">Coming soon</span></li>
+          <li>Process maps and workflows <span class="soon">Coming soon</span></li>
+          <li>Oracle step-by-step job aids with screenshots <span class="soon">Coming soon</span></li>
+          <li>Quick reference guides (1 to 2 page cheat sheets) <span class="soon">Coming soon</span></li>
+          <li>Scenario-based learning exercises <span class="soon">Coming soon</span></li>
+          <li>Frequently Asked Questions (FAQ) repository <span class="soon">Coming soon</span></li>
+          <li>Knowledge base articles for common errors and troubleshooting <span class="soon">Coming soon</span></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -369,24 +527,38 @@ footer a{ color:var(--gold); }
   cards.forEach(function(c){ addChip(c.id, c.dataset.short); });
 
   function update(){
-    var term = norm(q.value), courses = 0, shownCards = 0;
+    var term = norm(q.value), courses = 0, aidsShown = 0, shownCards = 0;
     chips.querySelectorAll('button').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.topic === topic ? 'true' : 'false'); });
     cards.forEach(function(c){
       var inTopic = topic === 'all' || c.id === topic,
           head = norm(c.querySelector('h3').textContent + ' ' + c.querySelector('p').textContent + ' ' + c.dataset.short),
           headHit = !term || head.indexOf(term) > -1, lineHits = 0,
-          lis = c.querySelectorAll('.links li');
-      lis.forEach(function(li){
-        var hit = headHit || norm(li.textContent).indexOf(term) > -1;
-        li.hidden = !hit; if (hit) lineHits++;
+          lis = c.querySelectorAll('.links li:not(.group)'), cardAids = 0;
+      c.querySelectorAll('.sect').forEach(function(s){
+        var sub = s.querySelector('.subhead'), subHit = headHit || (sub && norm(sub.textContent).indexOf(term) > -1), any = 0;
+        s.querySelectorAll('.links li:not(.group)').forEach(function(li){
+          var hit = subHit || norm(li.textContent).indexOf(term) > -1;
+          li.hidden = !hit; if (hit){ lineHits++; any++; }
+        });
+        var aidHits = 0;
+        s.querySelectorAll('.aids li').forEach(function(li){
+          var hit = subHit || norm(li.textContent).indexOf(term) > -1;
+          li.hidden = !hit; if (hit){ aidHits++; any++; cardAids++; }
+        });
+        var grp = s.querySelector('.links li.group');
+        if (grp){ var after = false, vis = false; s.querySelectorAll('.links li').forEach(function(li){ if (li === grp) after = true; else if (after && li.classList.contains('sub') && !li.hidden) vis = true; }); grp.hidden = !(vis || subHit); }
+        var det = s.querySelector('.aids-wrap'); if (det){ det.hidden = aidHits === 0; if (term && aidHits && !subHit) det.open = true; }
+        s.hidden = !any;
       });
-      var show = inTopic && (headHit || lineHits > 0);
+      if (!lis.length) lineHits = 0;
+      var show = inTopic && (headHit || c.querySelector('.sect:not([hidden])') !== null);
       c.hidden = !show;
-      if (show){ shownCards++; courses += lineHits; }
+      if (show){ shownCards++; courses += lineHits; aidsShown += cardAids; }
     });
     none.hidden = shownCards > 0;
-    count.textContent = shownCards === cards.length && !term ? 'Showing all ' + courses + ' courses.'
-      : 'Showing ' + courses + (courses === 1 ? ' course' : ' courses') + ' in ' + shownCards + (shownCards === 1 ? ' topic.' : ' topics.');
+    var pl = function(n, w){ return n + ' ' + w + (n === 1 ? '' : 's'); };
+    count.textContent = (shownCards === cards.length && !term ? 'Showing all ' : 'Showing ')
+      + pl(courses, 'course') + ' and ' + pl(aidsShown, 'job aid') + ' in ' + pl(shownCards, 'topic') + '.';
   }
   q.addEventListener('input', update);
   document.getElementById('clear').addEventListener('click', function(){ q.value = ''; topic = 'all'; update(); q.focus(); });
@@ -413,7 +585,7 @@ footer a{ color:var(--gold); }
 
   /* turn every course line into a completion toggle */
   cards.forEach(function(c){
-    c.querySelectorAll('.links li').forEach(function(li, i){
+    c.querySelectorAll('.links li:not(.group)').forEach(function(li, i){
       var id = c.id + '-' + i, soon = li.querySelector('.soon'), name = li.textContent.replace(soon ? soon.textContent : '', '').trim();
       var b = document.createElement('button');
       b.type = 'button'; b.className = 'course-btn'; b.dataset.id = id;
