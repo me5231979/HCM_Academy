@@ -26,6 +26,15 @@ Kept deliberately short:
 - Progress is saved only in this browser (`localStorage` keys `hcm-pre`, `hcm-done`, `hcm-final`); nothing is sent anywhere.
 - To add real questions, replace `buildQs` placeholder text with a question bank per topic.
 
+## Course rows
+
+Every course, job aid, and resource is a row with a title, a one-line overview,
+time (or length), format (or type), and status. Overviews, times, and formats are
+placeholder estimates written for the mock-up, except formats carried over from the
+current catalog (videos and e-learning). Edit them in place: each row is
+`<span class="tt">Title</span><span class="ds">Overview</span>` then
+`<span class="tm">Time</span>` and `<span class="fm">Format</span>`.
+
 ## Adding a course when it ships
 
 Each course line shows "Coming soon". When a course is live, replace that

@@ -282,6 +282,53 @@ footer a{ color:var(--gold); }
   .search{ flex-basis:100%; }
 }
 @media (prefers-reduced-motion:reduce){ .card .links li.cbtn:hover{ transform:none; } }
+
+/* ── row layout: every course, job aid, and resource is a full-width row ── */
+.rowhead[hidden],.card ul[hidden]{ display:none !important; }
+.sr-l{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.card .links,.card .aids,.allres .aids{ display:flex !important; flex-direction:column; gap:0 !important; border:1px solid var(--gray); border-top:0; border-radius:0 0 6px 6px; overflow:hidden; background:#fff; margin-top:0 !important; }
+.rowhead{ display:grid; grid-template-columns:22px minmax(0,1fr) 90px 150px 120px; gap:16px; padding:9px 18px; margin-top:10px;
+  background:var(--black); color:#fff; border-radius:6px 6px 0 0; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; }
+.rowhead span:first-child{ grid-column:1 / 3; }
+.aids-wrap .rowhead,.allres .rowhead{ background:#3A3A38; }
+.card .links li,.card .aids li,.allres .aids li{ display:grid !important; grid-template-columns:minmax(0,1fr) 90px 150px 120px; align-items:center; gap:16px;
+  border:0 !important; border-top:1px solid var(--gray) !important; border-radius:0 !important; padding:14px 18px; margin:0 !important; background:#fff; box-shadow:none !important; transform:none !important; }
+.card .links li:first-child,.card .aids li:first-child,.allres .aids li:first-child{ border-top:0 !important; }
+.card .aids li,.allres .aids li{ padding-left:56px; background:#fff; }
+.card .aids li::before,.allres .aids li::before{ left:24px; top:50%; transform:translateY(-50%); }
+.card .links li.cbtn{ padding:0 !important; display:block !important; }
+.course-btn{ display:grid !important; grid-template-columns:22px minmax(0,1fr) 90px 150px 120px !important; align-items:center !important; gap:16px !important; padding:14px 18px !important; width:100%; transition:background-color .15s; }
+.course-btn .ck{ grid-row:auto !important; top:0 !important; }
+.nm{ display:flex; flex-direction:column; gap:2px; min-width:0; }
+.nm .tt{ font-weight:600; line-height:1.35; color:var(--black); }
+.nm .ds{ font-weight:400; font-size:.86rem; line-height:1.45; color:rgba(28,28,28,.75); }
+.card .links li.sub .course-btn .nm .tt{ font-weight:600; }
+.tm,.fm{ font-size:.86rem; color:rgba(28,28,28,.8); }
+.tm::before{ content:''; display:inline-block; width:12px; height:12px; margin-right:6px; vertical-align:-1px;
+  background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7v5l3 2'/%3E%3C/svg%3E"); }
+.course-btn .soon,.card .aids li .soon,.allres .aids li .soon{ justify-self:start; margin-top:0 !important; }
+.card .aids li .soon,.allres .aids li .soon{ background:#EFEDE8 !important; }
+.course-btn .soon{ grid-column:auto !important; }
+.tm,.fm{ white-space:nowrap; }
+.aids .tm::before{ display:none; }
+.card .links li.cbtn:hover .course-btn{ background:#FAF8F4; }
+.card .links li.cbtn:has(.course-btn[aria-pressed="true"]) .course-btn{ background:#F3F8F3; }
+.card .links li.cbtn:has(.course-btn[aria-pressed="true"]){ background:#F3F8F3 !important; }
+.card .links li.sub .course-btn{ padding-left:42px !important; grid-template-columns:22px minmax(0,1fr) 90px 150px 120px !important; }
+.card .links li.group{ display:block !important; background:var(--cream) !important; padding:10px 18px !important; font-family:var(--cond); font-weight:700; font-size:.76rem; letter-spacing:.06em; text-transform:uppercase; }
+.card .links li.group ~ li:not(.sub){ margin-top:0 !important; }
+.card .links li.group ~ li:not(.sub) .course-btn{ border-top:1px solid var(--sand); }
+@media (max-width:760px){
+  .rowhead{ display:none; }
+  .card .links,.card .aids,.allres .aids{ border-top:1px solid var(--gray); border-radius:6px; margin-top:10px !important; }
+  .course-btn,.card .links li.sub .course-btn{ grid-template-columns:22px auto 1fr !important; row-gap:8px !important; column-gap:12px !important; }
+  .course-btn .nm{ grid-column:2 / -1; }
+  .course-btn .tm{ grid-column:2 !important; } .course-btn .fm{ grid-column:3 !important; } .course-btn .soon{ grid-column:2 / -1 !important; justify-self:start; }
+  .card .aids li,.allres .aids li{ grid-template-columns:auto 1fr; row-gap:8px; column-gap:12px; }
+  .card .aids li .nm,.allres .aids li .nm{ grid-column:1 / -1; }
+  .card .aids li .soon,.allres .aids li .soon{ grid-column:1 / -1; justify-self:start; }
+  .card .aids li::before,.allres .aids li::before{ top:22px; transform:none; }
+}
 </style>
 </head>
 <body>
@@ -361,13 +408,14 @@ footer a{ color:var(--gold); }
           <p>The structure, workflow, and responsibilities every HCM needs first.</p>
           <div class="sect">
             <p class="lbl">Training topics <span class="lc">6</span></p>
+            <div class="rowhead" aria-hidden="true"><span>Course</span><span>Time</span><span>Format</span><span>Status</span></div>
             <ul class="links">
-              <li>HCM Structure and Key Concepts <span class="soon">Coming soon</span></li>
-              <li>HCM Workflow and Worklists <span class="soon">Coming soon</span></li>
-              <li>Quick Actions and Viewing Person and Employment Information <span class="soon">Coming soon</span></li>
-              <li>The Shared Administrative Calendar <span class="soon">Coming soon</span></li>
-              <li>Confidentiality and Secure Access Agreement (annual) <span class="soon">Coming soon</span></li>
-              <li>FERPA Tutorial for Staff <span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">HCM Structure and Key Concepts</span><span class="ds">How Oracle HCM is organized and the terms you will use every day.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>Video</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">HCM Workflow and Worklists</span><span class="ds">How transactions route for approval and how to work your worklist.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Video</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Quick Actions and Viewing Person and Employment Information</span><span class="ds">Find people fast and read their employment record.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Video</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">The Shared Administrative Calendar</span><span class="ds">The dates and deadlines that drive HCM and payroll processing.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span>Video</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Confidentiality and Secure Access Agreement (annual)</span><span class="ds">Your responsibilities for protecting employee data. Required every year.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">FERPA Tutorial for Staff</span><span class="ds">What FERPA protects and how it applies to student records, with a short quiz.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
             </ul>
           </div>
         </section>
@@ -378,31 +426,32 @@ footer a{ color:var(--gold); }
           <p>From an open role to an accepted offer.</p>
           <div class="sect">
             <p class="lbl">Training topics <span class="lc">16</span></p>
+            <div class="rowhead" aria-hidden="true"><span>Course</span><span>Time</span><span>Format</span><span>Status</span></div>
             <ul class="links">
-              <li>Compensation Management: Getting the Compensation Memo <span class="soon">Coming soon</span></li>
-              <li>Job Architecture overview and how it impacts recruiting decisions <span class="soon">Coming soon</span></li>
-              <li>When to create a new position vs. update an existing position <span class="soon">Coming soon</span></li>
-              <li>Pending Worker conversions <span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Compensation Management: Getting the Compensation Memo</span><span class="ds">Request the compensation memo you need before a position can be posted.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Job Architecture overview and how it impacts recruiting decisions</span><span class="ds">How jobs, families, and levels shape what you can post and offer.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">When to create a new position vs. update an existing position</span><span class="ds">Decide between a new position and an update, with worked examples.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Pending Worker conversions</span><span class="ds">Convert a pending worker into an employee or contingent worker.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Oracle walkthrough</span><span class="soon">Coming soon</span></li>
               <li class="group">Hiring scenarios by worker type</li>
-              <li class="sub">Staff <span class="soon">Coming soon</span></li>
-              <li class="sub">Faculty <span class="soon">Coming soon</span></li>
-              <li class="sub">Emeritus <span class="soon">Coming soon</span></li>
-              <li class="sub">FERDC <span class="soon">Coming soon</span></li>
-              <li class="sub">Student Workers <span class="soon">Coming soon</span></li>
-              <li class="sub">Student Expense Only <span class="soon">Coming soon</span></li>
-              <li class="sub">Service Free Stipend <span class="soon">Coming soon</span></li>
-              <li class="sub">Interns (Paid and Unpaid) <span class="soon">Coming soon</span></li>
-              <li class="sub">Union Employees <span class="soon">Coming soon</span></li>
-              <li class="sub">Non-Workers <span class="soon">Coming soon</span></li>
-              <li class="sub">Executive or External Search <span class="soon">Coming soon</span></li>
-              <li>When to add an Assignment vs. create a Work Relationship <span class="soon">Coming soon</span></li>
+              <li class="sub"><span class="nm"><span class="tt">Staff</span><span class="ds">Hiring a staff member from requisition to start date.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
+              <li class="sub"><span class="nm"><span class="tt">Faculty</span><span class="ds">Hiring faculty and the steps that differ from staff hires.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
+              <li class="sub"><span class="nm"><span class="tt">Emeritus</span><span class="ds">Setting up emeritus appointments correctly.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
+              <li class="sub"><span class="nm"><span class="tt">FERDC</span><span class="ds">Hiring and record setup for FERDC appointments.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
+              <li class="sub"><span class="nm"><span class="tt">Student Workers</span><span class="ds">Hiring student workers, including eligibility and end dates.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
+              <li class="sub"><span class="nm"><span class="tt">Student Expense Only</span><span class="ds">When and how to use the Student Expense Only setup.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
+              <li class="sub"><span class="nm"><span class="tt">Service Free Stipend</span><span class="ds">Setting up a service free stipend the right way.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
+              <li class="sub"><span class="nm"><span class="tt">Interns (Paid and Unpaid)</span><span class="ds">Bringing on paid and unpaid interns and what each requires.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
+              <li class="sub"><span class="nm"><span class="tt">Union Employees</span><span class="ds">Hiring into union positions and the rules that apply.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
+              <li class="sub"><span class="nm"><span class="tt">Non-Workers</span><span class="ds">Adding non-workers who need access but are not employees.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
+              <li class="sub"><span class="nm"><span class="tt">Executive or External Search</span><span class="ds">Hires that run through an executive or external search.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">When to add an Assignment vs. create a Work Relationship</span><span class="ds">Choose between a new assignment and a new work relationship.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
             </ul>
             <details class="aids-wrap" open><summary>Job aids &amp; resources <span class="lc">4</span></summary>
-              <ul class="aids">
-                <li>Requisition creation checklist (including the required Job Description and Pre-Search Memo to attach when creating a requisition) <span class="soon">Coming soon</span></li>
-                <li>Position Management decision tree (Create vs. Update Position) <span class="soon">Coming soon</span></li>
-                <li>Hiring scenario guide by worker type <span class="soon">Coming soon</span></li>
-                <li>Default expense account entry guide <span class="soon">Coming soon</span></li>
+              <div class="rowhead" aria-hidden="true"><span>Job aid</span><span>Length</span><span>Type</span><span>Status</span></div><ul class="aids">
+                <li><span class="nm"><span class="tt">Requisition creation checklist (including the required Job Description and Pre-Search Memo to attach when creating a requisition)</span><span class="ds">Everything to have ready, and attach, before you submit a requisition.</span></span><span class="tm"><span class="sr-l">Time: </span>1 page</span><span class="fm"><span class="sr-l">Format: </span>Checklist</span><span class="soon">Coming soon</span></li>
+                <li><span class="nm"><span class="tt">Position Management decision tree (Create vs. Update Position)</span><span class="ds">Answer a few questions to know whether to create or update.</span></span><span class="tm"><span class="sr-l">Time: </span>1 page</span><span class="fm"><span class="sr-l">Format: </span>Decision tree</span><span class="soon">Coming soon</span></li>
+                <li><span class="nm"><span class="tt">Hiring scenario guide by worker type</span><span class="ds">The steps for each worker type in one place.</span></span><span class="tm"><span class="sr-l">Time: </span>4 pages</span><span class="fm"><span class="sr-l">Format: </span>Guide</span><span class="soon">Coming soon</span></li>
+                <li><span class="nm"><span class="tt">Default expense account entry guide</span><span class="ds">How to enter the default expense account on a hire.</span></span><span class="tm"><span class="sr-l">Time: </span>2 pages</span><span class="fm"><span class="sr-l">Format: </span>Guide</span><span class="soon">Coming soon</span></li>
               </ul>
             </details>
           </div>
@@ -414,25 +463,27 @@ footer a{ color:var(--gold); }
           <p>Getting time approved and pay right every cycle.</p>
           <div class="sect">
             <p class="lbl">Training topics <span class="lc">4</span></p>
+            <div class="rowhead" aria-hidden="true"><span>Course</span><span>Time</span><span>Format</span><span>Status</span></div>
             <ul class="links">
-              <li>UKG: Managing Timecards, Time Off, and Schedules (HCM) <span class="soon">Coming soon</span></li>
-              <li>UKG: Timecards, Time Off, and Schedules for Managers <span class="soon">Coming soon</span></li>
-              <li>UKG: Employee Timecards and Time Off <span class="soon">Coming soon</span></li>
-              <li class="sub">Off-Cycle Pay Requests <span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">UKG: Managing Timecards, Time Off, and Schedules (HCM)</span><span class="ds">The HCM view of timecards, time off, and schedules in UKG.</span></span><span class="tm"><span class="sr-l">Time: </span>30 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">UKG: Timecards, Time Off, and Schedules for Managers</span><span class="ds">What managers do in UKG, so you can support them.</span></span><span class="tm"><span class="sr-l">Time: </span>25 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">UKG: Employee Timecards and Time Off</span><span class="ds">What employees see in UKG, so you can answer their questions.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
+              <li class="sub"><span class="nm"><span class="tt">Off-Cycle Pay Requests</span><span class="ds">When an off-cycle payment is needed and how to request one.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Oracle walkthrough</span><span class="soon">Coming soon</span></li>
             </ul>
           </div>
           <div class="sect">
             <h4 class="subhead">Compensation Management</h4>
             <p class="lbl">Training topics <span class="lc">2</span></p>
+            <div class="rowhead" aria-hidden="true"><span>Course</span><span>Time</span><span>Format</span><span>Status</span></div>
             <ul class="links">
-              <li>Salary changes and individual compensation actions <span class="soon">Coming soon</span></li>
-              <li>Compensation impacts on payroll processing <span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Salary changes and individual compensation actions</span><span class="ds">Process salary changes and individual compensation actions.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>Oracle walkthrough</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Compensation impacts on payroll processing</span><span class="ds">How compensation changes flow into payroll and when they take effect.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
             </ul>
             <details class="aids-wrap" open><summary>Job aids &amp; resources <span class="lc">3</span></summary>
-              <ul class="aids">
-                <li>Step-by-step guide for updating employee timesheets <span class="soon">Coming soon</span></li>
-                <li>Approving timecards on behalf of managers <span class="soon">Coming soon</span></li>
-                <li>Compensation change processing guide <span class="soon">Coming soon</span></li>
+              <div class="rowhead" aria-hidden="true"><span>Job aid</span><span>Length</span><span>Type</span><span>Status</span></div><ul class="aids">
+                <li><span class="nm"><span class="tt">Step-by-step guide for updating employee timesheets</span><span class="ds">Update an employee timesheet, screen by screen.</span></span><span class="tm"><span class="sr-l">Time: </span>3 pages</span><span class="fm"><span class="sr-l">Format: </span>Guide</span><span class="soon">Coming soon</span></li>
+                <li><span class="nm"><span class="tt">Approving timecards on behalf of managers</span><span class="ds">When and how to approve timecards for a manager.</span></span><span class="tm"><span class="sr-l">Time: </span>2 pages</span><span class="fm"><span class="sr-l">Format: </span>Guide</span><span class="soon">Coming soon</span></li>
+                <li><span class="nm"><span class="tt">Compensation change processing guide</span><span class="ds">Process a compensation change from request to payroll.</span></span><span class="tm"><span class="sr-l">Time: </span>3 pages</span><span class="fm"><span class="sr-l">Format: </span>Guide</span><span class="soon">Coming soon</span></li>
               </ul>
             </details>
           </div>
@@ -445,47 +496,50 @@ footer a{ color:var(--gold); }
           <div class="sect">
             <h4 class="subhead">Position Management</h4>
             <p class="lbl">Training topics <span class="lc">3</span></p>
+            <div class="rowhead" aria-hidden="true"><span>Course</span><span>Time</span><span>Format</span><span>Status</span></div>
             <ul class="links">
-              <li>Creating positions <span class="soon">Coming soon</span></li>
-              <li>Updating positions <span class="soon">Coming soon</span></li>
-              <li>Position management best practices <span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Creating positions</span><span class="ds">Create a new position with the right job, department, and funding.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>Oracle walkthrough</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Updating positions</span><span class="ds">Update an existing position without breaking linked records.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Oracle walkthrough</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Position management best practices</span><span class="ds">Habits that keep positions clean and reporting accurate.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
             </ul>
             <details class="aids-wrap" open><summary>Job aids &amp; resources <span class="lc">2</span></summary>
-              <ul class="aids">
-                <li>Position creation guide <span class="soon">Coming soon</span></li>
-                <li>Position update checklist <span class="soon">Coming soon</span></li>
+              <div class="rowhead" aria-hidden="true"><span>Job aid</span><span>Length</span><span>Type</span><span>Status</span></div><ul class="aids">
+                <li><span class="nm"><span class="tt">Position creation guide</span><span class="ds">Create a position, screen by screen.</span></span><span class="tm"><span class="sr-l">Time: </span>3 pages</span><span class="fm"><span class="sr-l">Format: </span>Guide</span><span class="soon">Coming soon</span></li>
+                <li><span class="nm"><span class="tt">Position update checklist</span><span class="ds">What to check before and after updating a position.</span></span><span class="tm"><span class="sr-l">Time: </span>1 page</span><span class="fm"><span class="sr-l">Format: </span>Checklist</span><span class="soon">Coming soon</span></li>
               </ul>
             </details>
           </div>
           <div class="sect">
             <h4 class="subhead">Assignment Changes</h4>
             <p class="lbl">Training topics <span class="lc">4</span></p>
+            <div class="rowhead" aria-hidden="true"><span>Course</span><span>Time</span><span>Format</span><span>Status</span></div>
             <ul class="links">
-              <li>Transfers <span class="soon">Coming soon</span></li>
-              <li>Location changes <span class="soon">Coming soon</span></li>
-              <li>Manager changes <span class="soon">Coming soon</span></li>
-              <li>Assignment update scenarios <span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Transfers</span><span class="ds">Move an employee to a new department or position.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Oracle walkthrough</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Location changes</span><span class="ds">Update an employee work location.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span>Oracle walkthrough</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Manager changes</span><span class="ds">Change a reporting line and what it affects downstream.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span>Oracle walkthrough</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Assignment update scenarios</span><span class="ds">Practice common assignment updates from start to finish.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
             </ul>
             <details class="aids-wrap" open><summary>Job aids &amp; resources <span class="lc">2</span></summary>
-              <ul class="aids">
-                <li>Assignment change decision tree <span class="soon">Coming soon</span></li>
-                <li>Common transaction scenarios reference guide <span class="soon">Coming soon</span></li>
+              <div class="rowhead" aria-hidden="true"><span>Job aid</span><span>Length</span><span>Type</span><span>Status</span></div><ul class="aids">
+                <li><span class="nm"><span class="tt">Assignment change decision tree</span><span class="ds">Pick the right assignment action for the situation.</span></span><span class="tm"><span class="sr-l">Time: </span>1 page</span><span class="fm"><span class="sr-l">Format: </span>Decision tree</span><span class="soon">Coming soon</span></li>
+                <li><span class="nm"><span class="tt">Common transaction scenarios reference guide</span><span class="ds">Quick answers for the assignment changes you see most.</span></span><span class="tm"><span class="sr-l">Time: </span>2 pages</span><span class="fm"><span class="sr-l">Format: </span>Quick reference</span><span class="soon">Coming soon</span></li>
               </ul>
             </details>
           </div>
           <div class="sect">
             <h4 class="subhead">Offboarding</h4>
             <p class="lbl">Training topics <span class="lc">4</span></p>
+            <div class="rowhead" aria-hidden="true"><span>Course</span><span>Time</span><span>Format</span><span>Status</span></div>
             <ul class="links">
-              <li>Voluntary and involuntary terminations <span class="soon">Coming soon</span></li>
-              <li>Ending assignments vs. terminating employment <span class="soon">Coming soon</span></li>
-              <li class="sub">How to handle a termination when an employee has multiple assignments <span class="soon">Coming soon</span></li>
-              <li>Offboarding process requirements <span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Voluntary and involuntary terminations</span><span class="ds">Process both kinds of termination and the reasons to choose.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Ending assignments vs. terminating employment</span><span class="ds">When to end one assignment and when to end employment.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
+              <li class="sub"><span class="nm"><span class="tt">How to handle a termination when an employee has multiple assignments</span><span class="ds">Terminate correctly when someone holds more than one job.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Offboarding process requirements</span><span class="ds">Everything that must happen when someone leaves.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
             </ul>
             <details class="aids-wrap" open><summary>Job aids &amp; resources <span class="lc">2</span></summary>
-              <ul class="aids">
-                <li>Offboarding checklist <span class="soon">Coming soon</span></li>
-                <li>Termination processing guide <span class="soon">Coming soon</span></li>
+              <div class="rowhead" aria-hidden="true"><span>Job aid</span><span>Length</span><span>Type</span><span>Status</span></div><ul class="aids">
+                <li><span class="nm"><span class="tt">Offboarding checklist</span><span class="ds">Every offboarding step, in order.</span></span><span class="tm"><span class="sr-l">Time: </span>1 page</span><span class="fm"><span class="sr-l">Format: </span>Checklist</span><span class="soon">Coming soon</span></li>
+                <li><span class="nm"><span class="tt">Termination processing guide</span><span class="ds">Process a termination, screen by screen.</span></span><span class="tm"><span class="sr-l">Time: </span>3 pages</span><span class="fm"><span class="sr-l">Format: </span>Guide</span><span class="soon">Coming soon</span></li>
               </ul>
             </details>
           </div>
@@ -497,19 +551,20 @@ footer a{ color:var(--gold); }
           <p>Recording time away and leaves of absence.</p>
           <div class="sect">
             <p class="lbl">Training topics <span class="lc">5</span></p>
+            <div class="rowhead" aria-hidden="true"><span>Course</span><span>Time</span><span>Format</span><span>Status</span></div>
             <ul class="links">
-              <li>Leave status updates <span class="soon">Coming soon</span></li>
-              <li>Entering and managing FMLA/TMLA transactions (continuous vs. intermittent) <span class="soon">Coming soon</span></li>
-              <li>Differences in processing leaves for monthly vs. biweekly employees <span class="soon">Coming soon</span></li>
-              <li>Leave administration workflows within Oracle <span class="soon">Coming soon</span></li>
-              <li>Managing Exempt Time Off in Oracle <span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Leave status updates</span><span class="ds">Update leave status as a leave starts, changes, and ends.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Oracle walkthrough</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Entering and managing FMLA/TMLA transactions (continuous vs. intermittent)</span><span class="ds">Enter continuous and intermittent FMLA/TMLA leave correctly.</span></span><span class="tm"><span class="sr-l">Time: </span>25 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Differences in processing leaves for monthly vs. biweekly employees</span><span class="ds">How pay frequency changes the way you process a leave.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Leave administration workflows within Oracle</span><span class="ds">How leave requests route and who approves them in Oracle.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Oracle walkthrough</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Managing Exempt Time Off in Oracle</span><span class="ds">Review and approve exempt employee time off in Oracle.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
             </ul>
             <details class="aids-wrap" open><summary>Job aids &amp; resources <span class="lc">4</span></summary>
-              <ul class="aids">
-                <li>Leave Management quick reference guide <span class="soon">Coming soon</span></li>
-                <li>Leave types and required documentation matrix <span class="soon">Coming soon</span></li>
-                <li>FMLA/TMLA processing guide <span class="soon">Coming soon</span></li>
-                <li>Leave status update instructions <span class="soon">Coming soon</span></li>
+              <div class="rowhead" aria-hidden="true"><span>Job aid</span><span>Length</span><span>Type</span><span>Status</span></div><ul class="aids">
+                <li><span class="nm"><span class="tt">Leave Management quick reference guide</span><span class="ds">The leave basics on one page.</span></span><span class="tm"><span class="sr-l">Time: </span>1 page</span><span class="fm"><span class="sr-l">Format: </span>Quick reference</span><span class="soon">Coming soon</span></li>
+                <li><span class="nm"><span class="tt">Leave types and required documentation matrix</span><span class="ds">Which documents each leave type needs.</span></span><span class="tm"><span class="sr-l">Time: </span>1 page</span><span class="fm"><span class="sr-l">Format: </span>Matrix</span><span class="soon">Coming soon</span></li>
+                <li><span class="nm"><span class="tt">FMLA/TMLA processing guide</span><span class="ds">Process FMLA/TMLA leave, screen by screen.</span></span><span class="tm"><span class="sr-l">Time: </span>4 pages</span><span class="fm"><span class="sr-l">Format: </span>Guide</span><span class="soon">Coming soon</span></li>
+                <li><span class="nm"><span class="tt">Leave status update instructions</span><span class="ds">Update a leave status, step by step.</span></span><span class="tm"><span class="sr-l">Time: </span>2 pages</span><span class="fm"><span class="sr-l">Format: </span>Guide</span><span class="soon">Coming soon</span></li>
               </ul>
             </details>
           </div>
@@ -521,16 +576,17 @@ footer a{ color:var(--gold); }
           <p>Charging each salary to the right account.</p>
           <div class="sect">
             <p class="lbl">Training topics <span class="lc">3</span></p>
+            <div class="rowhead" aria-hidden="true"><span>Course</span><span>Time</span><span>Format</span><span>Status</span></div>
             <ul class="links">
-              <li>Costing fundamentals <span class="soon">Coming soon</span></li>
-              <li>How employee costing impacts payroll and financial reporting <span class="soon">Coming soon</span></li>
-              <li>When and where to update costing in Oracle <span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Costing fundamentals</span><span class="ds">What costing is and how salary is charged to accounts.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>Video</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">How employee costing impacts payroll and financial reporting</span><span class="ds">Why accurate costing matters for payroll and financial reports.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">When and where to update costing in Oracle</span><span class="ds">Update costing at the right level and time in Oracle.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>Oracle walkthrough</span><span class="soon">Coming soon</span></li>
             </ul>
             <details class="aids-wrap" open><summary>Job aids &amp; resources <span class="lc">3</span></summary>
-              <ul class="aids">
-                <li>Employee costing update guide <span class="soon">Coming soon</span></li>
-                <li>Costing validation checklist <span class="soon">Coming soon</span></li>
-                <li>Common costing scenarios and examples <span class="soon">Coming soon</span></li>
+              <div class="rowhead" aria-hidden="true"><span>Job aid</span><span>Length</span><span>Type</span><span>Status</span></div><ul class="aids">
+                <li><span class="nm"><span class="tt">Employee costing update guide</span><span class="ds">Update employee costing, screen by screen.</span></span><span class="tm"><span class="sr-l">Time: </span>3 pages</span><span class="fm"><span class="sr-l">Format: </span>Guide</span><span class="soon">Coming soon</span></li>
+                <li><span class="nm"><span class="tt">Costing validation checklist</span><span class="ds">Check costing before payroll runs.</span></span><span class="tm"><span class="sr-l">Time: </span>1 page</span><span class="fm"><span class="sr-l">Format: </span>Checklist</span><span class="soon">Coming soon</span></li>
+                <li><span class="nm"><span class="tt">Common costing scenarios and examples</span><span class="ds">Worked examples of the costing changes you see most.</span></span><span class="tm"><span class="sr-l">Time: </span>2 pages</span><span class="fm"><span class="sr-l">Format: </span>Quick reference</span><span class="soon">Coming soon</span></li>
               </ul>
             </details>
           </div>
@@ -542,18 +598,19 @@ footer a{ color:var(--gold); }
           <p>Hiring students and faculty and changing their assignments.</p>
           <div class="sect">
             <p class="lbl">Training topics <span class="lc">4</span></p>
+            <div class="rowhead" aria-hidden="true"><span>Course</span><span>Time</span><span>Format</span><span>Status</span></div>
             <ul class="links">
-              <li>Student hiring process and requirements <span class="soon">Coming soon</span></li>
-              <li>Faculty hiring process and requirements <span class="soon">Coming soon</span></li>
-              <li>Student and faculty assignment changes <span class="soon">Coming soon</span></li>
-              <li>Oracle transactions and approvals for these populations <span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Student hiring process and requirements</span><span class="ds">The full student hiring process and what each step requires.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Faculty hiring process and requirements</span><span class="ds">The full faculty hiring process and what each step requires.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Student and faculty assignment changes</span><span class="ds">Change assignments for students and faculty between terms.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Oracle transactions and approvals for these populations</span><span class="ds">The Oracle transactions and approval paths for students and faculty.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Oracle walkthrough</span><span class="soon">Coming soon</span></li>
             </ul>
             <details class="aids-wrap" open><summary>Job aids &amp; resources <span class="lc">4</span></summary>
-              <ul class="aids">
-                <li>Student hiring guide <span class="soon">Coming soon</span></li>
-                <li>Faculty hiring guide <span class="soon">Coming soon</span></li>
-                <li>Assignment change reference for students and faculty <span class="soon">Coming soon</span></li>
-                <li>Common scenarios and troubleshooting guide <span class="soon">Coming soon</span></li>
+              <div class="rowhead" aria-hidden="true"><span>Job aid</span><span>Length</span><span>Type</span><span>Status</span></div><ul class="aids">
+                <li><span class="nm"><span class="tt">Student hiring guide</span><span class="ds">Hire a student, screen by screen.</span></span><span class="tm"><span class="sr-l">Time: </span>3 pages</span><span class="fm"><span class="sr-l">Format: </span>Guide</span><span class="soon">Coming soon</span></li>
+                <li><span class="nm"><span class="tt">Faculty hiring guide</span><span class="ds">Hire a faculty member, screen by screen.</span></span><span class="tm"><span class="sr-l">Time: </span>3 pages</span><span class="fm"><span class="sr-l">Format: </span>Guide</span><span class="soon">Coming soon</span></li>
+                <li><span class="nm"><span class="tt">Assignment change reference for students and faculty</span><span class="ds">Which assignment action to use for students and faculty.</span></span><span class="tm"><span class="sr-l">Time: </span>1 page</span><span class="fm"><span class="sr-l">Format: </span>Quick reference</span><span class="soon">Coming soon</span></li>
+                <li><span class="nm"><span class="tt">Common scenarios and troubleshooting guide</span><span class="ds">Fixes for the student and faculty issues that come up most.</span></span><span class="tm"><span class="sr-l">Time: </span>2 pages</span><span class="fm"><span class="sr-l">Format: </span>Guide</span><span class="soon">Coming soon</span></li>
               </ul>
             </details>
           </div>
@@ -565,11 +622,12 @@ footer a{ color:var(--gold); }
           <p>Keeping employee documents complete and pulling the reports your area needs.</p>
           <div class="sect">
             <p class="lbl">Training topics <span class="lc">4</span></p>
+            <div class="rowhead" aria-hidden="true"><span>Course</span><span>Time</span><span>Format</span><span>Status</span></div>
             <ul class="links">
-              <li>Introduction to BI Reporting and the Departmental Playbook <span class="soon">Coming soon</span></li>
-              <li>Reporting 101 <span class="soon">Coming soon</span></li>
-              <li>Reporting 201 <span class="soon">Coming soon</span></li>
-              <li>Reporting 301 <span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Introduction to BI Reporting and the Departmental Playbook</span><span class="ds">Get started with Oracle BI reporting and the departmental playbook.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Reporting 101</span><span class="ds">Run and read the standard HCM reports.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>Video</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Reporting 201</span><span class="ds">Filter, schedule, and export reports for your area.</span></span><span class="tm"><span class="sr-l">Time: </span>25 min</span><span class="fm"><span class="sr-l">Format: </span>Video</span><span class="soon">Coming soon</span></li>
+              <li><span class="nm"><span class="tt">Reporting 301</span><span class="ds">Build and customize reports for advanced needs.</span></span><span class="tm"><span class="sr-l">Time: </span>30 min</span><span class="fm"><span class="sr-l">Format: </span>Video</span><span class="soon">Coming soon</span></li>
             </ul>
           </div>
         </section>
@@ -578,14 +636,14 @@ footer a{ color:var(--gold); }
         <p class="mono eyebrow">Get answers</p>
         <h2>Help for every <em>topic</em>.</h2>
         <p>Alongside instructor-led and virtual training, each topic will have these resources.</p>
-        <ul class="aids">
-          <li>Decision trees for common transaction choices <span class="soon">Coming soon</span></li>
-          <li>Process maps and workflows <span class="soon">Coming soon</span></li>
-          <li>Oracle step-by-step job aids with screenshots <span class="soon">Coming soon</span></li>
-          <li>Quick reference guides (1 to 2 page cheat sheets) <span class="soon">Coming soon</span></li>
-          <li>Scenario-based learning exercises <span class="soon">Coming soon</span></li>
-          <li>Frequently Asked Questions (FAQ) repository <span class="soon">Coming soon</span></li>
-          <li>Knowledge base articles for common errors and troubleshooting <span class="soon">Coming soon</span></li>
+        <div class="rowhead" aria-hidden="true"><span>Job aid</span><span>Length</span><span>Type</span><span>Status</span></div><ul class="aids">
+          <li><span class="nm"><span class="tt">Decision trees for common transaction choices</span><span class="ds">Answer a few questions and get the right transaction.</span></span><span class="tm"><span class="sr-l">Time: </span>Varies</span><span class="fm"><span class="sr-l">Format: </span>All topics</span><span class="soon">Coming soon</span></li>
+          <li><span class="nm"><span class="tt">Process maps and workflows</span><span class="ds">See every step and hand-off in a process.</span></span><span class="tm"><span class="sr-l">Time: </span>Varies</span><span class="fm"><span class="sr-l">Format: </span>All topics</span><span class="soon">Coming soon</span></li>
+          <li><span class="nm"><span class="tt">Oracle step-by-step job aids with screenshots</span><span class="ds">Screen-by-screen help for Oracle transactions.</span></span><span class="tm"><span class="sr-l">Time: </span>Varies</span><span class="fm"><span class="sr-l">Format: </span>All topics</span><span class="soon">Coming soon</span></li>
+          <li><span class="nm"><span class="tt">Quick reference guides (1 to 2 page cheat sheets)</span><span class="ds">The essentials of a task on one or two pages.</span></span><span class="tm"><span class="sr-l">Time: </span>Varies</span><span class="fm"><span class="sr-l">Format: </span>All topics</span><span class="soon">Coming soon</span></li>
+          <li><span class="nm"><span class="tt">Scenario-based learning exercises</span><span class="ds">Practice real situations before you meet them on the job.</span></span><span class="tm"><span class="sr-l">Time: </span>Varies</span><span class="fm"><span class="sr-l">Format: </span>All topics</span><span class="soon">Coming soon</span></li>
+          <li><span class="nm"><span class="tt">Frequently Asked Questions (FAQ) repository</span><span class="ds">Answers to the questions HCMs ask most.</span></span><span class="tm"><span class="sr-l">Time: </span>Varies</span><span class="fm"><span class="sr-l">Format: </span>All topics</span><span class="soon">Coming soon</span></li>
+          <li><span class="nm"><span class="tt">Knowledge base articles for common errors and troubleshooting</span><span class="ds">Fixes for common Oracle errors and how to avoid them.</span></span><span class="tm"><span class="sr-l">Time: </span>Varies</span><span class="fm"><span class="sr-l">Format: </span>All topics</span><span class="soon">Coming soon</span></li>
         </ul>
       </div>
     </div>
@@ -691,6 +749,7 @@ footer a{ color:var(--gold); }
         if (grp){ var after = false, vis = false; s.querySelectorAll('.links li').forEach(function(li){ if (li === grp) after = true; else if (after && li.classList.contains('sub') && !li.hidden) vis = true; }); grp.hidden = !(vis || subHit); }
         var det = s.querySelector('.aids-wrap'); if (det){ det.hidden = aidHits === 0; if (term && aidHits && !subHit) det.open = true; }
         s.hidden = !any;
+        s.querySelectorAll('.rowhead').forEach(function(h){ var ul = h.nextElementSibling, vis = !!ul.querySelector('li:not([hidden])'); h.hidden = !vis; ul.hidden = !vis; });
       });
       if (!lis.length) lineHits = 0;
       var show = inTopic && (headHit || c.querySelector('.sect:not([hidden])') !== null);
@@ -729,12 +788,12 @@ footer a{ color:var(--gold); }
   /* turn every course line into a completion toggle */
   cards.forEach(function(c){
     c.querySelectorAll('.links li:not(.group)').forEach(function(li, i){
-      var id = c.id + '-' + i, soon = li.querySelector('.soon'), name = li.textContent.replace(soon ? soon.textContent : '', '').trim();
+      var id = c.id + '-' + i;
       var b = document.createElement('button');
       b.type = 'button'; b.className = 'course-btn'; b.dataset.id = id;
-      b.innerHTML = '<span class="ck" aria-hidden="true">' + CHECK + '</span><span class="nm"></span><span class="soon"></span>';
-      b.querySelector('.nm').textContent = name;
-      li.textContent = ''; li.appendChild(b); li.classList.add('cbtn');
+      b.innerHTML = '<span class="ck" aria-hidden="true">' + CHECK + '</span>';
+      while (li.firstChild) b.appendChild(li.firstChild);
+      li.appendChild(b); li.classList.add('cbtn');
       b.addEventListener('click', function(){ toggle(id); });
       buttons.push(b);
     });
@@ -774,7 +833,7 @@ footer a{ color:var(--gold); }
     if (i > -1) done.splice(i, 1); else done.push(id);
     store.set('hcm-done', done); render();
     var b = buttons.filter(function(x){ return x.dataset.id === id; })[0];
-    pstatus.textContent = b.querySelector('.nm').textContent + (i > -1 ? ' marked not complete. ' : ' complete. ') + ptext.textContent;
+    pstatus.textContent = b.querySelector('.tt').textContent + (i > -1 ? ' marked not complete. ' : ' complete. ') + ptext.textContent;
     if (!wasAll && done.length === buttons.length && !finalPassed) openFinal();
   }
 
