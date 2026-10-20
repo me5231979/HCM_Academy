@@ -13,7 +13,7 @@ no build step, no backend. Fonts and lockups live in `assets/`.
 Kept deliberately short:
 
 1. **Hero**: what an HCM is (people embedded in the business who own the people work for their area) and what the Academy is for: learn, share, meet, get answers.
-2. **Choose a topic**: a search box and topic filter buttons (built from the cards, so a new card gets a button automatically; give it a `data-short` label), then eight cards (Start Here plus seven topic areas). Each card, or each subsection in it (Compensation Management; Position Management, Assignment Changes, Offboarding), lists its Training topics (clickable, count toward completion) and a collapsible Job aids & resources list (reference only).
+2. **Choose a topic**: a progress panel, a search box that searches every topic, and a row of horizontal topic tabs (built from the cards, so a new card gets a tab automatically; its `data-short` attribute is the tab label, and each tab shows its completed/total count). One topic shows at a time, full width, with training topics and job aids side by side. There are eight topics (Start Here plus seven topic areas). Each card, or each subsection in it (Compensation Management; Position Management, Assignment Changes, Offboarding), lists its Training topics (clickable, count toward completion) and a collapsible Job aids & resources list (reference only).
    Below the cards, "Help for every topic" lists the resource types planned across all topics.
 3. **Footer**: contact and accessibility statement.
 
