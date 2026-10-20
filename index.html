@@ -100,13 +100,6 @@ header .cta:hover{ background:var(--highlight); }
 .finder input{ width:100%; max-width:520px; font:inherit; font-size:1rem; padding:12px 14px; min-height:48px;
   border:1px solid #B8AD98; border-radius:4px; background:#fff; color:var(--black); }
 .finder input::placeholder{ color:rgba(28,28,28,.6); }
-.chips{ display:flex; flex-wrap:wrap; gap:0; margin-top:24px; border-bottom:1px solid var(--sand); }
-.chips button{ gap:5px !important; font:inherit; font-size:.86rem; min-height:48px; padding:10px 8px; cursor:pointer; background:none; border:0;
-  border-bottom:3px solid transparent; margin-bottom:-1px; color:rgba(28,28,28,.8); display:inline-flex; align-items:baseline; gap:8px; white-space:nowrap; transition:color .2s, border-color .2s; }
-.chips button .tn{ font-family:var(--cond); font-weight:700; color:var(--black); }
-.chips button .tc{ font-size:.75rem; color:rgba(28,28,28,.72); }
-.chips button:hover{ color:var(--black); border-bottom-color:var(--sand); }
-.chips button[aria-pressed="true"]{ color:var(--black); font-weight:600; border-bottom-color:var(--gold); background:#fff; }
 .count{ margin-top:14px; font-size:.9rem; color:rgba(28,28,28,.75); }
 .none{ margin-top:24px; }
 .none button{ font:inherit; background:none; border:0; border-bottom:1px solid var(--oak); color:var(--oak); cursor:pointer; padding:2px 0; min-height:24px; }
@@ -195,6 +188,100 @@ footer a{ color:var(--gold); }
 @media (max-width:640px){ .grid{ grid-template-columns:1fr; } .logo img{ height:28px; } }
 @media (max-width:420px){ .logo span{ display:none; } .pillars{ grid-template-columns:1fr; } }
 @media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } }
+
+/* ── horizontal tiles: course lists, job aids, and resources run across the row ── */
+.card{ display:block !important; }
+.card[hidden]{ display:none !important; }
+.card > .sect{ display:block !important; }
+.card .links,.card .aids,.allres .aids{ display:grid !important; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px; columns:auto !important; margin-top:8px; padding:0; }
+.card .links li,.card .aids li,.allres .aids li{ border:1px solid var(--gray); border-radius:4px; background:#fff; padding:12px 14px;
+  display:flex; flex-direction:column; justify-content:space-between; align-items:flex-start; gap:8px; font-size:.92rem; font-weight:500; position:static; }
+.card .aids li,.allres .aids li{ background:var(--cream); }
+.card .links li[hidden],.card .aids li[hidden]{ display:none !important; }
+.card .links li.sub::before{ display:none; }
+.card .links li.cbtn{ padding:0; }
+.card .links li.group{ grid-column:1 / -1; border:0; background:none; padding:8px 0 0; font-weight:600; font-size:.95rem; }
+.course-btn{ display:grid !important; grid-template-columns:auto 1fr; gap:6px 10px; padding:12px 14px !important; height:100%; align-content:start; }
+.course-btn .ck{ grid-row:1 / span 2; top:1px; }
+.course-btn .nm{ font-weight:600; line-height:1.35; }
+.card .links li.sub .course-btn .nm{ font-weight:500; }
+.course-btn .soon{ grid-column:2; }
+.card .links li.cbtn:has(.course-btn[aria-pressed="true"]){ border-color:var(--done); background:#F3F8F3; }
+.card .links li.cbtn:hover{ border-color:#B8AD98; }
+.aids-wrap{ border:0 !important; background:none !important; margin-top:18px !important; }
+.aids-wrap summary{ padding:0 !important; min-height:32px !important; font-family:var(--cond); font-weight:700 !important; font-size:.72rem !important; letter-spacing:.06em; text-transform:uppercase; }
+.aids-wrap .aids{ padding:0 !important; }
+.card .subhead{ margin-top:26px; }
+.card .links li.group ~ li:not(.sub){ grid-column-start:1; margin-top:14px; }
+.card .links li.group ~ li:not(.sub) ~ li:not(.sub){ grid-column-start:auto; }
+@media (max-width:560px){ .card .links,.card .aids,.allres .aids{ grid-template-columns:1fr; } }
+
+/* ── polish pass: header, search, progress, tabs, tiles ── */
+:root{ --done-ink:#1B5E20; --shadow:0 1px 2px rgba(28,28,28,.06),0 4px 14px rgba(28,28,28,.06); --shadow-hi:0 2px 4px rgba(28,28,28,.08),0 10px 24px rgba(28,28,28,.10); }
+.topics-head{ display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:20px 32px; }
+.search{ flex:0 1 380px; }
+.search label{ display:block; color:var(--black); margin-bottom:8px; }
+.search-box{ position:relative; }
+.search-box svg{ position:absolute; left:14px; top:50%; width:18px; height:18px; transform:translateY(-50%); color:rgba(28,28,28,.6); pointer-events:none; }
+.search-box input{ width:100%; font:inherit; font-size:1rem; padding:12px 14px 12px 42px; min-height:48px; border:1px solid #B8AD98; border-radius:999px; background:#fff; color:var(--black); box-shadow:var(--shadow); }
+.search-box input::placeholder{ color:rgba(28,28,28,.6); }
+.search-box input:focus-visible{ outline:2px solid var(--oak); outline-offset:2px; }
+.progress{ margin-top:28px; padding:18px 22px; box-shadow:var(--shadow); border-left-width:1px; }
+.progress .row{ display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:14px 20px; }
+.ring{ width:56px; height:56px; transform:rotate(-90deg); }
+.ring circle{ fill:none; stroke-width:5; }
+.ring-bg{ stroke:var(--gray); }
+.ring-fg{ stroke:var(--done); stroke-linecap:round; stroke-dasharray:119.4; stroke-dashoffset:119.4; transition:stroke-dashoffset .4s ease-out; }
+.pmeta h3{ font-size:1.15rem; }
+.pmeta .bar{ margin-top:8px; height:6px; }
+.progress .demo{ margin-top:14px; }
+.tabbar{ position:sticky; top:76px; z-index:4; background:var(--cream); margin-top:26px; padding-top:4px; }
+.chips{ display:grid; grid-auto-flow:column; grid-auto-columns:minmax(0,1fr); gap:4px; border-bottom:1px solid var(--sand); margin:0; }
+.chips button{ font:inherit; font-size:.88rem; min-height:48px; padding:10px 12px; cursor:pointer; background:none; border:0; border-radius:6px 6px 0 0;
+  border-bottom:3px solid transparent; margin-bottom:-1px; color:rgba(28,28,28,.8); display:grid; grid-template-columns:1fr auto; align-content:start; gap:4px 6px; text-align:left; min-height:68px;
+  transition:color .15s, border-color .15s, background-color .15s; }
+.chips button .tn{ font-family:var(--cond); font-weight:700; color:var(--black); font-size:1rem; line-height:1.2; }
+.chips button .tl{ grid-column:1 / -1; line-height:1.25; }
+.chips button .tc{ font-size:.72rem; font-weight:600; color:rgba(28,28,28,.75); background:#EFEDE8; border-radius:999px; padding:2px 7px; line-height:1.4; }
+.chips button.done .tc{ background:#E3F0E4; color:var(--done-ink); }
+.chips button:hover{ color:var(--black); background:rgba(255,255,255,.6); }
+.chips button[aria-selected="true"]{ color:var(--black); font-weight:600; border-bottom-color:var(--gold); background:#fff; }
+.chips button:focus-visible{ outline:2px solid var(--oak); outline-offset:-2px; }
+.count{ margin-top:12px; }
+.grid{ margin-top:14px !important; }
+.card{ box-shadow:var(--shadow); border-top-width:4px; }
+.card > h3{ margin-top:6px !important; }
+.card > .no{ font-size:1.5rem !important; }
+.tprog{ display:flex; align-items:center; gap:14px; margin-top:16px; max-width:520px; }
+.tprog .tbar{ flex:1; height:6px; background:var(--gray); border-radius:3px; overflow:hidden; }
+.tprog .tbar span{ display:block; height:100%; width:0; background:var(--done); transition:width .3s ease-out; }
+.tprog .tt{ font-size:.85rem; color:rgba(28,28,28,.8); white-space:nowrap; }
+.lbl,.aids-wrap summary{ display:flex !important; align-items:center; gap:8px; }
+.lc{ font-family:var(--sans); font-weight:600; font-size:.72rem; letter-spacing:0; text-transform:none; background:#EFEDE8; color:rgba(28,28,28,.8); border-radius:999px; padding:1px 8px; }
+.card .links li.cbtn{ box-shadow:0 1px 2px rgba(28,28,28,.05); transition:box-shadow .15s ease-out, transform .15s ease-out, border-color .15s; }
+.card .links li.cbtn:hover{ box-shadow:var(--shadow-hi); transform:translateY(-1px); border-color:#B8AD98; }
+.course-btn .soon{ display:inline-flex; width:max-content; font-family:var(--sans); font-weight:600; font-size:.7rem; letter-spacing:.02em; text-transform:none;
+  background:#EFEDE8; color:rgba(28,28,28,.78); border-radius:999px; padding:2px 9px; margin-top:4px; }
+.course-btn[aria-pressed="true"] .soon{ background:#E3F0E4; color:var(--done-ink); }
+.card .aids li,.allres .aids li{ position:relative; padding-left:40px; border-style:dashed; }
+.card .aids li::before,.allres .aids li::before{ content:''; position:absolute; left:14px; top:14px; width:16px; height:18px;
+  background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23946E24' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z'/%3E%3Cpath d='M14 3v6h6M8 13h8M8 17h5'/%3E%3C/svg%3E"); }
+.card .aids li .soon,.allres .aids li .soon{ font-family:var(--sans); font-weight:600; font-size:.7rem; text-transform:none; letter-spacing:.02em; background:#fff; border-radius:999px; padding:2px 9px; color:rgba(28,28,28,.78); }
+.pnav{ display:flex; justify-content:space-between; gap:12px; margin-top:28px; padding-top:20px; border-top:1px solid var(--gray); }
+.pnav button{ font:inherit; font-size:.9rem; font-weight:600; min-height:44px; padding:10px 16px; border-radius:999px; border:1px solid #B8AD98; background:#fff; color:var(--black); cursor:pointer; transition:border-color .15s, background-color .15s; }
+.pnav button:hover{ border-color:var(--black); }
+.pnav button.next{ margin-left:auto; background:var(--black); border-color:var(--black); color:#fff; }
+.pnav button.next:hover{ background:var(--oak); border-color:var(--oak); }
+.grid.searching .pnav{ display:none; }
+.allres{ box-shadow:var(--shadow); }
+@media (max-width:760px){
+  .chips{ grid-auto-columns:minmax(132px,1fr); overflow-x:auto; scrollbar-width:thin; }
+  .tabbar{ top:64px; }
+  .progress .row{ grid-template-columns:auto 1fr; }
+  .progress #finalBtn{ grid-column:1 / -1; }
+  .search{ flex-basis:100%; }
+}
+@media (prefers-reduced-motion:reduce){ .card .links li.cbtn:hover{ transform:none; } }
 </style>
 </head>
 <body>
@@ -228,18 +315,30 @@ footer a{ color:var(--gold); }
 
   <section class="topics" id="topics" aria-labelledby="topicsTitle">
     <div class="wrap">
-      <p class="mono eyebrow">Learn</p>
-      <h2 id="topicsTitle">Choose a <em>topic</em>.</h2>
+      <div class="topics-head">
+        <div>
+          <p class="mono eyebrow">Learn</p>
+          <h2 id="topicsTitle" tabindex="-1">Choose a <em>topic</em>.</h2>
+        </div>
+        <div class="search" id="finder" hidden>
+          <label class="mono" for="q">Search all topics</label>
+          <div class="search-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+            <input id="q" type="search" placeholder="Try FMLA, requisition, or UKG" autocomplete="off" />
+          </div>
+        </div>
+      </div>
 
       <div class="progress" id="progress" hidden>
         <div class="row">
-          <div>
+          <svg class="ring" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19" class="ring-bg"/><circle cx="22" cy="22" r="19" class="ring-fg" id="pring"/></svg>
+          <div class="pmeta">
             <h3>Your progress</h3>
             <p class="ptext" id="ptext">0 of 0 courses complete.</p>
+            <div class="bar" aria-hidden="true"><span id="pbar"></span></div>
           </div>
           <button type="button" class="btn" id="finalBtn" disabled>Final assessment unlocks when every course is complete</button>
         </div>
-        <div class="bar" aria-hidden="true"><span id="pbar"></span></div>
         <p class="passed" id="passed" hidden><span class="ck" style="background:var(--done);border-color:var(--done);top:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="opacity:1"><path d="M5 12l5 5 9-10"/></svg></span>HCM Academy complete. You passed the final assessment.</p>
         <div class="demo"><b>Mock-up</b> Click any course to mark it complete.
           <button type="button" id="demoAll">Mark all complete</button>
@@ -248,22 +347,20 @@ footer a{ color:var(--gold); }
       </div>
       <p class="sr" id="pstatus" role="status" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"></p>
 
-      <div class="finder" id="finder" hidden>
-        <label class="mono" for="q">Search all topics</label>
-        <input id="q" type="search" placeholder="Try FMLA, requisition, or UKG" autocomplete="off" />
-        <div class="chips" id="chips" role="group" aria-label="Topics"></div>
-        <p class="count" id="count" role="status" aria-live="polite"></p>
+      <div class="tabbar">
+        <div class="chips" id="chips" role="tablist" aria-label="HCM Academy topics"></div>
       </div>
+      <p class="count" id="count" role="status" aria-live="polite"></p>
       <p class="none" id="none" hidden>No courses match that search. <button type="button" id="clear">Clear search</button></p>
 
 
       <div class="grid">
-        <article class="card" id="start" data-short="Start Here">
+        <section class="card" id="start" data-short="Start Here">
           <span class="no" aria-hidden="true">00</span>
           <h3>Start Here: HCM Foundations</h3>
           <p>The structure, workflow, and responsibilities every HCM needs first.</p>
           <div class="sect">
-            <p class="lbl">Training topics</p>
+            <p class="lbl">Training topics <span class="lc">6</span></p>
             <ul class="links">
               <li>HCM Structure and Key Concepts <span class="soon">Coming soon</span></li>
               <li>HCM Workflow and Worklists <span class="soon">Coming soon</span></li>
@@ -273,14 +370,14 @@ footer a{ color:var(--gold); }
               <li>FERPA Tutorial for Staff <span class="soon">Coming soon</span></li>
             </ul>
           </div>
-        </article>
+        </section>
 
-        <article class="card" id="recruiting" data-short="Recruiting">
+        <section class="card" id="recruiting" data-short="Recruiting">
           <span class="no" aria-hidden="true">01</span>
           <h3>Recruitment &amp; Hiring</h3>
           <p>From an open role to an accepted offer.</p>
           <div class="sect">
-            <p class="lbl">Training topics</p>
+            <p class="lbl">Training topics <span class="lc">16</span></p>
             <ul class="links">
               <li>Compensation Management: Getting the Compensation Memo <span class="soon">Coming soon</span></li>
               <li>Job Architecture overview and how it impacts recruiting decisions <span class="soon">Coming soon</span></li>
@@ -300,7 +397,7 @@ footer a{ color:var(--gold); }
               <li class="sub">Executive or External Search <span class="soon">Coming soon</span></li>
               <li>When to add an Assignment vs. create a Work Relationship <span class="soon">Coming soon</span></li>
             </ul>
-            <details class="aids-wrap" open><summary>Job aids &amp; resources (4)</summary>
+            <details class="aids-wrap" open><summary>Job aids &amp; resources <span class="lc">4</span></summary>
               <ul class="aids">
                 <li>Requisition creation checklist (including the required Job Description and Pre-Search Memo to attach when creating a requisition) <span class="soon">Coming soon</span></li>
                 <li>Position Management decision tree (Create vs. Update Position) <span class="soon">Coming soon</span></li>
@@ -309,14 +406,14 @@ footer a{ color:var(--gold); }
               </ul>
             </details>
           </div>
-        </article>
+        </section>
 
-        <article class="card multi" id="payroll" data-short="Payroll">
+        <section class="card multi" id="payroll" data-short="Payroll">
           <span class="no" aria-hidden="true">02</span>
           <h3>Payroll &amp; Timecards</h3>
           <p>Getting time approved and pay right every cycle.</p>
           <div class="sect">
-            <p class="lbl">Training topics</p>
+            <p class="lbl">Training topics <span class="lc">4</span></p>
             <ul class="links">
               <li>UKG: Managing Timecards, Time Off, and Schedules (HCM) <span class="soon">Coming soon</span></li>
               <li>UKG: Timecards, Time Off, and Schedules for Managers <span class="soon">Coming soon</span></li>
@@ -326,12 +423,12 @@ footer a{ color:var(--gold); }
           </div>
           <div class="sect">
             <h4 class="subhead">Compensation Management</h4>
-            <p class="lbl">Training topics</p>
+            <p class="lbl">Training topics <span class="lc">2</span></p>
             <ul class="links">
               <li>Salary changes and individual compensation actions <span class="soon">Coming soon</span></li>
               <li>Compensation impacts on payroll processing <span class="soon">Coming soon</span></li>
             </ul>
-            <details class="aids-wrap" open><summary>Job aids &amp; resources (3)</summary>
+            <details class="aids-wrap" open><summary>Job aids &amp; resources <span class="lc">3</span></summary>
               <ul class="aids">
                 <li>Step-by-step guide for updating employee timesheets <span class="soon">Coming soon</span></li>
                 <li>Approving timecards on behalf of managers <span class="soon">Coming soon</span></li>
@@ -339,21 +436,21 @@ footer a{ color:var(--gold); }
               </ul>
             </details>
           </div>
-        </article>
+        </section>
 
-        <article class="card multi" id="positions" data-short="Positions">
+        <section class="card multi" id="positions" data-short="Positions">
           <span class="no" aria-hidden="true">03</span>
           <h3>Onboarding, Offboarding, Transfers &amp; Managing Positions</h3>
           <p>Setting up positions and every move a person makes in them.</p>
           <div class="sect">
             <h4 class="subhead">Position Management</h4>
-            <p class="lbl">Training topics</p>
+            <p class="lbl">Training topics <span class="lc">3</span></p>
             <ul class="links">
               <li>Creating positions <span class="soon">Coming soon</span></li>
               <li>Updating positions <span class="soon">Coming soon</span></li>
               <li>Position management best practices <span class="soon">Coming soon</span></li>
             </ul>
-            <details class="aids-wrap" open><summary>Job aids &amp; resources (2)</summary>
+            <details class="aids-wrap" open><summary>Job aids &amp; resources <span class="lc">2</span></summary>
               <ul class="aids">
                 <li>Position creation guide <span class="soon">Coming soon</span></li>
                 <li>Position update checklist <span class="soon">Coming soon</span></li>
@@ -362,14 +459,14 @@ footer a{ color:var(--gold); }
           </div>
           <div class="sect">
             <h4 class="subhead">Assignment Changes</h4>
-            <p class="lbl">Training topics</p>
+            <p class="lbl">Training topics <span class="lc">4</span></p>
             <ul class="links">
               <li>Transfers <span class="soon">Coming soon</span></li>
               <li>Location changes <span class="soon">Coming soon</span></li>
               <li>Manager changes <span class="soon">Coming soon</span></li>
               <li>Assignment update scenarios <span class="soon">Coming soon</span></li>
             </ul>
-            <details class="aids-wrap" open><summary>Job aids &amp; resources (2)</summary>
+            <details class="aids-wrap" open><summary>Job aids &amp; resources <span class="lc">2</span></summary>
               <ul class="aids">
                 <li>Assignment change decision tree <span class="soon">Coming soon</span></li>
                 <li>Common transaction scenarios reference guide <span class="soon">Coming soon</span></li>
@@ -378,28 +475,28 @@ footer a{ color:var(--gold); }
           </div>
           <div class="sect">
             <h4 class="subhead">Offboarding</h4>
-            <p class="lbl">Training topics</p>
+            <p class="lbl">Training topics <span class="lc">4</span></p>
             <ul class="links">
               <li>Voluntary and involuntary terminations <span class="soon">Coming soon</span></li>
               <li>Ending assignments vs. terminating employment <span class="soon">Coming soon</span></li>
               <li class="sub">How to handle a termination when an employee has multiple assignments <span class="soon">Coming soon</span></li>
               <li>Offboarding process requirements <span class="soon">Coming soon</span></li>
             </ul>
-            <details class="aids-wrap" open><summary>Job aids &amp; resources (2)</summary>
+            <details class="aids-wrap" open><summary>Job aids &amp; resources <span class="lc">2</span></summary>
               <ul class="aids">
                 <li>Offboarding checklist <span class="soon">Coming soon</span></li>
                 <li>Termination processing guide <span class="soon">Coming soon</span></li>
               </ul>
             </details>
           </div>
-        </article>
+        </section>
 
-        <article class="card" id="leave" data-short="Leave">
+        <section class="card" id="leave" data-short="Leave">
           <span class="no" aria-hidden="true">04</span>
           <h3>Leave Management</h3>
           <p>Recording time away and leaves of absence.</p>
           <div class="sect">
-            <p class="lbl">Training topics</p>
+            <p class="lbl">Training topics <span class="lc">5</span></p>
             <ul class="links">
               <li>Leave status updates <span class="soon">Coming soon</span></li>
               <li>Entering and managing FMLA/TMLA transactions (continuous vs. intermittent) <span class="soon">Coming soon</span></li>
@@ -407,7 +504,7 @@ footer a{ color:var(--gold); }
               <li>Leave administration workflows within Oracle <span class="soon">Coming soon</span></li>
               <li>Managing Exempt Time Off in Oracle <span class="soon">Coming soon</span></li>
             </ul>
-            <details class="aids-wrap" open><summary>Job aids &amp; resources (4)</summary>
+            <details class="aids-wrap" open><summary>Job aids &amp; resources <span class="lc">4</span></summary>
               <ul class="aids">
                 <li>Leave Management quick reference guide <span class="soon">Coming soon</span></li>
                 <li>Leave types and required documentation matrix <span class="soon">Coming soon</span></li>
@@ -416,20 +513,20 @@ footer a{ color:var(--gold); }
               </ul>
             </details>
           </div>
-        </article>
+        </section>
 
-        <article class="card" id="costing" data-short="Costing">
+        <section class="card" id="costing" data-short="Costing">
           <span class="no" aria-hidden="true">05</span>
           <h3>Costing Management</h3>
           <p>Charging each salary to the right account.</p>
           <div class="sect">
-            <p class="lbl">Training topics</p>
+            <p class="lbl">Training topics <span class="lc">3</span></p>
             <ul class="links">
               <li>Costing fundamentals <span class="soon">Coming soon</span></li>
               <li>How employee costing impacts payroll and financial reporting <span class="soon">Coming soon</span></li>
               <li>When and where to update costing in Oracle <span class="soon">Coming soon</span></li>
             </ul>
-            <details class="aids-wrap" open><summary>Job aids &amp; resources (3)</summary>
+            <details class="aids-wrap" open><summary>Job aids &amp; resources <span class="lc">3</span></summary>
               <ul class="aids">
                 <li>Employee costing update guide <span class="soon">Coming soon</span></li>
                 <li>Costing validation checklist <span class="soon">Coming soon</span></li>
@@ -437,21 +534,21 @@ footer a{ color:var(--gold); }
               </ul>
             </details>
           </div>
-        </article>
+        </section>
 
-        <article class="card" id="students" data-short="Students &amp; Faculty">
+        <section class="card" id="students" data-short="Students &amp; Faculty">
           <span class="no" aria-hidden="true">06</span>
           <h3>Student &amp; Faculty Hiring and Assignment Changes</h3>
           <p>Hiring students and faculty and changing their assignments.</p>
           <div class="sect">
-            <p class="lbl">Training topics</p>
+            <p class="lbl">Training topics <span class="lc">4</span></p>
             <ul class="links">
               <li>Student hiring process and requirements <span class="soon">Coming soon</span></li>
               <li>Faculty hiring process and requirements <span class="soon">Coming soon</span></li>
               <li>Student and faculty assignment changes <span class="soon">Coming soon</span></li>
               <li>Oracle transactions and approvals for these populations <span class="soon">Coming soon</span></li>
             </ul>
-            <details class="aids-wrap" open><summary>Job aids &amp; resources (4)</summary>
+            <details class="aids-wrap" open><summary>Job aids &amp; resources <span class="lc">4</span></summary>
               <ul class="aids">
                 <li>Student hiring guide <span class="soon">Coming soon</span></li>
                 <li>Faculty hiring guide <span class="soon">Coming soon</span></li>
@@ -460,14 +557,14 @@ footer a{ color:var(--gold); }
               </ul>
             </details>
           </div>
-        </article>
+        </section>
 
-        <article class="card" id="records" data-short="Records">
+        <section class="card" id="records" data-short="Records">
           <span class="no" aria-hidden="true">07</span>
           <h3>Document Records &amp; Reporting</h3>
           <p>Keeping employee documents complete and pulling the reports your area needs.</p>
           <div class="sect">
-            <p class="lbl">Training topics</p>
+            <p class="lbl">Training topics <span class="lc">4</span></p>
             <ul class="links">
               <li>Introduction to BI Reporting and the Departmental Playbook <span class="soon">Coming soon</span></li>
               <li>Reporting 101 <span class="soon">Coming soon</span></li>
@@ -475,7 +572,7 @@ footer a{ color:var(--gold); }
               <li>Reporting 301 <span class="soon">Coming soon</span></li>
             </ul>
           </div>
-        </article>
+        </section>
       </div>
       <div class="allres" id="resources">
         <p class="mono eyebrow">Get answers</p>
@@ -536,18 +633,44 @@ footer a{ color:var(--gold); }
       topic = cards.length ? cards[0].id : '';
 
   function norm(s){ return s.toLowerCase().replace(/\s+/g,' ').trim(); }
+  var grid = document.querySelector('.grid'), tabbar = document.querySelector('.tabbar');
+  function select(id, focus){
+    topic = id; if (q.value){ q.value = ''; } update();
+    var tb = document.getElementById('tab-' + id);
+    if (focus && tb) tb.focus();
+  }
   function addChip(c){
     var b = document.createElement('button');
-    b.type = 'button'; b.dataset.topic = c.id;
-    b.innerHTML = '<span class="tn">' + c.querySelector('.no').textContent + '</span>' + c.dataset.short + '<span class="tc"></span>';
-    b.addEventListener('click', function(){ topic = c.id; if (q.value){ q.value = ''; } update(); });
+    b.type = 'button'; b.dataset.topic = c.id; b.id = 'tab-' + c.id;
+    b.setAttribute('role', 'tab'); b.setAttribute('aria-controls', c.id);
+    b.innerHTML = '<span class="tn">' + c.querySelector('.no').textContent + '</span><span class="tc"></span><span class="tl">' + c.dataset.short + '</span>';
+    b.addEventListener('click', function(){ select(c.id); });
+    b.addEventListener('keydown', function(e){
+      var i = cards.indexOf(c), n = cards.length, k = e.key, j = -1;
+      if (k === 'ArrowRight') j = (i + 1) % n; else if (k === 'ArrowLeft') j = (i - 1 + n) % n; else if (k === 'Home') j = 0; else if (k === 'End') j = n - 1;
+      if (j > -1){ e.preventDefault(); select(cards[j].id, true); }
+    });
     chips.appendChild(b);
+    c.setAttribute('role', 'tabpanel'); c.setAttribute('aria-labelledby', 'tab-' + c.id);
   }
   cards.forEach(addChip);
+  /* previous / next topic */
+  cards.forEach(function(c, i){
+    var nav = document.createElement('div'); nav.className = 'pnav';
+    function mk(target, cls, label){
+      var b = document.createElement('button'); b.type = 'button'; b.className = cls; b.textContent = label;
+      b.addEventListener('click', function(){ select(target.id); tabbar.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'start' }); document.getElementById('tab-' + target.id).focus({ preventScroll:true }); });
+      nav.appendChild(b);
+    }
+    if (i > 0) mk(cards[i - 1], 'prev', '\u2190 ' + cards[i - 1].querySelector('.no').textContent + ' ' + cards[i - 1].dataset.short.replace('&amp;', '&'));
+    if (i < cards.length - 1) mk(cards[i + 1], 'next', 'Next: ' + cards[i + 1].querySelector('.no').textContent + ' ' + cards[i + 1].dataset.short.replace('&amp;', '&') + ' \u2192');
+    c.appendChild(nav);
+  });
 
   function update(){
     var term = norm(q.value), courses = 0, aidsShown = 0, shownCards = 0;
-    chips.querySelectorAll('button').forEach(function(b){ b.setAttribute('aria-pressed', !term && b.dataset.topic === topic ? 'true' : 'false'); });
+    chips.querySelectorAll('button').forEach(function(b){ var on = !term && b.dataset.topic === topic; b.setAttribute('aria-selected', on ? 'true' : 'false'); b.tabIndex = on || (term && b === chips.firstChild) ? 0 : -1; });
+    grid.classList.toggle('searching', !!term);
     cards.forEach(function(c){
       var inTopic = !!term || c.id === topic,
           head = norm(c.querySelector('h3').textContent + ' ' + c.querySelector('p').textContent + ' ' + c.dataset.short),
@@ -632,10 +755,18 @@ footer a{ color:var(--gold); }
     finalBtn.disabled = !all || finalPassed;
     finalBtn.textContent = finalPassed ? 'Final assessment passed' : all ? 'Take the final assessment' : 'Final assessment unlocks when every course is complete';
     passed.hidden = !finalPassed;
+    var ring = document.getElementById('pring'); if (ring) ring.style.strokeDashoffset = 119.4 * (1 - (total ? n / total : 0));
     cards.forEach(function(c){
       var bs = c.querySelectorAll('.course-btn'), d = c.querySelectorAll('.course-btn[aria-pressed="true"]').length,
-          tc = document.querySelector('#chips button[data-topic="' + c.id + '"] .tc');
-      if (tc) tc.textContent = bs.length ? d + '/' + bs.length : '';
+          tab = document.querySelector('#chips button[data-topic="' + c.id + '"]'), tc = tab && tab.querySelector('.tc'),
+          full = bs.length && d === bs.length;
+      if (tc) tc.textContent = !bs.length ? 'Soon' : full ? '\u2713 Done' : d + '/' + bs.length;
+      if (tab) tab.classList.toggle('done', !!full);
+      var tp = c.querySelector('.tprog');
+      if (!tp){ tp = document.createElement('div'); tp.className = 'tprog'; tp.innerHTML = '<div class="tbar" aria-hidden="true"><span></span></div><span class="tt"></span>'; c.querySelector(':scope > p').after(tp); }
+      tp.hidden = !bs.length;
+      tp.querySelector('.tbar span').style.width = (bs.length ? d / bs.length * 100 : 0) + '%';
+      tp.querySelector('.tt').textContent = d + ' of ' + bs.length + ' complete';
     });
   }
   function toggle(id){

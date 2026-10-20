@@ -37,11 +37,11 @@ pcb@vanderbilt.edu
 
 ## Accessibility and brand gate
 
-Last run 2026-10-15:
+Last run 2026-10-20:
 
 - axe-core 4.10 (WCAG 2.0/2.1/2.2 A and AA plus best practice): 0 violations at 1440x900 and at 320px.
 - No horizontal scroll at 320px. Console clean.
-- Keyboard: skip link works, every link reachable with visible focus.
+- Keyboard: skip link works, every control reachable with visible focus; topic tabs follow the ARIA tabs pattern (arrow keys, Home, End).
 - Reduced motion turns off smooth scrolling.
 - Palette: approved Vanderbilt colors only. Oak (#946E24) measures 4.19:1 on Cream, so cream sections set labels in black and keep gold for ticks and rules.
 - Zero em or en dashes.
