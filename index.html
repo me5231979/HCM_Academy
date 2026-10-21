@@ -131,9 +131,9 @@ header .cta:hover{ background:var(--highlight); }
 .course-btn .nm{ flex:1; }
 .ck{ flex-shrink:0; width:20px; height:20px; border-radius:50%; border:2px solid #B8AD98; display:inline-grid; place-items:center; position:relative; top:4px; transition:background-color .2s, border-color .2s; }
 .ck svg{ width:12px; height:12px; color:#fff; opacity:0; }
-.course-btn[aria-pressed="true"] .ck{ background:var(--done); border-color:var(--done); }
-.course-btn[aria-pressed="true"] .ck svg{ opacity:1; }
-.course-btn[aria-pressed="true"] .soon{ color:var(--done); }
+.course-btn:is([aria-pressed="true"],[data-done="true"]) .ck{ background:var(--done); border-color:var(--done); }
+.course-btn:is([aria-pressed="true"],[data-done="true"]) .ck svg{ opacity:1; }
+.course-btn:is([aria-pressed="true"],[data-done="true"]) .soon{ color:var(--done); }
 .course-btn:hover .ck{ border-color:var(--done); }
 
 dialog.modal{ margin:auto; border:0; border-top:4px solid var(--gold); border-radius:6px; padding:0; width:min(680px,calc(100vw - 32px)); max-height:calc(100dvh - 48px); color:var(--black); background:#fff; }
@@ -206,7 +206,7 @@ footer a{ color:var(--gold); }
 .course-btn .nm{ font-weight:600; line-height:1.35; }
 .card .links li.sub .course-btn .nm{ font-weight:500; }
 .course-btn .soon{ grid-column:2; }
-.card .links li.cbtn:has(.course-btn[aria-pressed="true"]){ border-color:var(--done); background:#F3F8F3; }
+.card .links li.cbtn:has(.course-btn:is([aria-pressed="true"],[data-done="true"])){ border-color:var(--done); background:#F3F8F3; }
 .card .links li.cbtn:hover{ border-color:#B8AD98; }
 .aids-wrap{ border:0 !important; background:none !important; margin-top:18px !important; }
 .aids-wrap summary{ padding:0 !important; min-height:32px !important; font-family:var(--cond); font-weight:700 !important; font-size:.72rem !important; letter-spacing:.06em; text-transform:uppercase; }
@@ -262,7 +262,7 @@ footer a{ color:var(--gold); }
 .card .links li.cbtn:hover{ box-shadow:var(--shadow-hi); transform:translateY(-1px); border-color:#B8AD98; }
 .course-btn .soon{ display:inline-flex; width:max-content; font-family:var(--sans); font-weight:600; font-size:.7rem; letter-spacing:.02em; text-transform:none;
   background:#EFEDE8; color:rgba(28,28,28,.78); border-radius:999px; padding:2px 9px; margin-top:4px; }
-.course-btn[aria-pressed="true"] .soon{ background:#E3F0E4; color:var(--done-ink); }
+.course-btn:is([aria-pressed="true"],[data-done="true"]) .soon{ background:#E3F0E4; color:var(--done-ink); }
 .card .aids li,.allres .aids li{ position:relative; padding-left:40px; border-style:dashed; }
 .card .aids li::before,.allres .aids li::before{ content:''; position:absolute; left:14px; top:14px; width:16px; height:18px;
   background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23946E24' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z'/%3E%3Cpath d='M14 3v6h6M8 13h8M8 17h5'/%3E%3C/svg%3E"); }
@@ -312,8 +312,8 @@ footer a{ color:var(--gold); }
 .tm,.fm{ white-space:nowrap; }
 .aids .tm::before{ display:none; }
 .card .links li.cbtn:hover .course-btn{ background:#FAF8F4; }
-.card .links li.cbtn:has(.course-btn[aria-pressed="true"]) .course-btn{ background:#F3F8F3; }
-.card .links li.cbtn:has(.course-btn[aria-pressed="true"]){ background:#F3F8F3 !important; }
+.card .links li.cbtn:has(.course-btn:is([aria-pressed="true"],[data-done="true"])) .course-btn{ background:#F3F8F3; }
+.card .links li.cbtn:has(.course-btn:is([aria-pressed="true"],[data-done="true"])){ background:#F3F8F3 !important; }
 .card .links li.sub .course-btn{ padding-left:42px !important; grid-template-columns:22px minmax(0,1fr) 90px 150px 120px !important; }
 .card .links li.group{ display:block !important; background:var(--cream) !important; padding:10px 18px !important; font-family:var(--cond); font-weight:700; font-size:.76rem; letter-spacing:.06em; text-transform:uppercase; }
 .card .links li.group ~ li:not(.sub){ margin-top:0 !important; }
@@ -329,6 +329,9 @@ footer a{ color:var(--gold); }
   .card .aids li .soon,.allres .aids li .soon{ grid-column:1 / -1; justify-self:start; }
   .card .aids li::before,.allres .aids li::before{ top:22px; transform:none; }
 }
+.course-btn.course-link{ text-decoration:none; color:inherit; }
+.course-link:not([data-done="true"]) .soon{ background:var(--black) !important; color:#fff !important; }
+.course-link:not([data-done="true"]) .soon::after{ content:' \2192'; }
 </style>
 </head>
 <body>
@@ -462,21 +465,27 @@ footer a{ color:var(--gold); }
           <h3>Payroll &amp; Timecards</h3>
           <p>Getting time approved and pay right every cycle.</p>
           <div class="sect">
-            <p class="lbl">Training topics <span class="lc">4</span></p>
+            <p class="lbl">Training topics <span class="lc">7</span></p>
             <div class="rowhead" aria-hidden="true"><span>Course</span><span>Time</span><span>Format</span><span>Status</span></div>
             <ul class="links">
-              <li><span class="nm"><span class="tt">UKG: Managing Timecards, Time Off, and Schedules (HCM)</span><span class="ds">The HCM view of timecards, time off, and schedules in UKG.</span></span><span class="tm"><span class="sr-l">Time: </span>30 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
+              <li data-course="hcm-role-in-payroll"><span class="nm"><span class="tt">The HCM's role in payroll</span><span class="ds">You are new to the HCM role, or you are not sure whether a pay issue is yours to fix.</span></span><span class="tm"><span class="sr-l">Time: </span>5 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-course</span><span class="soon">Coming soon</span></li>
+              <li data-course="weekly-time-card-check"><span class="nm"><span class="tt">Weekly time card check</span><span class="ds">Every week, for your weekly and biweekly (non-exempt) employees.</span></span><span class="tm"><span class="sr-l">Time: </span>5 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-course</span><span class="soon">Coming soon</span></li>
+              <li data-course="review-approve-time-cards"><span class="nm"><span class="tt">Review and approve time cards</span><span class="ds">You are checking or approving non-exempt hours for a pay period.</span></span><span class="tm"><span class="sr-l">Time: </span>6 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-course</span><span class="soon">Coming soon</span></li>
+              <li data-course="enter-pto"><span class="nm"><span class="tt">Enter PTO for an employee</span><span class="ds">A non-exempt employee needs PTO entered and can't do it themselves.</span></span><span class="tm"><span class="sr-l">Time: </span>4 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-course</span><span class="soon">Coming soon</span></li>
               <li><span class="nm"><span class="tt">UKG: Timecards, Time Off, and Schedules for Managers</span><span class="ds">What managers do in UKG, so you can support them.</span></span><span class="tm"><span class="sr-l">Time: </span>25 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
               <li><span class="nm"><span class="tt">UKG: Employee Timecards and Time Off</span><span class="ds">What employees see in UKG, so you can answer their questions.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
-              <li class="sub"><span class="nm"><span class="tt">Off-Cycle Pay Requests</span><span class="ds">When an off-cycle payment is needed and how to request one.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Oracle walkthrough</span><span class="soon">Coming soon</span></li>
+              <li class="sub" data-course="off-cycle-payment"><span class="nm"><span class="tt">Request an off-cycle payment</span><span class="ds">A transaction failed to pay and it was not the employee's or HCM's fault.</span></span><span class="tm"><span class="sr-l">Time: </span>5 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-course</span><span class="soon">Coming soon</span></li>
             </ul>
           </div>
           <div class="sect">
             <h4 class="subhead">Compensation Management</h4>
-            <p class="lbl">Training topics <span class="lc">2</span></p>
+            <p class="lbl">Training topics <span class="lc">5</span></p>
             <div class="rowhead" aria-hidden="true"><span>Course</span><span>Time</span><span>Format</span><span>Status</span></div>
             <ul class="links">
-              <li><span class="nm"><span class="tt">Salary changes and individual compensation actions</span><span class="ds">Process salary changes and individual compensation actions.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>Oracle walkthrough</span><span class="soon">Coming soon</span></li>
+              <li data-course="change-salary"><span class="nm"><span class="tt">Change salary</span><span class="ds">A salary changes outside the annual increase process.</span></span><span class="tm"><span class="sr-l">Time: </span>6 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-course</span><span class="soon">Coming soon</span></li>
+              <li data-course="net-one-time-stipend"><span class="nm"><span class="tt">Process a net one-time stipend</span><span class="ds">You are paying a fixed take-home amount.</span></span><span class="tm"><span class="sr-l">Time: </span>5 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-course</span><span class="soon">Coming soon</span></li>
+              <li data-course="sign-on-bonus"><span class="nm"><span class="tt">Add a sign-on bonus</span><span class="ds">A sign-on (or retention) bonus was left off the offer transaction.</span></span><span class="tm"><span class="sr-l">Time: </span>5 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-course</span><span class="soon">Coming soon</span></li>
+              <li data-course="staff-supplement"><span class="nm"><span class="tt">Add a staff supplement</span><span class="ds">Someone takes on extra duties for a period of time.</span></span><span class="tm"><span class="sr-l">Time: </span>6 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-course</span><span class="soon">Coming soon</span></li>
               <li><span class="nm"><span class="tt">Compensation impacts on payroll processing</span><span class="ds">How compensation changes flow into payroll and when they take effect.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
             </ul>
             <details class="aids-wrap" open><summary>Job aids &amp; resources <span class="lc">3</span></summary>
@@ -528,10 +537,12 @@ footer a{ color:var(--gold); }
           </div>
           <div class="sect">
             <h4 class="subhead">Offboarding</h4>
-            <p class="lbl">Training topics <span class="lc">4</span></p>
+            <p class="lbl">Training topics <span class="lc">6</span></p>
             <div class="rowhead" aria-hidden="true"><span>Course</span><span>Time</span><span>Format</span><span>Status</span></div>
             <ul class="links">
-              <li><span class="nm"><span class="tt">Voluntary and involuntary terminations</span><span class="ds">Process both kinds of termination and the reasons to choose.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
+              <li data-course="voluntary-termination"><span class="nm"><span class="tt">Voluntary termination</span><span class="ds">An employee resigns.</span></span><span class="tm"><span class="sr-l">Time: </span>5 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-course</span><span class="soon">Coming soon</span></li>
+              <li data-course="reduction-in-force"><span class="nm"><span class="tt">Reduction in force (RIF)</span><span class="ds">A position is eliminated.</span></span><span class="tm"><span class="sr-l">Time: </span>6 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-course</span><span class="soon">Coming soon</span></li>
+              <li data-course="involuntary-termination"><span class="nm"><span class="tt">Involuntary termination (misconduct)</span><span class="ds">An employee is terminated for misconduct.</span></span><span class="tm"><span class="sr-l">Time: </span>5 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-course</span><span class="soon">Coming soon</span></li>
               <li><span class="nm"><span class="tt">Ending assignments vs. terminating employment</span><span class="ds">When to end one assignment and when to end employment.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
               <li class="sub"><span class="nm"><span class="tt">How to handle a termination when an employee has multiple assignments</span><span class="ds">Terminate correctly when someone holds more than one job.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span>Scenario practice</span><span class="soon">Coming soon</span></li>
               <li><span class="nm"><span class="tt">Offboarding process requirements</span><span class="ds">Everything that must happen when someone leaves.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
@@ -575,12 +586,13 @@ footer a{ color:var(--gold); }
           <h3>Costing Management</h3>
           <p>Charging each salary to the right account.</p>
           <div class="sect">
-            <p class="lbl">Training topics <span class="lc">3</span></p>
+            <p class="lbl">Training topics <span class="lc">4</span></p>
             <div class="rowhead" aria-hidden="true"><span>Course</span><span>Time</span><span>Format</span><span>Status</span></div>
             <ul class="links">
-              <li><span class="nm"><span class="tt">Costing fundamentals</span><span class="ds">What costing is and how salary is charged to accounts.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>Video</span><span class="soon">Coming soon</span></li>
+              <li data-course="costing-fundamentals"><span class="nm"><span class="tt">Costing fundamentals</span><span class="ds">You need to decide whether an employee needs costing entered or can stay on the default.</span></span><span class="tm"><span class="sr-l">Time: </span>6 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-course</span><span class="soon">Coming soon</span></li>
               <li><span class="nm"><span class="tt">How employee costing impacts payroll and financial reporting</span><span class="ds">Why accurate costing matters for payroll and financial reports.</span></span><span class="tm"><span class="sr-l">Time: </span>15 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
-              <li><span class="nm"><span class="tt">When and where to update costing in Oracle</span><span class="ds">Update costing at the right level and time in Oracle.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>Oracle walkthrough</span><span class="soon">Coming soon</span></li>
+              <li data-course="when-to-update-costing"><span class="nm"><span class="tt">When costing must be updated</span><span class="ds">Any of the events below happens to one of your employees.</span></span><span class="tm"><span class="sr-l">Time: </span>5 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-course</span><span class="soon">Coming soon</span></li>
+              <li data-course="enter-edit-costing"><span class="nm"><span class="tt">Enter or edit costing for a person</span><span class="ds">Costing fundamentals says the default won't work, or funding changed.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-course</span><span class="soon">Coming soon</span></li>
             </ul>
             <details class="aids-wrap" open><summary>Job aids &amp; resources <span class="lc">3</span></summary>
               <div class="rowhead" aria-hidden="true"><span>Job aid</span><span>Length</span><span>Type</span><span>Status</span></div><ul class="aids">
@@ -621,9 +633,10 @@ footer a{ color:var(--gold); }
           <h3>Document Records &amp; Reporting</h3>
           <p>Keeping employee documents complete and pulling the reports your area needs.</p>
           <div class="sect">
-            <p class="lbl">Training topics <span class="lc">4</span></p>
+            <p class="lbl">Training topics <span class="lc">5</span></p>
             <div class="rowhead" aria-hidden="true"><span>Course</span><span>Time</span><span>Format</span><span>Status</span></div>
             <ul class="links">
+              <li data-course="add-document-record"><span class="nm"><span class="tt">Add a document record</span><span class="ds">You have a final, signed document to file: discipline, a compensation letter, a performance review, or a leave or accommodation approval.</span></span><span class="tm"><span class="sr-l">Time: </span>6 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-course</span><span class="soon">Coming soon</span></li>
               <li><span class="nm"><span class="tt">Introduction to BI Reporting and the Departmental Playbook</span><span class="ds">Get started with Oracle BI reporting and the departmental playbook.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>E-learning</span><span class="soon">Coming soon</span></li>
               <li><span class="nm"><span class="tt">Reporting 101</span><span class="ds">Run and read the standard HCM reports.</span></span><span class="tm"><span class="sr-l">Time: </span>20 min</span><span class="fm"><span class="sr-l">Format: </span>Video</span><span class="soon">Coming soon</span></li>
               <li><span class="nm"><span class="tt">Reporting 201</span><span class="ds">Filter, schedule, and export reports for your area.</span></span><span class="tm"><span class="sr-l">Time: </span>25 min</span><span class="fm"><span class="sr-l">Format: </span>Video</span><span class="soon">Coming soon</span></li>
@@ -712,6 +725,7 @@ footer a{ color:var(--gold); }
     c.setAttribute('role', 'tabpanel'); c.setAttribute('aria-labelledby', 'tab-' + c.id);
   }
   cards.forEach(addChip);
+  (function(){ var h = location.hash.slice(1); if (cards.some(function(c){ return c.id === h; })) topic = h; })();
   /* previous / next topic */
   cards.forEach(function(c, i){
     var nav = document.createElement('div'); nav.className = 'pnav';
@@ -788,13 +802,14 @@ footer a{ color:var(--gold); }
   /* turn every course line into a completion toggle */
   cards.forEach(function(c){
     c.querySelectorAll('.links li:not(.group)').forEach(function(li, i){
-      var id = c.id + '-' + i;
-      var b = document.createElement('button');
-      b.type = 'button'; b.className = 'course-btn'; b.dataset.id = id;
+      var slug = li.dataset.course, id = slug ? 'c-' + slug : c.id + '-' + i;
+      var b = document.createElement(slug ? 'a' : 'button');
+      if (slug){ b.href = 'courses/' + slug + '/'; b.className = 'course-btn course-link'; } else { b.type = 'button'; b.className = 'course-btn'; }
+      b.dataset.id = id;
       b.innerHTML = '<span class="ck" aria-hidden="true">' + CHECK + '</span>';
       while (li.firstChild) b.appendChild(li.firstChild);
       li.appendChild(b); li.classList.add('cbtn');
-      b.addEventListener('click', function(){ toggle(id); });
+      if (!slug) b.addEventListener('click', function(){ toggle(id); });
       buttons.push(b);
     });
   });
@@ -804,9 +819,9 @@ footer a{ color:var(--gold); }
 
   function render(){
     buttons.forEach(function(b){
-      var on = done.indexOf(b.dataset.id) > -1;
-      b.setAttribute('aria-pressed', on ? 'true' : 'false');
-      b.querySelector('.soon').textContent = on ? 'Complete' : 'Coming soon';
+      var on = done.indexOf(b.dataset.id) > -1, link = b.tagName === 'A';
+      if (link){ b.dataset.done = on ? 'true' : 'false'; } else { b.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+      b.querySelector('.soon').textContent = on ? 'Complete' : link ? 'Start V.01' : 'Coming soon';
     });
     var n = done.length, total = buttons.length, all = n === total;
     ptext.textContent = n + ' of ' + total + ' courses complete.';
@@ -816,7 +831,7 @@ footer a{ color:var(--gold); }
     passed.hidden = !finalPassed;
     var ring = document.getElementById('pring'); if (ring) ring.style.strokeDashoffset = 119.4 * (1 - (total ? n / total : 0));
     cards.forEach(function(c){
-      var bs = c.querySelectorAll('.course-btn'), d = c.querySelectorAll('.course-btn[aria-pressed="true"]').length,
+      var bs = c.querySelectorAll('.course-btn'), d = c.querySelectorAll('.course-btn:is([aria-pressed="true"],[data-done="true"])').length,
           tab = document.querySelector('#chips button[data-topic="' + c.id + '"]'), tc = tab && tab.querySelector('.tc'),
           full = bs.length && d === bs.length;
       if (tc) tc.textContent = !bs.length ? 'Soon' : full ? '\u2713 Done' : d + '/' + bs.length;

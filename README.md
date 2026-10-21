@@ -35,6 +35,23 @@ current catalog (videos and e-learning). Edit them in place: each row is
 `<span class="tt">Title</span><span class="ds">Overview</span>` then
 `<span class="tm">Time</span>` and `<span class="fm">Format</span>`.
 
+## Micro-courses (V.01)
+
+16 short courses live in `courses/<slug>/`. Each has four parts: a brief intro,
+a step-by-step walkthrough (a checklist), a 3-question knowledge check with
+feedback, and a printable one-page job aid (Print button; print CSS shows only
+the job aid). Passing all three questions marks the course complete on the
+landing page (shared `localStorage` key `hcm-done`, id `c-<slug>`).
+
+- Content lives in `tools/course_content.py`. Edit there, then run
+  `python3 tools/build_courses.py` to regenerate every page.
+- Shared look and behavior: `courses/course.css`, `courses/course.js`.
+- Sources: Briana Knowles (Oct 20), Alex Enferadi (Oct 20), Jennifer Garcia
+  (Oct 19) sessions; the Costing for Persons guide (2022); the Document Records
+  guide; the Award Compensation Elements guide (2023). Open items are flagged
+  in each course's draft note and watch-outs.
+- Landing rows link to a course with `data-course="<slug>"` on the `<li>`.
+
 ## Adding a course when it ships
 
 Each course line shows "Coming soon". When a course is live, replace that
