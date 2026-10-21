@@ -169,4 +169,5 @@ footer a{ color:var(--gold); }
 .assess .topics{ margin:14px 0 0 20px; }
 .assess .topics li{ margin-top:6px; }
 .assess #results:focus{ outline:none; }
-.hero:not(:has(nav.parts)) .wrap{ padding-bottom:clamp(28px,5vw,44px); }
+.hero:is(:not(:has(nav.parts)),:has(nav.parts[hidden])) .wrap{ padding-bottom:clamp(28px,5vw,44px); }
+[hidden]{ display:none !important; }

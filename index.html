@@ -247,6 +247,13 @@ footer a{ color:var(--gold); }
 .course-btn .soon{ display:inline-flex; width:max-content; font-family:var(--sans); font-weight:600; font-size:.7rem; letter-spacing:.02em; text-transform:none;
   background:#EFEDE8; color:rgba(28,28,28,.78); border-radius:999px; padding:2px 9px; margin-top:4px; }
 .course-btn:is([aria-pressed="true"],[data-done="true"]) .soon{ background:#E3F0E4; color:var(--done-ink); }
+/* locked until the pre-assessment is taken */
+.course-btn[aria-disabled="true"]{ cursor:not-allowed; }
+.course-btn[aria-disabled="true"] .tt,.course-btn[aria-disabled="true"] .ds,.course-btn[aria-disabled="true"] .tm,.course-btn[aria-disabled="true"] .fm{ opacity:.6; }
+.course-btn[aria-disabled="true"] .ck{ border-style:dashed; }
+.course-btn .soon .lk{ width:11px; height:11px; margin-right:4px; flex-shrink:0; align-self:center; }
+.card .links li.cbtn:has(.course-btn[aria-disabled="true"]):hover{ transform:none; box-shadow:0 1px 2px rgba(28,28,28,.05); }
+.prestart.nudge{ outline:3px solid var(--gold); outline-offset:2px; }
 .card .aids li,.allres .aids li{ position:relative; padding-left:40px; border-style:dashed; }
 .card .aids li::before,.allres .aids li::before{ content:''; position:absolute; left:14px; top:14px; width:16px; height:18px;
   background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23946E24' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z'/%3E%3Cpath d='M14 3v6h6M8 13h8M8 17h5'/%3E%3C/svg%3E"); }
@@ -364,7 +371,7 @@ footer a{ color:var(--gold); }
       </div>
 
       <div class="progress" id="progress" hidden>
-        <div class="prestart" id="preStart"><p><b>New here?</b> Take the 5-minute pre-assessment. It's not graded, and your results show which topics to start with.</p><a class="btn" href="assessment/pre/">Take the pre-assessment</a></div>
+        <div class="prestart" id="preStart"><p id="preStartText"><b>Start with the pre-assessment.</b> Courses unlock once you've taken it. It takes about 5 minutes, it's not graded, and your results show which topics to start with.</p><a class="btn" href="assessment/pre/">Take the pre-assessment</a></div>
         <div class="row">
           <svg class="ring" viewBox="0 0 44 44" aria-hidden="true"><circle cx="22" cy="22" r="19" class="ring-bg"/><circle cx="22" cy="22" r="19" class="ring-fg" id="pring"/></svg>
           <div class="pmeta">
@@ -375,7 +382,7 @@ footer a{ color:var(--gold); }
           <a class="btn" id="finalBtn" aria-disabled="true">Final assessment unlocks when every course is complete</a>
         </div>
         <p class="passed" id="passed" hidden><span class="ck" style="background:var(--done);border-color:var(--done);top:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="opacity:1"><path d="M5 12l5 5 9-10"/></svg></span>HCM Academy complete. You passed the final assessment.</p>
-        <div class="demo"><b>Mock-up</b> Click any course that is coming soon to mark it complete.
+        <div class="demo"><b>Mock-up</b> After the pre-assessment, click any course that is coming soon to mark it complete.
           <button type="button" id="demoAll">Mark all complete</button>
           <button type="button" id="demoReset">Reset demo</button>
         </div>
@@ -702,6 +709,7 @@ footer a{ color:var(--gold); }
     set: function(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} },
     clear: function(){ try { ['hcm-pre','hcm-done','hcm-final'].forEach(function(k){ localStorage.removeItem(k); }); } catch(e){} }
   };
+  var LOCK = '<svg class="lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
   var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>';
   var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
   var topics = cards.map(function(c){ return { id:c.id, name:c.querySelector('h3').textContent }; });
@@ -730,6 +738,16 @@ footer a{ color:var(--gold); }
     });
   });
 
+  /* until the pre-assessment is taken, course rows point the learner back to it */
+  document.querySelector('.grid').addEventListener('click', function(e){
+    var b = e.target.closest('.course-btn[aria-disabled="true"]'); if (!b) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    var box = document.getElementById('preStart'), go = box.querySelector('a');
+    box.classList.add('nudge'); setTimeout(function(){ box.classList.remove('nudge'); }, 1600);
+    box.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block:'center' });
+    go.focus({ preventScroll:true });
+    pstatus.textContent = 'Locked. Take the pre-assessment first to unlock the courses.';
+  }, true);
   var ptext = document.getElementById('ptext'), pbar = document.getElementById('pbar'), pstatus = document.getElementById('pstatus'),
       finalBtn = document.getElementById('finalBtn'), passed = document.getElementById('passed');
 
@@ -737,7 +755,9 @@ footer a{ color:var(--gold); }
     buttons.forEach(function(b){
       var on = done.indexOf(b.dataset.id) > -1, link = b.tagName === 'A';
       if (link){ b.dataset.done = on ? 'true' : 'false'; } else { b.setAttribute('aria-pressed', on ? 'true' : 'false'); }
-      b.querySelector('.soon').textContent = on ? 'Complete' : link ? 'Start V.01' : 'Coming soon';
+      var locked = !preDone, soon = b.querySelector('.soon');
+      if (locked){ b.setAttribute('aria-disabled', 'true'); soon.innerHTML = LOCK + 'Locked'; b.setAttribute('aria-describedby', 'preStartText'); }
+      else { b.removeAttribute('aria-disabled'); b.removeAttribute('aria-describedby'); soon.textContent = on ? 'Complete' : link ? 'Start V.01' : 'Coming soon'; }
     });
     var n = done.length, total = buttons.length, all = n === total;
     ptext.textContent = n + ' of ' + total + ' courses complete.';
@@ -773,8 +793,9 @@ footer a{ color:var(--gold); }
 
   /* demo controls */
   document.getElementById('demoAll').addEventListener('click', function(){
-    done = buttons.map(function(b){ return b.dataset.id; }); store.set('hcm-done', done); render();
-    pstatus.textContent = 'All courses marked complete. The final assessment is unlocked.';
+    done = buttons.map(function(b){ return b.dataset.id; }); store.set('hcm-done', done);
+    preDone = true; store.set('hcm-pre', true); render();
+    pstatus.textContent = 'Pre-assessment and all courses marked complete. The final assessment is unlocked.';
   });
   document.getElementById('demoReset').addEventListener('click', function(){
     store.clear(); done = []; finalPassed = false; preDone = false; render(); pstatus.textContent = 'Demo reset.';

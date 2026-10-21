@@ -7,6 +7,12 @@
     get: function(k, d){ try { var v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch(e){ return d; } },
     set: function(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} }
   };
+  /* courses stay locked until the pre-assessment has been taken once */
+  if (!store.get('hcm-pre', false)){
+    document.querySelectorAll('main .part, main .draft, nav.parts').forEach(function(el){ el.hidden = true; });
+    document.getElementById('locked').hidden = false;
+    return;
+  }
   var live = document.getElementById('live');
   function say(t){ live.textContent = ''; setTimeout(function(){ live.textContent = t; }, 30); }
 
