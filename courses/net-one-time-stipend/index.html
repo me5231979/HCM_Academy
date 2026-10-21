@@ -22,7 +22,7 @@
   <div class="wrap">
     <p class="mono crumb">Compensation Management &middot; Course 7 of 16</p>
     <h1 id="t">Process a net one-time <em>stipend</em>.</h1>
-    <ul class="meta" aria-label="Course details"><li class="v">V.01 draft</li><li>5 min</li><li>Oracle HCM</li><li>3-question check</li><li>Printable job aid</li></ul>
+    <ul class="meta" aria-label="Course details"><li class="v">V.01 draft</li><li>6 min</li><li>Oracle HCM</li><li>3-question check</li><li>Printable job aid</li></ul>
   </div>
   <nav class="parts" aria-label="Course parts"><ol>
     <li><a href="#intro"><span>1</span>Intro</a></li><li><a href="#steps"><span>2</span>Walk through</a></li><li><a href="#check"><span>3</span>Check</a></li><li><a href="#jobaid"><span>4</span>Job aid</a></li>
@@ -34,7 +34,7 @@
     <section class="part" id="intro" aria-labelledby="h1">
       <p class="mono num">1 &middot; Intro</p>
       <h2 id="h1">When to <em>use</em> it.</h2>
-      <p>Use this when the employee should take home a fixed amount, such as the $500 net at-home office stipend. Oracle grosses it up so the net lands where you set it.</p><p>Start from the Quick Action, or search the employee&#x27;s name and open the action from their record. Both reach the same screen.</p>
+      <p>Use this when the employee should take home a fixed amount, such as the $500 net at-home office stipend. You enter the net amount and Oracle works out the gross so the take-home matches.</p><p>Start from the Quick Action, or search the employee&#x27;s name and open the action from their record. Both reach the same screen.</p>
       <p class="use"><b>Use this when</b>You are paying a fixed take-home amount.</p>
     </section>
     <section class="part" id="steps" aria-labelledby="h2">
@@ -42,24 +42,25 @@
       <h2 id="h2">Step by <em>step</em>.</h2>
       <p>Follow along in Oracle HCM. Check off each step as you go.</p>
       <ol class="steps">
-<li><label><input type="checkbox" /><span class="st">Start the transaction.<ul><li>Quick Actions &gt; Individual Compensation &gt; select the employee, or</li><li>Search the employee&#x27;s name &gt; Individual Compensation.</li></ul></span></label></li>
-<li><label><input type="checkbox" /><span class="st">Click Add &gt; One-time or recurring payment.</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Plan: Lump sum payment.</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Start date: the first day of the payroll month you&#x27;re targeting (for example, Nov 1 for the November check).</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Enter the amount in the Net field (for example, $500).</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Leave Process separately set to Yes.</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Click Save.</span></label></li>
-<li><label><input type="checkbox" /><span class="st">No comments or attachments needed: click Submit. Otherwise click Continue, add them, then Submit.</span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Start the transaction.</strong><span class="sd">Individual Compensation is where one-time and recurring payments outside salary are awarded.</span><ul><li>Quick Actions &gt; Individual Compensation &gt; select the employee, or</li><li>Search the employee&#x27;s name &gt; Individual Compensation.</li></ul></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Click Add &gt; One-time or recurring payment.</strong><span class="sd">This opens a new payment line for the employee.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Plan: Lump sum payment.</strong><span class="sd">The plan decides which pay element is used and how it is taxed and reported. Lump sum is used for this kind of stipend.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Start date: the first day of the target payroll month.</strong><span class="sd">For example, Nov 1 for the November check. A one-time payment pays in the payroll that covers this date.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Enter the amount in the Net field (for example, $500).</strong><span class="sd">Net is what the employee takes home. Oracle grosses it up to cover taxes. Use Amount only when the figure is gross.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Leave Process separately set to Yes.</strong><span class="sd">Oracle calculates the payment on its own (so supplemental tax rules can apply), then pays it in the same paycheck as regular pay. It does not create a separate check.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Click Save.</strong><span class="sd">Saving keeps the line. It isn&#x27;t submitted yet.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Submit, or Continue to add comments or attachments first.</strong><span class="sd">Submit sends the transaction into approval. If your finance partner wants a note or a document, click Continue first to reach the comments and attachments step.</span></span></label></li>
       </ol>
       <p class="stepcount" id="stepcount" aria-live="polite"></p>
       
       <div class="watch"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17.5v.01"/></svg>Watch-outs</h3><ul><li>Missed the cutoff (around the 18th)? Date it for next month.</li><li>Only change Process separately if payroll tells you to.</li><li>Pay goes to direct deposit, which is required.</li></ul></div>
+      <div class="docs"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>Official documentation</h3><p>Vendor documentation describes the standard process. Vanderbilt's setup, codes, and rules in this course take priority.</p><ul><li><a href="https://docs.oracle.com/en/cloud/saas/human-resources/faucf/spot-bonus-and-stock-grant-plan-configuration.html" target="_blank" rel="noopener">Oracle: Individual compensation one-time payment plans<span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://docs.oracle.com/en/cloud/saas/human-resources/fapus/run-types.html" target="_blank" rel="noopener">Oracle: Run Types, incl. Process Separately (US Payroll)<span class="sr"> (opens in a new tab)</span></a></li></ul></div>
     </section>
     <section class="part quiz" id="check" aria-labelledby="h3">
       <p class="mono num">3 &middot; Knowledge check</p>
       <h2 id="h3">Check your <em>understanding</em>.</h2>
       <p>Three questions. You get feedback on each answer. All three right completes the course.</p>
-      <fieldset data-a="1" data-why="Net is take-home. Amount is gross." data-hint="Look back at the walkthrough."><legend><span class="qn">Q1</span>Which field do you use for a fixed take-home amount?</legend><label><input type="radio" name="q0" value="0" />Amount</label><label><input type="radio" name="q0" value="1" />Net</label><label><input type="radio" name="q0" value="2" />Gross</label><p class="fb" aria-live="polite"></p></fieldset><fieldset data-a="1" data-why="Use the first day of the payroll month you&#x27;re targeting." data-hint="Look back at the walkthrough."><legend><span class="qn">Q2</span>You want the payment on the November check. What start date?</legend><label><input type="radio" name="q1" value="0" />Today</label><label><input type="radio" name="q1" value="1" />Nov 1</label><label><input type="radio" name="q1" value="2" />Nov 30</label><p class="fb" aria-live="polite"></p></fieldset><fieldset data-a="1" data-why="Leave it set to Yes unless payroll tells you otherwise." data-hint="Look back at the walkthrough."><legend><span class="qn">Q3</span>When should you change Process separately?</legend><label><input type="radio" name="q2" value="0" />Always</label><label><input type="radio" name="q2" value="1" />Only if payroll tells you to</label><label><input type="radio" name="q2" value="2" />For amounts over $500</label><p class="fb" aria-live="polite"></p></fieldset>
+      <fieldset data-a="1" data-why="Net is take-home. Amount is gross." data-hint="Look back at the walkthrough."><legend><span class="qn">Q1</span>Which field do you use for a fixed take-home amount?</legend><label><input type="radio" name="q0" value="0" />Amount</label><label><input type="radio" name="q0" value="1" />Net</label><label><input type="radio" name="q0" value="2" />Gross</label><p class="fb" aria-live="polite"></p></fieldset><fieldset data-a="1" data-why="Use the first day of the payroll month you&#x27;re targeting." data-hint="Look back at the walkthrough."><legend><span class="qn">Q2</span>You want the payment on the November check. What start date?</legend><label><input type="radio" name="q1" value="0" />Today</label><label><input type="radio" name="q1" value="1" />Nov 1</label><label><input type="radio" name="q1" value="2" />Nov 30</label><p class="fb" aria-live="polite"></p></fieldset><fieldset data-a="1" data-why="It is calculated separately (for example, for supplemental tax) and paid in the same paycheck." data-hint="Look back at the walkthrough."><legend><span class="qn">Q3</span>What does Process separately = Yes do?</legend><label><input type="radio" name="q2" value="0" />Issues a separate paper check</label><label><input type="radio" name="q2" value="1" />Calculates the payment on its own, then pays it with regular pay</label><label><input type="radio" name="q2" value="2" />Delays the payment a month</label><p class="fb" aria-live="polite"></p></fieldset>
       <p class="score" id="score" hidden></p>
     </section>
     <section class="part" id="jobaid" aria-labelledby="h4">
@@ -76,11 +77,11 @@
 <li>Start the transaction.<ul><li>Quick Actions &gt; Individual Compensation &gt; select the employee, or</li><li>Search the employee&#x27;s name &gt; Individual Compensation.</li></ul></li>
 <li>Click Add &gt; One-time or recurring payment.</li>
 <li>Plan: Lump sum payment.</li>
-<li>Start date: the first day of the payroll month you&#x27;re targeting (for example, Nov 1 for the November check).</li>
+<li>Start date: the first day of the target payroll month.</li>
 <li>Enter the amount in the Net field (for example, $500).</li>
 <li>Leave Process separately set to Yes.</li>
 <li>Click Save.</li>
-<li>No comments or attachments needed: click Submit. Otherwise click Continue, add them, then Submit.</li>
+<li>Submit, or Continue to add comments or attachments first.</li>
           </ol>
           
           <h3>Watch-outs</h3>

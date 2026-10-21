@@ -22,7 +22,7 @@
   <div class="wrap">
     <p class="mono crumb">Costing Management &middot; Course 13 of 16</p>
     <h1 id="t">Costing <em>fundamentals</em>.</h1>
-    <ul class="meta" aria-label="Course details"><li class="v">V.01 draft</li><li>6 min</li><li>Oracle HCM</li><li>3-question check</li><li>Printable job aid</li></ul>
+    <ul class="meta" aria-label="Course details"><li class="v">V.01 draft</li><li>7 min</li><li>Oracle HCM</li><li>3-question check</li><li>Printable job aid</li></ul>
   </div>
   <nav class="parts" aria-label="Course parts"><ol>
     <li><a href="#intro"><span>1</span>Intro</a></li><li><a href="#steps"><span>2</span>Walk through</a></li><li><a href="#check"><span>3</span>Check</a></li><li><a href="#jobaid"><span>4</span>Job aid</a></li>
@@ -34,7 +34,7 @@
     <section class="part" id="intro" aria-labelledby="h1">
       <p class="mono num">1 &middot; Intro</p>
       <h2 id="h1">When to <em>use</em> it.</h2>
-      <p>Payroll costing decides which account pays for a person&#x27;s compensation, and for which periods. It matters for grant and contract research and for certain gifts.</p><p>Blank costing on an assignment is not an error. It means the default applies.</p>
+      <p>Payroll costing decides which account pays for a person&#x27;s compensation, and for which periods. It matters for grant and contract research and for certain gifts.</p><p>Blank costing on an assignment is not an error. It means a default applies.</p>
       <p class="use"><b>Use this when</b>You need to decide whether an employee needs costing entered or can stay on the default.</p>
     </section>
     <section class="part" id="steps" aria-labelledby="h2">
@@ -42,21 +42,22 @@
       <h2 id="h2">How Oracle picks the account, then your <em>decision</em>.</h2>
       <p>Check off each item as you read.</p>
       <ol class="steps">
-<li><label><input type="checkbox" /><span class="st">When payroll runs, Oracle checks three levels in order:<ul><li>Is the pay element costed? Use the element&#x27;s costing (for example, a bonus charged differently).</li><li>If not, is the assignment costed? Use the assignment&#x27;s costing.</li><li>If not, use the default for the assignment&#x27;s work unit.</li></ul></span></label></li>
-<li><label><input type="checkbox" /><span class="st">Open the employee&#x27;s assignment and check its costing.</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Blank? Salary charges to the work unit&#x27;s default COA (for example, work unit 46100, program 000).</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Ask your finance partner: does your department split the work unit by program code (for example, Team A = 100, Team B = 200)?<ul><li>No split: leave the default. Nothing to enter.</li><li>Split: enter costing for each person. Otherwise they default to program 000.</li></ul></span></label></li>
-<li><label><input type="checkbox" /><span class="st">Ask whether finance wants any role tracked separately. If yes, enter costing with the COA they give you.</span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Know the order Oracle checks.</strong><span class="sd">Oracle uses the most specific costing it finds. Lower levels win, and anything left blank inherits from the level above.</span><ul><li>Element (one payment, such as a bonus) costed? Use it.</li><li>Otherwise, assignment (the person&#x27;s job) costed? Use it.</li><li>Otherwise, use the default for the assignment&#x27;s work unit.</li></ul></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Open the employee&#x27;s assignment and check its costing.</strong><span class="sd">Costing for Persons shows every costing entry for the person&#x27;s assignments and elements.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Blank? Salary charges to the work unit&#x27;s default COA.</strong><span class="sd">For example, work unit 46100, program 000. Nothing is wrong. The default is doing its job.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Ask your finance partner whether your department splits the work unit by program code.</strong><span class="sd">Some departments track teams separately (for example, Team A = 100, Team B = 200).</span><ul><li>No split: leave the default. Nothing to enter.</li><li>Split: enter costing for each person. Otherwise they default to program 000.</li></ul></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Ask whether finance wants any role tracked separately.</strong><span class="sd">If yes, enter costing with the COA they give you. See Enter or edit costing for the steps.</span></span></label></li>
       </ol>
       <p class="stepcount" id="stepcount" aria-live="polite"></p>
       
       <div class="watch"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17.5v.01"/></svg>Watch-outs</h3><ul><li>Some departments set default costing at the work unit level, others at the business unit level. Know which applies to you.</li><li>Costing touches payroll and financial reporting. Wrong costing charges the wrong budget.</li><li>Costing practice varies by department. Validate with your finance partner.</li></ul></div>
+      <div class="docs"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>Official documentation</h3><p>Vendor documentation describes the standard process. Vanderbilt's setup, codes, and rules in this course take priority.</p><ul><li><a href="https://docs.oracle.com/en/cloud/saas/human-resources/faipc/payroll-setup-for-costing-accounts.html" target="_blank" rel="noopener">Oracle: Payroll Setup for Costing Accounts (costing hierarchy)<span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://docs.oracle.com/en/cloud/saas/human-resources/24b/faipc/set-up-person-level-costing.html" target="_blank" rel="noopener">Oracle: Set Up Person Level Costing<span class="sr"> (opens in a new tab)</span></a></li></ul></div>
     </section>
     <section class="part quiz" id="check" aria-labelledby="h3">
       <p class="mono num">3 &middot; Knowledge check</p>
       <h2 id="h3">Check your <em>understanding</em>.</h2>
       <p>Three questions. You get feedback on each answer. All three right completes the course.</p>
-      <fieldset data-a="1" data-why="Blank costing means the work unit default applies. It is not an error." data-hint="Look back at the walkthrough."><legend><span class="qn">Q1</span>An assignment has no costing. What happens?</legend><label><input type="radio" name="q0" value="0" />Payroll fails</label><label><input type="radio" name="q0" value="1" />Salary charges to the work unit&#x27;s default COA</label><label><input type="radio" name="q0" value="2" />The employee isn&#x27;t paid</label><p class="fb" aria-live="polite"></p></fieldset><fieldset data-a="1" data-why="Element first, then assignment, then the work unit default." data-hint="Look back at the walkthrough."><legend><span class="qn">Q2</span>In what order does Oracle look for costing?</legend><label><input type="radio" name="q1" value="0" />Work unit, assignment, element</label><label><input type="radio" name="q1" value="1" />Element, assignment, work unit default</label><label><input type="radio" name="q1" value="2" />Assignment only</label><p class="fb" aria-live="polite"></p></fieldset><fieldset data-a="0" data-why="Without costing, they default to program 000." data-hint="Look back at the walkthrough."><legend><span class="qn">Q3</span>Your department splits the work unit by program code. What happens if you don&#x27;t enter costing?</legend><label><input type="radio" name="q2" value="0" />They default to program 000</label><label><input type="radio" name="q2" value="1" />Oracle picks the right program</label><label><input type="radio" name="q2" value="2" />Payroll enters it</label><p class="fb" aria-live="polite"></p></fieldset>
+      <fieldset data-a="1" data-why="Blank costing means the work unit default applies. It is not an error." data-hint="Look back at the walkthrough."><legend><span class="qn">Q1</span>An assignment has no costing. What happens?</legend><label><input type="radio" name="q0" value="0" />Payroll fails</label><label><input type="radio" name="q0" value="1" />Salary charges to the work unit&#x27;s default COA</label><label><input type="radio" name="q0" value="2" />The employee isn&#x27;t paid</label><p class="fb" aria-live="polite"></p></fieldset><fieldset data-a="1" data-why="The most specific level wins: element first, then assignment, then the default." data-hint="Look back at the walkthrough."><legend><span class="qn">Q2</span>In what order does Oracle look for costing?</legend><label><input type="radio" name="q1" value="0" />Work unit, assignment, element</label><label><input type="radio" name="q1" value="1" />Element, assignment, work unit default</label><label><input type="radio" name="q1" value="2" />Assignment only</label><p class="fb" aria-live="polite"></p></fieldset><fieldset data-a="0" data-why="Without costing, they default to program 000." data-hint="Look back at the walkthrough."><legend><span class="qn">Q3</span>Your department splits the work unit by program code. What happens if you don&#x27;t enter costing?</legend><label><input type="radio" name="q2" value="0" />They default to program 000</label><label><input type="radio" name="q2" value="1" />Oracle picks the right program</label><label><input type="radio" name="q2" value="2" />Payroll enters it</label><p class="fb" aria-live="polite"></p></fieldset>
       <p class="score" id="score" hidden></p>
     </section>
     <section class="part" id="jobaid" aria-labelledby="h4">
@@ -70,11 +71,11 @@
           <h2>Costing fundamentals</h2>
           <p class="ja-use"><b>Use when:</b> You need to decide whether an employee needs costing entered or can stay on the default. &middot; <b>System:</b> Oracle HCM</p>
           <ol>
-<li>When payroll runs, Oracle checks three levels in order:<ul><li>Is the pay element costed? Use the element&#x27;s costing (for example, a bonus charged differently).</li><li>If not, is the assignment costed? Use the assignment&#x27;s costing.</li><li>If not, use the default for the assignment&#x27;s work unit.</li></ul></li>
+<li>Know the order Oracle checks.<ul><li>Element (one payment, such as a bonus) costed? Use it.</li><li>Otherwise, assignment (the person&#x27;s job) costed? Use it.</li><li>Otherwise, use the default for the assignment&#x27;s work unit.</li></ul></li>
 <li>Open the employee&#x27;s assignment and check its costing.</li>
-<li>Blank? Salary charges to the work unit&#x27;s default COA (for example, work unit 46100, program 000).</li>
-<li>Ask your finance partner: does your department split the work unit by program code (for example, Team A = 100, Team B = 200)?<ul><li>No split: leave the default. Nothing to enter.</li><li>Split: enter costing for each person. Otherwise they default to program 000.</li></ul></li>
-<li>Ask whether finance wants any role tracked separately. If yes, enter costing with the COA they give you.</li>
+<li>Blank? Salary charges to the work unit&#x27;s default COA.</li>
+<li>Ask your finance partner whether your department splits the work unit by program code.<ul><li>No split: leave the default. Nothing to enter.</li><li>Split: enter costing for each person. Otherwise they default to program 000.</li></ul></li>
+<li>Ask whether finance wants any role tracked separately.</li>
           </ol>
           
           <h3>Watch-outs</h3>

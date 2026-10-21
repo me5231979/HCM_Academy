@@ -9,15 +9,17 @@ ROOT = os.path.dirname(HERE)
 E = lambda s: html.escape(s, quote=True)
 
 WARN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17.5v.01"/></svg>'
+BOOK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>'
 PRINT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M6 14h12v7H6z"/></svg>'
 
 def step_items(steps, checklist):
     out = []
     for i, s in enumerate(steps):
-        t, sub = (s, []) if isinstance(s, str) else (s["t"], s.get("sub", []))
+        t, sub, d = (s, [], "") if isinstance(s, str) else (s["t"], s.get("sub", []), s.get("d", ""))
         subs = ("<ul>" + "".join(f"<li>{E(x)}</li>" for x in sub) + "</ul>") if sub else ""
         if checklist:
-            out.append(f'<li><label><input type="checkbox" /><span class="st">{E(t)}{subs}</span></label></li>')
+            det = f'<span class="sd">{E(d)}</span>' if d else ""
+            out.append(f'<li><label><input type="checkbox" /><span class="st"><strong>{E(t)}</strong>{det}{subs}</span></label></li>')
         else:
             out.append(f"<li>{E(t)}{subs}</li>")
     return "\n".join(out)
@@ -40,6 +42,10 @@ def page(c, n, total):
         quiz.append(f'<fieldset data-a="{q["a"]}" data-why="{E(q["why"])}" data-hint="Look back at the walkthrough."><legend><span class="qn">Q{qi+1}</span>{E(q["q"])}</legend>{opts}<p class="fb" aria-live="polite"></p></fieldset>')
     watch = "".join(f"<li>{E(w)}</li>" for w in c["watch"])
     back = f'../../index.html#{c["topic"]}'
+    docs_box = ""
+    if c.get("docs"):
+        items = "".join(f'<li><a href="{E(u)}" target="_blank" rel="noopener">{E(l)}<span class="sr"> (opens in a new tab)</span></a></li>' for l, u in c["docs"])
+        docs_box = f'<div class="docs"><h3>{BOOK}Official documentation</h3><p>Vendor documentation describes the standard process. Vanderbilt\'s setup, codes, and rules in this course take priority.</p><ul>{items}</ul></div>'
     st = c.get("steps_title", "Step by step")
     w = st.rsplit(" ", 1)
     steps_h = f'{E(w[0])} <em>{E(w[1])}</em>.'
@@ -93,6 +99,7 @@ def page(c, n, total):
       <p class="stepcount" id="stepcount" aria-live="polite"></p>
       {table(c.get("table"))}
       <div class="watch"><h3>{WARN}Watch-outs</h3><ul>{watch}</ul></div>
+      {docs_box}
     </section>
     <section class="part quiz" id="check" aria-labelledby="h3">
       <p class="mono num">3 &middot; Knowledge check</p>
@@ -142,6 +149,19 @@ def main():
         with open(os.path.join(d, "index.html"), "w", encoding="utf-8") as f:
             f.write(page(c, i, total))
     print(f"built {total} courses")
+    sync_landing()
+
+def sync_landing():
+    """Keep the landing page rows (li[data-course]) in step with each course's name, use-when line, and time."""
+    import re
+    p = os.path.join(ROOT, "index.html")
+    t = open(p, encoding="utf-8").read(); n = 0
+    esc = lambda s: html.escape(s, quote=False)
+    for c in COURSES:
+        pat = re.compile(r'(<li(?: class="sub")? data-course="' + c["slug"] + r'"><span class="nm"><span class="tt">)[^<]*(</span><span class="ds">)[^<]*(</span></span><span class="tm"><span class="sr-l">Time: </span>)[^<]*(</span>)')
+        t, k = pat.subn(lambda m: m.group(1) + esc(c["name"]) + m.group(2) + esc(c["use_when"]) + m.group(3) + esc(c["time"]) + m.group(4), t); n += k
+    open(p, "w", encoding="utf-8").write(t)
+    print(f"synced {n} landing rows")
 
 if __name__ == "__main__":
     main()

@@ -22,7 +22,7 @@
   <div class="wrap">
     <p class="mono crumb">Offboarding &middot; Course 10 of 16</p>
     <h1 id="t">Voluntary <em>termination</em>.</h1>
-    <ul class="meta" aria-label="Course details"><li class="v">V.01 draft</li><li>5 min</li><li>Oracle HCM</li><li>3-question check</li><li>Printable job aid</li></ul>
+    <ul class="meta" aria-label="Course details"><li class="v">V.01 draft</li><li>7 min</li><li>Oracle HCM</li><li>3-question check</li><li>Printable job aid</li></ul>
   </div>
   <nav class="parts" aria-label="Course parts"><ol>
     <li><a href="#intro"><span>1</span>Intro</a></li><li><a href="#steps"><span>2</span>Walk through</a></li><li><a href="#check"><span>3</span>Check</a></li><li><a href="#jobaid"><span>4</span>Job aid</a></li>
@@ -34,7 +34,7 @@
     <section class="part" id="intro" aria-labelledby="h1">
       <p class="mono num">1 &middot; Intro</p>
       <h2 id="h1">When to <em>use</em> it.</h2>
-      <p>Use this when an employee resigns, including mid pay period. The termination stops pay. There&#x27;s no separate payroll step.</p><p>Start from the Quick Action, or search the employee&#x27;s name and open the action from their record. Both reach the same screen.</p>
+      <p>Use this when an employee resigns, including mid pay period. The termination stops pay, and Oracle notifies payroll when it is saved. There&#x27;s no separate payroll step.</p><p>Start from the Quick Action, or search the employee&#x27;s name and open the action from their record. Both reach the same screen.</p>
       <p class="use"><b>Use this when</b>An employee resigns.</p>
     </section>
     <section class="part" id="steps" aria-labelledby="h2">
@@ -42,25 +42,26 @@
       <h2 id="h2">Step by <em>step</em>.</h2>
       <p>Follow along in Oracle HCM. Check off each step as you go.</p>
       <ol class="steps">
-<li><label><input type="checkbox" /><span class="st">Start the transaction.<ul><li>Quick Actions &gt; Terminate Employment &gt; select the employee, or</li><li>Search the employee&#x27;s name &gt; Terminate Employment.</li></ul></span></label></li>
-<li><label><input type="checkbox" /><span class="st">Notification date: the day they told you.</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Termination date: their last day.</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Action: Voluntary separation. Reason: for example, Resigned.</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Click Continue.</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Revoke access: after termination is standard. Confirm with department leadership and your PCB consultant.</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Leave the payroll eligibility field as defaulted.</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Last working day: optional. Enter it if known.</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Click Submit.</span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Start the transaction.</strong><span class="sd">Terminate Employment ends the work relationship, which ends pay and benefits eligibility.</span><ul><li>Quick Actions &gt; Terminate Employment &gt; select the employee, or</li><li>Search the employee&#x27;s name &gt; Terminate Employment.</li></ul></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Notification date: the day they told you.</strong><span class="sd">In Oracle, the notification date is when the person ending the relationship told the other side. For a resignation, that&#x27;s the day the employee told you.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Termination date: their last day.</strong><span class="sd">Oracle may default this to the notification date plus the notice period. Override it with the actual last day.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Action: Voluntary separation. Reason: for example, Resigned.</strong><span class="sd">The action and reason drive reporting and turnover data, so pick the reason that matches.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Click Continue.</strong><span class="sd">This moves you to the access and payroll fields.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Revoke access: after termination is standard.</strong><span class="sd">Oracle offers Immediately or After termination. After termination removes access once the termination date passes. Confirm with department leadership and your PCB consultant.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Leave the payroll eligibility field as defaulted.</strong><span class="sd">Payroll uses it to process final pay. Changing it can stop final pay from processing.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Last working day: optional. Enter it if known.</strong><span class="sd">Use it when the last day worked differs from the termination date.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Click Submit.</strong><span class="sd">Continue first if a step needs review. Payroll is notified of the termination.</span></span></label></li>
       </ol>
       <p class="stepcount" id="stepcount" aria-live="polite"></p>
       
       <div class="watch"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17.5v.01"/></svg>Watch-outs</h3><ul><li>The termination stops pay. Don&#x27;t send a separate payroll request.</li><li>Open item: the seniority dates screen is no longer editable since Redwood. Skip it for now.</li></ul></div>
+      <div class="docs"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>Official documentation</h3><p>Vendor documentation describes the standard process. Vanderbilt's setup, codes, and rules in this course take priority.</p><ul><li><a href="https://docs.oracle.com/en/cloud/saas/human-resources/fawhr/terminations.html" target="_blank" rel="noopener">Oracle: Terminations (Using Global Human Resources)<span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://docs.oracle.com/en/cloud/saas/readiness/hcm/24c/hure-24c/24C-hr-wn-f31966.htm" target="_blank" rel="noopener">Oracle: Redwood Terminate Employment and Resign pages (24C)<span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://docs.oracle.com/en/cloud/saas/human-resources/24b/farws/op-workers-workersuniqid-child-workrelationships-periodofserviceid-action-terminate-post.html" target="_blank" rel="noopener">Oracle: Terminate a worker, field reference incl. Revoke User Access<span class="sr"> (opens in a new tab)</span></a></li></ul></div>
     </section>
     <section class="part quiz" id="check" aria-labelledby="h3">
       <p class="mono num">3 &middot; Knowledge check</p>
       <h2 id="h3">Check your <em>understanding</em>.</h2>
       <p>Three questions. You get feedback on each answer. All three right completes the course.</p>
-      <fieldset data-a="1" data-why="Notification date is the day they told you. Termination date is their last day." data-hint="Look back at the walkthrough."><legend><span class="qn">Q1</span>What is the notification date?</legend><label><input type="radio" name="q0" value="0" />The employee&#x27;s last day</label><label><input type="radio" name="q0" value="1" />The day the employee told you</label><label><input type="radio" name="q0" value="2" />Today, always</label><p class="fb" aria-live="polite"></p></fieldset><fieldset data-a="1" data-why="The termination stops pay. No separate payroll step." data-hint="Look back at the walkthrough."><legend><span class="qn">Q2</span>Do you need a separate payroll step to stop pay?</legend><label><input type="radio" name="q1" value="0" />Yes, email payroll</label><label><input type="radio" name="q1" value="1" />No, the termination stops pay</label><label><input type="radio" name="q1" value="2" />Yes, an off-cycle request</label><p class="fb" aria-live="polite"></p></fieldset><fieldset data-a="1" data-why="Leave the payroll eligibility field as defaulted." data-hint="Look back at the walkthrough."><legend><span class="qn">Q3</span>What should you do with the payroll eligibility field?</legend><label><input type="radio" name="q2" value="0" />Change it to No</label><label><input type="radio" name="q2" value="1" />Leave it as defaulted</label><label><input type="radio" name="q2" value="2" />Delete it</label><p class="fb" aria-live="polite"></p></fieldset>
+      <fieldset data-a="1" data-why="Notification date is the day they told you. Termination date is their last day." data-hint="Look back at the walkthrough."><legend><span class="qn">Q1</span>What is the notification date?</legend><label><input type="radio" name="q0" value="0" />The employee&#x27;s last day</label><label><input type="radio" name="q0" value="1" />The day the employee told you</label><label><input type="radio" name="q0" value="2" />Today, always</label><p class="fb" aria-live="polite"></p></fieldset><fieldset data-a="1" data-why="The termination stops pay and Oracle notifies payroll." data-hint="Look back at the walkthrough."><legend><span class="qn">Q2</span>Do you need a separate payroll step to stop pay?</legend><label><input type="radio" name="q1" value="0" />Yes, email payroll</label><label><input type="radio" name="q1" value="1" />No, the termination stops pay and payroll is notified</label><label><input type="radio" name="q1" value="2" />Yes, an off-cycle request</label><p class="fb" aria-live="polite"></p></fieldset><fieldset data-a="1" data-why="After termination is standard. Confirm with leadership and your PCB consultant." data-hint="Look back at the walkthrough."><legend><span class="qn">Q3</span>Which access option is standard for a resignation?</legend><label><input type="radio" name="q2" value="0" />Immediately</label><label><input type="radio" name="q2" value="1" />After termination</label><label><input type="radio" name="q2" value="2" />Never revoke</label><p class="fb" aria-live="polite"></p></fieldset>
       <p class="score" id="score" hidden></p>
     </section>
     <section class="part" id="jobaid" aria-labelledby="h4">
@@ -79,7 +80,7 @@
 <li>Termination date: their last day.</li>
 <li>Action: Voluntary separation. Reason: for example, Resigned.</li>
 <li>Click Continue.</li>
-<li>Revoke access: after termination is standard. Confirm with department leadership and your PCB consultant.</li>
+<li>Revoke access: after termination is standard.</li>
 <li>Leave the payroll eligibility field as defaulted.</li>
 <li>Last working day: optional. Enter it if known.</li>
 <li>Click Submit.</li>

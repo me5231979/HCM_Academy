@@ -69,11 +69,21 @@ ol.steps label{ display:grid; grid-template-columns:28px 22px 1fr; gap:12px; ali
 ol.steps label:hover{ background:#FAF8F4; }
 ol.steps label::before{ content:counter(s); font-family:var(--cond); font-weight:700; font-size:1.15rem; color:var(--oak); line-height:1.4; }
 ol.steps input{ width:20px; height:20px; margin-top:3px; accent-color:var(--done); }
-ol.steps .st{ line-height:1.5; }
+ol.steps .st{ line-height:1.5; display:block; }
+ol.steps .st strong{ display:block; font-weight:600; }
+ol.steps .sd{ display:block; margin-top:4px; color:var(--muted); font-size:.95rem; line-height:1.55; }
+.docs{ margin-top:16px; border:1px solid var(--gray); border-radius:6px; padding:16px 18px; }
+.docs h3{ font-family:var(--cond); font-weight:700; letter-spacing:.05em; text-transform:uppercase; font-size:.85rem; display:flex; align-items:center; gap:8px; }
+.docs h3 svg{ width:18px; height:18px; color:var(--oak); }
+.docs p{ margin-top:6px; font-size:.9rem; color:var(--muted); }
+.docs ul{ margin:8px 0 0 20px; }
+.docs li{ margin-top:5px; font-size:.95rem; overflow-wrap:anywhere; }
+.docs a{ color:var(--oak); font-weight:600; }
+.sr{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
 ol.steps ul{ margin:6px 0 0 18px; color:var(--muted); font-size:.95rem; }
 ol.steps ul li{ margin-top:3px; }
 ol.steps li:has(input:checked) label{ background:#F3F8F3; }
-ol.steps li:has(input:checked) .st{ color:var(--muted); }
+ol.steps li:has(input:checked) .st strong{ color:var(--muted); }
 .stepcount{ margin-top:10px; font-size:.88rem; color:var(--muted); }
 table.ref{ width:100%; border-collapse:collapse; margin-top:20px; font-size:.93rem; }
 table.ref caption{ text-align:left; font-family:var(--cond); font-weight:700; letter-spacing:.05em; text-transform:uppercase; font-size:.78rem; padding-bottom:8px; }

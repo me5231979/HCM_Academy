@@ -13,7 +13,7 @@ no build step, no backend. Fonts and lockups live in `assets/`.
 Kept deliberately short:
 
 1. **Hero**: what an HCM is (people embedded in the business who own the people work for their area) and what the Academy is for: learn, share, meet, get answers.
-2. **Choose a topic**: a progress panel, a search box that searches every topic, and a row of horizontal topic tabs (built from the cards, so a new card gets a tab automatically; its `data-short` attribute is the tab label, and each tab shows its completed/total count). One topic shows at a time, full width, with training topics and job aids side by side. There are eight topics (Start Here plus seven topic areas). Each card, or each subsection in it (Compensation Management; Position Management, Assignment Changes, Offboarding), lists its Training topics (clickable, count toward completion) and a collapsible Job aids & resources list (reference only).
+2. **Choose a topic**: a progress panel, a search box that searches every topic, and a row of horizontal topic tabs (built from the cards, so a new card gets a tab automatically; its `data-short` attribute is the tab label, and each tab shows its completed/total count). One topic shows at a time, full width, with training topics and job aids side by side. There are eight topics (Start Here plus seven topic areas). Each card, or each subsection in it (Compensation Management; Position Management, Assignment Changes, Offboarding), lists its training topics. Job aids are not listed separately: every course carries its own printable job aid.
    Below the cards, "Help for every topic" lists the resource types planned across all topics.
 3. **Footer**: contact and accessibility statement.
 
@@ -38,13 +38,15 @@ current catalog (videos and e-learning). Edit them in place: each row is
 ## Micro-courses (V.01)
 
 16 short courses live in `courses/<slug>/`. Each has four parts: a brief intro,
-a step-by-step walkthrough (a checklist), a 3-question knowledge check with
+a step-by-step walkthrough (a checklist where each step has a plain-language explanation
+and the course ends with links to official Oracle or UKG documentation), a 3-question knowledge check with
 feedback, and a printable one-page job aid (Print button; print CSS shows only
 the job aid). Passing all three questions marks the course complete on the
 landing page (shared `localStorage` key `hcm-done`, id `c-<slug>`).
 
 - Content lives in `tools/course_content.py`. Edit there, then run
-  `python3 tools/build_courses.py` to regenerate every page.
+  `python3 tools/build_courses.py` to regenerate every page. The script also
+  updates each course's row on the landing page (name, overview, time).
 - Shared look and behavior: `courses/course.css`, `courses/course.js`.
 - Sources: Briana Knowles (Oct 20), Alex Enferadi (Oct 20), Jennifer Garcia
   (Oct 19) sessions; the Costing for Persons guide (2022); the Document Records

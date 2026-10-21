@@ -22,7 +22,7 @@
   <div class="wrap">
     <p class="mono crumb">Compensation Management &middot; Course 8 of 16</p>
     <h1 id="t">Add a sign-on <em>bonus</em>.</h1>
-    <ul class="meta" aria-label="Course details"><li class="v">V.01 draft</li><li>5 min</li><li>Oracle HCM</li><li>3-question check</li><li>Printable job aid</li></ul>
+    <ul class="meta" aria-label="Course details"><li class="v">V.01 draft</li><li>6 min</li><li>Oracle HCM</li><li>3-question check</li><li>Printable job aid</li></ul>
   </div>
   <nav class="parts" aria-label="Course parts"><ol>
     <li><a href="#intro"><span>1</span>Intro</a></li><li><a href="#steps"><span>2</span>Walk through</a></li><li><a href="#check"><span>3</span>Check</a></li><li><a href="#jobaid"><span>4</span>Job aid</a></li>
@@ -42,23 +42,24 @@
       <h2 id="h2">Step by <em>step</em>.</h2>
       <p>Follow along in Oracle HCM. Check off each step as you go.</p>
       <ol class="steps">
-<li><label><input type="checkbox" /><span class="st">Search the employee&#x27;s name &gt; Individual Compensation (or use the Quick Action).</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Click Add &gt; One-time or recurring payment.</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Plan: Bonus.</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Start date: the first day of the target payroll month (for example, Nov 1).</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Enter the amount in the Amount field, not Net (for example, $1,500). The employee pays the taxes.</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Leave Process separately set to Yes. Click Save.</span></label></li>
-<li><label><input type="checkbox" /><span class="st">Click Continue, add comments or attachments, then Submit.</span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Search the employee&#x27;s name &gt; Individual Compensation (or use the Quick Action).</strong><span class="sd">Bonuses are awarded through Individual Compensation, not Change Salary, because they are not part of base pay.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Click Add &gt; One-time or recurring payment.</strong><span class="sd">A sign-on bonus is a one-time payment.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Plan: Bonus.</strong><span class="sd">The plan ties the payment to the bonus pay element. In the award compensation guide, the sign-on bonus element is SGN and a general bonus is BON.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Start date: the first day of the target payroll month (for example, Nov 1).</strong><span class="sd">The payment goes out in the payroll covering this date, if it is entered before the cutoff.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Enter the amount in the Amount field, not Net (for example, $1,500).</strong><span class="sd">Amount is gross. The offer states a gross bonus, and the employee pays the taxes on it.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Leave Process separately set to Yes. Click Save.</strong><span class="sd">The bonus is calculated on its own for tax purposes and paid with the regular paycheck.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Click Continue, add comments or attachments, then Submit.</strong><span class="sd">Attach the offer or bonus letter if your finance partner wants it. File the signed bonus letter as a Compensation Letters document record.</span></span></label></li>
       </ol>
       <p class="stepcount" id="stepcount" aria-live="polite"></p>
       
-      <div class="watch"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17.5v.01"/></svg>Watch-outs</h3><ul><li>Adding the bonus to the offer is the preferred path. It processes in one transaction and reduces Oracle failures.</li><li>Amount = gross. Net = take-home. Mixing them up changes what the employee receives.</li><li>In the award compensation guide, the sign-on bonus element is SGN and a general bonus is BON.</li></ul></div>
+      <div class="watch"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17.5v.01"/></svg>Watch-outs</h3><ul><li>Adding the bonus to the offer is the preferred path. It processes in one transaction and reduces Oracle failures.</li><li>Amount = gross. Net = take-home. Mixing them up changes what the employee receives.</li></ul></div>
+      <div class="docs"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>Official documentation</h3><p>Vendor documentation describes the standard process. Vanderbilt's setup, codes, and rules in this course take priority.</p><ul><li><a href="https://docs.oracle.com/en/cloud/saas/human-resources/faucf/spot-bonus-and-stock-grant-plan-configuration.html" target="_blank" rel="noopener">Oracle: Individual compensation one-time payment plans<span class="sr"> (opens in a new tab)</span></a></li><li><a href="https://docs.oracle.com/en/cloud/saas/human-resources/fapus/run-types.html" target="_blank" rel="noopener">Oracle: Run Types, incl. Process Separately (US Payroll)<span class="sr"> (opens in a new tab)</span></a></li></ul></div>
     </section>
     <section class="part quiz" id="check" aria-labelledby="h3">
       <p class="mono num">3 &middot; Knowledge check</p>
       <h2 id="h3">Check your <em>understanding</em>.</h2>
       <p>Three questions. You get feedback on each answer. All three right completes the course.</p>
-      <fieldset data-a="0" data-why="The recruiter adds it to the offer. Use this course only when it was left off." data-hint="Look back at the walkthrough."><legend><span class="qn">Q1</span>What is the preferred way to pay a sign-on bonus?</legend><label><input type="radio" name="q0" value="0" />Add it to the offer so it processes in one transaction</label><label><input type="radio" name="q0" value="1" />An off-cycle request</label><label><input type="radio" name="q0" value="2" />Change Salary</label><p class="fb" aria-live="polite"></p></fieldset><fieldset data-a="1" data-why="Use Amount (gross). The employee pays the taxes." data-hint="Look back at the walkthrough."><legend><span class="qn">Q2</span>Which field holds a $1,500 sign-on bonus?</legend><label><input type="radio" name="q1" value="0" />Net</label><label><input type="radio" name="q1" value="1" />Amount</label><label><input type="radio" name="q1" value="2" />Either one</label><p class="fb" aria-live="polite"></p></fieldset><fieldset data-a="1" data-why="Plan: Bonus." data-hint="Look back at the walkthrough."><legend><span class="qn">Q3</span>Which plan do you choose?</legend><label><input type="radio" name="q2" value="0" />Lump sum payment</label><label><input type="radio" name="q2" value="1" />Bonus</label><label><input type="radio" name="q2" value="2" />Staff supplement</label><p class="fb" aria-live="polite"></p></fieldset>
+      <fieldset data-a="0" data-why="The recruiter adds it to the offer. Use this course only when it was left off." data-hint="Look back at the walkthrough."><legend><span class="qn">Q1</span>What is the preferred way to pay a sign-on bonus?</legend><label><input type="radio" name="q0" value="0" />Add it to the offer so it processes in one transaction</label><label><input type="radio" name="q0" value="1" />An off-cycle request</label><label><input type="radio" name="q0" value="2" />Change Salary</label><p class="fb" aria-live="polite"></p></fieldset><fieldset data-a="1" data-why="Use Amount (gross). The employee pays the taxes." data-hint="Look back at the walkthrough."><legend><span class="qn">Q2</span>Which field holds a $1,500 sign-on bonus?</legend><label><input type="radio" name="q1" value="0" />Net</label><label><input type="radio" name="q1" value="1" />Amount</label><label><input type="radio" name="q1" value="2" />Either one</label><p class="fb" aria-live="polite"></p></fieldset><fieldset data-a="0" data-why="Bonuses are one-time payments through Individual Compensation, not salary." data-hint="Look back at the walkthrough."><legend><span class="qn">Q3</span>Why not use Change Salary for a bonus?</legend><label><input type="radio" name="q2" value="0" />A bonus isn&#x27;t part of base pay</label><label><input type="radio" name="q2" value="1" />Change Salary is only for managers</label><label><input type="radio" name="q2" value="2" />It is faster</label><p class="fb" aria-live="polite"></p></fieldset>
       <p class="score" id="score" hidden></p>
     </section>
     <section class="part" id="jobaid" aria-labelledby="h4">
@@ -76,13 +77,13 @@
 <li>Click Add &gt; One-time or recurring payment.</li>
 <li>Plan: Bonus.</li>
 <li>Start date: the first day of the target payroll month (for example, Nov 1).</li>
-<li>Enter the amount in the Amount field, not Net (for example, $1,500). The employee pays the taxes.</li>
+<li>Enter the amount in the Amount field, not Net (for example, $1,500).</li>
 <li>Leave Process separately set to Yes. Click Save.</li>
 <li>Click Continue, add comments or attachments, then Submit.</li>
           </ol>
           
           <h3>Watch-outs</h3>
-          <ul class="jw"><li>Adding the bonus to the offer is the preferred path. It processes in one transaction and reduces Oracle failures.</li><li>Amount = gross. Net = take-home. Mixing them up changes what the employee receives.</li><li>In the award compensation guide, the sign-on bonus element is SGN and a general bonus is BON.</li></ul>
+          <ul class="jw"><li>Adding the bonus to the offer is the preferred path. It processes in one transaction and reduces Oracle failures.</li><li>Amount = gross. Net = take-home. Mixing them up changes what the employee receives.</li></ul>
           <div class="ja-foot"><span>V.01 draft. Sources: Briana Knowles walkthrough, Oct 20; Award Compensation Elements Resource Guide (updated 01/17/2023).</span><span>Questions: pcb@vanderbilt.edu</span></div>
         </article>
       </div>
