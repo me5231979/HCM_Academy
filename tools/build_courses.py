@@ -157,6 +157,11 @@ ASSESS = {
                   lede="Answer every question, then submit. You need 90% or higher to complete HCM Academy. If you miss it, your results list the topics to review before you retake it."),
 }
 
+def ver(rel):
+    """Short content hash, added to script URLs so browsers fetch the new file after every change."""
+    import hashlib
+    return hashlib.sha1(open(os.path.join(ROOT, rel), "rb").read()).hexdigest()[:8]
+
 def assessment_counts():
     import re
     t = open(os.path.join(ROOT, "assets", "assessments.js"), encoding="utf-8").read()
@@ -225,8 +230,8 @@ def assessment_page(kind, count):
     <p>An internal training prototype, not an official Vanderbilt University site. Questions or accessibility needs: <a href="mailto:pcb@vanderbilt.edu">pcb@vanderbilt.edu</a></p>
   </div>
 </footer>
-<script src="../../assets/assessments.js"></script>
-<script src="../assessment.js"></script>
+<script src="../../assets/assessments.js?v={ver('assets/assessments.js')}"></script>
+<script src="../assessment.js?v={ver('assessment/assessment.js')}"></script>
 </body>
 </html>
 '''

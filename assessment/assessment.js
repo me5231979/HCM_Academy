@@ -4,7 +4,8 @@
    hcm-total (number of courses) so the final can tell when every course is complete. */
 (function(){
   'use strict';
-  var BANK = window.HCM_ASSESS, main = document.querySelector('main'), kind = main.dataset.kind;
+  var BANK = window.HCM_ASSESS || { pass:0.9, pre:[], final:[] }, main = document.querySelector('main'), kind = main.dataset.kind;
+  BANK.topics = BANK.topics || {};
   var list = kind === 'pre' ? BANK.pre : BANK.final, PASS = BANK.pass, home = '../../index.html';
   var store = {
     get: function(k, d){ try { var v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch(e){ return d; } },
