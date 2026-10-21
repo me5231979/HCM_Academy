@@ -42,7 +42,7 @@ current catalog (videos and e-learning). Edit them in place: each row is
 
 ## Micro-courses (V.01)
 
-17 short courses live in `courses/<slug>/`. Each has four parts: a brief intro,
+22 short courses live in `courses/<slug>/`. Each has four parts: a brief intro,
 a step-by-step walkthrough (a checklist where each step has a plain-language explanation
 and the course ends with links to official Oracle or UKG documentation), a 3-question knowledge check with
 feedback, and a printable one-page job aid (Print button; print CSS shows only
@@ -59,7 +59,7 @@ landing page (shared `localStorage` key `hcm-done`, id `c-<slug>`).
   intro (16:9, full width, hidden when printing) and the course header lists
   "Video". First one: Weekly time card check.
 - Sources: Briana Knowles (Oct 20), Alex Enferadi (Oct 20), Jennifer Garcia
-  (Oct 19) sessions; the Costing for Persons guide (2022); the Document Records
+  (Oct 19) sessions; HCM training sessions 1 and 2 (Andres Castro, Stephanie Commo, Sep 8 and 9, 2026) for positions, requisitions, and pending worker conversion; the Costing for Persons guide (2022); the Document Records
   guide; the Award Compensation Elements guide (2023). Open items are flagged
   in each course's draft note and watch-outs.
 - Landing rows link to a course with `data-course="<slug>"` on the `<li>`.

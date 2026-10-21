@@ -16,6 +16,8 @@ JEN = "Jennifer Garcia session, Oct 19"
 COSTGUIDE = "Training Guide: Enter or Edit Costing for Persons (updated 01/27/2022)"
 DOCGUIDE = "Personnel Files: Document Records, Oracle User Guide"
 AWARDGUIDE = "Award Compensation Elements Resource Guide (updated 01/17/2023)"
+S1 = "HCM training session 1, positions and pending workers (Andres Castro, Stephanie Commo), Sep 8, 2026"
+S2 = "HCM training session 2, requisitions (Stephanie Commo), Sep 9, 2026"
 
 D = "https://docs.oracle.com/en/cloud/"
 DOC = {
@@ -31,12 +33,162 @@ DOC = {
  "runtypes": ("Oracle: Run Types, incl. Process Separately (US Payroll)", D+"saas/human-resources/fapus/run-types.html"),
  "salary": ("Oracle: Redwood Change Salary page fields (25C)", D+"saas/readiness/hcm/25c/comp-25c/25C-compensation-wn-f37529.htm"),
  "quickpay": ("Oracle: Overview of QuickPay (how payroll pays off-cycle)", D+"saas/human-resources/faapc/overview-of-quickpay.html"),
+ "positions": ("Oracle: Jobs and Positions (Using Global Human Resources)", D+"saas/human-resources/21b/fawhr/jobs-and-positions.html"),
+ "req": ("Oracle: Create a Job Requisition", D+"saas/talent-management/faush/create-a-job-requisition.html"),
+ "req_pos": ("Oracle: Create a Job Requisition Based on a Position", D+"saas/talent-management/faush/create-a-job-requisition-based-on-a-position.html"),
+ "pending": ("Oracle: How You Convert Pending Workers", D+"saas/human-resources/fawhr/how-you-convert-pending-workers.html"),
+ "pending_rw": ("Oracle: Redwood experience for Convert Pending Workers (24B)", D+"saas/readiness/hcm/24b/hure-24b/24B-hr-wn-f31968.htm"),
  "ukg_approve": ("UKG: Timecard approvals for managers", "https://developer.ukg.com/wfm/reference/timecard-approvals-for-manager"),
  "ukg_paycode": ("UKG: Work with pay codes in the hourly timecard", "https://sso-hlp01.gss.mykronos.com/help/en_GB/Content/Timekeeping/PayCodeEdits-hourlyTC.htm"),
 }
 def docs(*keys): return [DOC[k] for k in keys]
 
 COURSES = [
+# ───────────── POSITIONS, RECRUITMENT & HIRING ─────────────
+dict(slug="create-position", topic="recruiting", topic_label="Position Management",
+ title_pre="Create a", title_em="position", name="Create a position",
+ system="Oracle HCM", time="8 min", sources=[S1],
+ intro=["Every hire starts with a position. The requisition is built from it, and the new hire's assignment inherits from it, so a mistake here follows the person all the way through.",
+        "Before you start, have the approved position description from your engagement consultant and the pre-search memo from Compensation. The memo gives you the job code, title, level, and assignment category."],
+ use_when="You need a new position to recruit and hire into.",
+ steps=[
+  {"t":"Open Positions.","d":"Sign in to Oracle Cloud with your VUnetID. On the Home page, go to Our Workforce, scroll to Workforce Structures, and click Positions. Click Search with the status filter set to Active to see every active position in your business unit; the Incumbents column shows who sits in each one."},
+  {"t":"Click Add (or Create).","d":"A new position opens at the When and Why section."},
+  {"t":"Effective date: today, not the start date.","d":"The position must be approved and active before it can be posted. If someone starts Oct 1, create the position effective today; dating it Oct 1 means it can't be used until Oct 1."},
+  {"t":"Status: Active. Action reason: New Position.","d":"New positions always use these two values."},
+  {"t":"Business unit, name, and code.","d":"Pick your business unit. Name is what you call the position (for example, Accounting Manager). Code identifies it; note it so you can find the position later."},
+  {"t":"Work unit: the department.","d":"Where Oracle says department, it means work unit."},
+  {"t":"Job: enter the six-digit job code from the pre-search memo.","d":"Search by code, not by name. A name search such as accountant returns many jobs; the code returns the exact one (for example, Accountant Support SS2). The job name becomes the employee's business title, and it ties the position to Vanderbilt's job architecture, including pay ranges. Four- and five-digit codes predate the job architecture; don't use them (VTS temporary positions are the exception). Leave Manager blank: managers change, and the manager belongs on the assignment."},
+  {"t":"Location: where the person would sit on site.","d":"Location feeds the requisition and the hire. It decides whether the posting must show a pay range (pay transparency states such as New York and California) and which pay range Compensation recommends. Don't assume Nashville. If the role is remote, the location is overridden on the assignment at hire."},
+  {"t":"Assignment category: the one on the memo.","d":"Most used: Professional exempt, Staff non-exempt, and VTS (Vanderbilt Temporary Services). Never Professional salaried non-exempt: it's built into Oracle but not used at Vanderbilt, and the position will be sent back."},
+  {"t":"Hours: keep Standard working hours at 40; set Working hours to the actual hours.","d":"FTE is calculated from standard working hours of 40. Typing 20 into Standard working hours makes the FTE 1 by mistake. For a 20-hour position: Standard 40, Working 20, FTE 0.5. This is the most common position error."},
+  {"t":"Headcount and type.","d":"Headcount 1 is Single incumbent. More than 1 is Pool, and the FTE multiplies (3 full-time seats = FTE 3). Vanderbilt doesn't use None or Shared. Seats in different locations need separate single-incumbent positions."},
+  {"t":"Overlap allowed: Yes. Then set Term or Flex if it applies.","d":"Overlap lets you recruit and hire into the position while the current incumbent is still on payroll.","sub":["Temporary: six months or less.","Term: a fixed role longer than six months, up to a year.","Flex: needed only part of the year, such as summer help who return each year. Usually non-exempt; set as temporary with 20 working hours so benefits don't kick in."]},
+  {"t":"Attach the pre-search memo and position description, add comments, and click Submit.","d":"Central HR approves only with the pre-search memo attached (not needed for VTS). The position description helps your business unit approver. Attachments stay on the position, so you keep its history. Approval goes to your business unit approver (often the CFO), then to the central HR approval group."},
+ ],
+ table=dict(title="Fields that get positions sent back", head=["Field","Do this"], rows=[
+  ["Standard working hours","Always 40. Put actual hours in Working hours."],
+  ["Job","Six-digit code from the memo. No four- or five-digit codes (except VTS)."],
+  ["Assignment category","Never Professional salaried non-exempt. VTS is always temporary."],
+  ["Manager","Leave blank."],
+  ["Attachments","Pre-search memo (required) and position description."]]),
+ watch=["Don't reactivate an inactive position. Old job codes on it can block updates and approval. Create a new one.",
+        "Don't repurpose an unused position that was built for a different worker type (for example, a student position for staff). Create a new one.",
+        "The requisition copies the position when it is submitted. Fix the position before you create the requisition."],
+ docs=docs("positions"),
+ quiz=[
+  dict(q="Someone starts Oct 1. What effective date do you give the new position?", o=["Oct 1","Today, so it can be approved and posted now","The first day of the next pay period"], a=1, why="The position has to be active before it can be posted. Date it today."),
+  dict(q="A 20-hour position. What do you enter?", o=["Standard 20, Working 20","Standard 40, Working 20","Standard 40, Working 40"], a=1, why="Standard stays 40 so the FTE calculates correctly: 20 of 40 is 0.5."),
+  dict(q="What must be attached for central HR to approve a staff position?", o=["The offer letter","The pre-search memo from Compensation","Nothing"], a=1, why="Central HR approves only with the pre-search memo. Add the position description too."),
+ ]),
+
+dict(slug="update-position", topic="recruiting", topic_label="Position Management",
+ title_pre="Update a", title_em="position", name="Update a position",
+ system="Oracle HCM", time="6 min", sources=[S1],
+ intro=["Update a position when it changes: most often its name, and for a reclassification its job code and maybe its assignment category.",
+        "Some changes reach the incumbent's assignment automatically once approved. Others don't, so plan a second transaction for those."],
+ use_when="A position's name, job code, or category changes, such as a reclassification.",
+ steps=[
+  {"t":"Open the position.","d":"Our Workforce > Workforce Structures > Positions. Search for the position and open it."},
+  {"t":"Choose Update and enter the effective date.","d":"Use the date the change takes effect (for example, Sep 1 for a reclassification)."},
+  {"t":"Pick the action reason that matches the change.","d":"Updates have more reasons than new positions, for example a reclassification to a higher range or an assignment category change. The reason drives reporting."},
+  {"t":"Change the fields that changed.","d":"For a reclassification, enter the new six-digit job code from Compensation's reclass memo, the new name, and the new assignment category if it changed. Fix anything else that's wrong while you're there, such as headcount type (1 seat = Single incumbent)."},
+  {"t":"Attach the reclass memo, add comments, and click Submit.","d":"Approval follows the same path as a new position."},
+  {"t":"After approval, update the incumbent's assignment for what didn't flow.","d":"Approved position changes sync to active assignments, but these fields don't: person type, location, working hours, and hourly salary. Open the employee's Employment Info and use Change Assignment (position change within business unit) to update them and the business title."},
+ ],
+ watch=["Position changes never reach an existing requisition. The requisition keeps the position as it was when submitted.",
+        "Reclassifications need Compensation's reclass memo before you update the position."],
+ docs=docs("positions"),
+ quiz=[
+  dict(q="A reclassification changes the job. What do you enter on the position?", o=["Only the new name","The new job code from the reclass memo, the name, and the category if it changed","Nothing; Compensation updates it"], a=1, why="Enter the new job code, name, and category from the reclass memo."),
+  dict(q="Which of these does NOT flow from the position to the assignment?", o=["Job code","Working hours","Position name"], a=1, why="Person type, location, working hours, and hourly salary don't flow. Update the assignment separately."),
+  dict(q="You update a position that already has an open requisition. What happens to the requisition?", o=["It updates automatically","Nothing; it keeps the old details","It's canceled"], a=1, why="Requisitions copy the position at submission and never sync afterward."),
+ ]),
+
+dict(slug="position-best-practices", topic="recruiting", topic_label="Position Management",
+ title_pre="Position management best", title_em="practices", name="Position management best practices",
+ system="Overview", time="4 min", sources=[S1, S2],
+ intro=["Most position problems come from reusing old positions and a few easy-to-miss fields. These habits keep positions clean, approvals fast, and the data that flows to the hire correct."],
+ use_when="You manage positions for your business unit and want to avoid send-backs.",
+ steps_title="Habits to keep",
+ steps=[
+  {"t":"Create new; don't reactivate or repurpose.","d":"Inactive positions can carry retired job codes that block updates and approval. A vacant position built for another worker type (for example, a student role) should stay as it is. Create a new position instead."},
+  {"t":"Use six-digit job codes only.","d":"Six digits mean the job is in Vanderbilt's job architecture. Four- and five-digit codes are retired (VTS is the exception)."},
+  {"t":"Get the memo first.","d":"Request the pre-search memo from Compensation through your engagement consultant before you create the position. Requisitions need a memo from the last 12 months whose job code matches the position."},
+  {"t":"Standard working hours are always 40.","d":"Put actual hours in Working hours so FTE is right."},
+  {"t":"Leave Manager blank on the position.","d":"Set the manager on the assignment, so the position doesn't hold stale history when managers change."},
+  {"t":"Set the real location.","d":"It drives pay transparency, the pay range, and New York's background check process. One location per position."},
+  {"t":"Fix the position before the requisition.","d":"The requisition snapshots the position at submission, and the hire inherits from the requisition."},
+  {"t":"Keep documents on the position.","d":"Attach the memo and position description. They stay with the position as its history."},
+ ],
+ watch=["When in doubt about a code, category, or location, ask your engagement consultant before you submit."],
+ docs=docs("positions"),
+ quiz=[
+  dict(q="A vacant student position could work for a new staff hire. What do you do?", o=["Update it to staff","Create a new staff position","Reactivate an old staff position"], a=1, why="Don't repurpose positions across worker types, and don't reactivate old ones. Create new."),
+  dict(q="Why leave Manager blank on the position?", o=["Oracle requires it","Managers change; the manager belongs on the assignment","It speeds approval"], a=1, why="Keeping the manager on the assignment avoids stale history on the position."),
+  dict(q="How old can the pre-search memo be for a requisition?", o=["Any age","Within the last 12 months","Within 30 days"], a=1, why="Central recruiting checks the memo is from the last 12 months and its job code matches."),
+ ]),
+
+dict(slug="create-requisition", topic="recruiting", topic_label="Hiring",
+ title_pre="Create a", title_em="requisition", name="Create a requisition",
+ system="Oracle Recruiting", time="9 min", sources=[S2],
+ intro=["A requisition is the request to recruit. It's built from a position, and it copies that position the moment you submit, so check the position first.",
+        "Vanderbilt's recruiting is outsourced to Cielo, which bills for every opening and every fill. Open only what you'll actually fill."],
+ use_when="An approved position needs to be posted and recruited for.",
+ steps=[
+  {"t":"Check the position first.","d":"Confirm it has a six-digit job code and the right location and category. The requisition snapshots the position at submission and can't be changed later, and bad data flows on to the new hire."},
+  {"t":"Open Hiring and click Create.","d":"Our Workforce > Hiring > Requisitions, then Create at the top. You see the requisitions for your business unit, and you're a collaborator on any you create."},
+  {"t":"Choose Standard and select the position.","d":"Pipeline is for recruiters only. Pick the position; its job details fill in, and the position can't be changed after this."},
+  {"t":"Requisition title: the posting title.","d":"Change it to something candidates understand (for example, add Senior or Hybrid). It's only the posting title, not the business title."},
+  {"t":"Justification and openings.","d":"New to the department, or replacing someone. Choose Limited and the exact number of seats. Never Unlimited.","sub":["Each opening is billed, and unfilled openings are billed at 50% to cancel.","More than one opening also goes to central finance for approval."]},
+  {"t":"Hiring manager and collaborators.","d":"Add the hiring manager (not you, unless you are). Add collaborators who should see candidates or interview, including any HCM you work with. Hiring managers see candidates once the recruiter has reviewed them."},
+  {"t":"Requisition type: Standard or Abbreviated.","d":"Standard is the full recruiting process. Abbreviated means you already have a candidate, usually internal; it must still be posted internally for five business days.","sub":["Executive search is only for Cielo's executive search program. An outside firm (such as Korn Ferry) needs a PO requisition, not a recruiting requisition."]},
+  {"t":"Organization and primary location.","d":"Organization is always Vanderbilt. Pick the specific location (Nashville, New York, California, West Palm Beach, and so on), never United States. Location tells recruiting whether pay transparency applies; pay ranges are posted only where required (New York and California)."},
+  {"t":"Required details.","d":"Fill in what's required: funding source (internal, external, or both; external adds contingent funding language to the offer), driving, replacing a RIF role, fingerprinting, motor vehicle record, and work with minors. Salary range is optional. Skip Tier; it's for billing."},
+  {"t":"Description: paste the position description.","d":"Paste it into the description so the recruiter can post it (they can't post from an attachment). You can write different internal and external versions. Let Skills pull through from the job architecture."},
+  {"t":"Offer info: workplace type.","d":"Pick On site, Hybrid, or Remote. Skip Grades. Leave Primary work location as it is; it's overridden at hire if the person is remote."},
+  {"t":"Attach the position description and pre-search memo.","d":"Central recruiting checks the memo exists, is from the last 12 months, and has the same job code as the requisition."},
+  {"t":"Configuration: candidate selection process and background check.","d":"New York requisitions must use the New York candidate selection process; everything else uses Standard. Background check vendor: HireRight. Account: VAN000 for non New York, VAN09 for New York.","sub":["New York requires non-criminal checks before any conditional offer. The wrong process breaks that law."]},
+  {"t":"Click Save, then Submit.","d":"Ignore the background check packages pop-up; the recruiter picks packages at the offer. Approval goes to the hiring line manager, your business unit's financial approver, then central recruiting (and central finance if more than one opening). Once approved, you and the recruiter get an email and the recruiter sets up the strategy meeting."},
+ ],
+ watch=["Never select Unlimited openings.","Never use United States as the location.","New York: New York candidate selection process and account VAN09, every time."],
+ docs=docs("req_pos","req"),
+ quiz=[
+  dict(q="You need two office assistants. How do you set openings?", o=["Unlimited","Limited, 2","Limited, 10 to be safe"], a=1, why="Cielo bills each opening, and unfilled ones cost 50% to cancel. Open exactly what you need."),
+  dict(q="A role is based in New York. What must you select?", o=["Standard candidate selection process","New York candidate selection process and account VAN09","Location: United States"], a=1, why="New York requires non-criminal checks before any conditional offer; the New York process and account handle that."),
+  dict(q="You notice the position has a four-digit job code. What do you do?", o=["Create the requisition and fix the position later","Fix the position first, then create the requisition","Change the job on the requisition"], a=1, why="The requisition snapshots the position at submission and never syncs. Fix the position first."),
+ ]),
+
+dict(slug="convert-pending-worker", topic="recruiting", topic_label="Hiring",
+ title_pre="Convert a pending", title_em="worker", name="Convert a pending worker",
+ system="Oracle HCM", time="10 min", sources=[S1],
+ intro=["When a candidate's background check clears, the pre-employment background check (PEBC) team emails you that they're clear to start, and the person appears as a pending worker. Converting them is the hire transaction.",
+        "What you enter here becomes their assignment, pay, and manager, so this is the step that decides whether the first paycheck is right."],
+ use_when="You got the clear to start email and the new hire is in your pending workers list.",
+ steps=[
+  {"t":"Open Pending Workers.","d":"Our Workforce > Pending Workers. Everyone in your business unit who is ready to convert is listed."},
+  {"t":"Click the three dots next to the person, then Convert.","d":"Don't use Quick Convert or Edit Pending Worker. Make every change inside Convert."},
+  {"t":"Select the sections you'll update.","d":"Check Payroll details (Vanderbilt calls it payroll relationship) and Salary. Add Compensation if there's a bonus or other payment, and Direct reports if they'll manage people. Click Continue."},
+  {"t":"When and why: action Hire, reason Employment.","d":"Hire employment is almost always right.","sub":["Service free appointment: only for students receiving a stipend.","Non-employment: affiliates."]},
+  {"t":"Check the business unit and position.","d":"If the position changed after the offer (the recruiter has already sent a new offer letter), select the correct position here. Make any pre-hire corrections at this step."},
+  {"t":"Biographical info: confirm date of birth and citizenship.","d":"Date of birth comes from the background check. For US citizen or permanent resident, click the pencil and pick Yes or No; PEBC records the answer on the application."},
+  {"t":"National ID: Social Security number or a placeholder.","d":"No SSN? Email the International Tax Office (ito@vanderbilt.edu) for a placeholder number, then click the pencil, choose placeholder number, and enter it."},
+  {"t":"Home address must be in the United States.","d":"Anyone being paid needs a US address. If you see another country, click Cancel and contact central HR to correct it."},
+  {"t":"Position overrides: review and continue.","d":"Shaded fields such as location and working hours can be changed. Check yourself as manager here only if you are their manager."},
+  {"t":"Assignment: person type, location, minors, expense account, status.","d":"Set Person type to match the assignment category (for example, Professional exempt = Staff exempt).","sub":["Location: override to where they'll actually work if remote (for example, Florida).","Working with minors: required; Yes triggers an additional check.","Default expense account: your department's usual account.","Assignment status: Active payroll eligible for anyone paid. Active no payroll only for affiliates; they won't appear in payroll even with a salary."]},
+  {"t":"Managers and work relationship.","d":"Click the pencil to set the manager. On work relationship info, choose Include in the new hire report for paid hires, Exclude for affiliates and contractors."},
+  {"t":"Payroll details.","d":"Monthly (regular) pays an annual salary. Biweekly is hourly: set overtime to biweekly and Time card required to Yes."},
+  {"t":"Salary: enter what they'll actually be paid.","d":"For a 0.75 FTE (30 hours) at $58,000, enter $58,000; use the calculator to confirm. Oracle shows the full-time equivalent for reference."},
+  {"t":"Review compensation, attach the offer letter, and click Submit.","d":"Check any payment such as a relocation or sign-on bonus. Attach the offer letter for your business unit approver. Approval: business unit approver, then PEBC, then central HR."},
+ ],
+ watch=["Never Quick Convert or Edit Pending Worker. Use Convert.","Active no payroll means no pay at all. Use it only for unpaid affiliates.","Not sure where a hire or transfer stands? Ask central recruiting before you create a direct hire."],
+ docs=docs("pending","pending_rw"),
+ quiz=[
+  dict(q="How do you know someone is ready to convert?", o=["The recruiter calls you","PEBC emails that they're clear to start, and they appear in Pending Workers","Their start date arrives"], a=1, why="Background check clearance creates the pending worker and triggers the clear to start email."),
+  dict(q="A new hire has no Social Security number. What do you do?", o=["Leave it blank","Get a placeholder number from ito@vanderbilt.edu","Use 000-00-0000"], a=1, why="The International Tax Office issues placeholder numbers."),
+  dict(q="Which assignment status for a paid staff hire?", o=["Active no payroll","Active payroll eligible","Inactive"], a=1, why="Active no payroll keeps them out of payroll entirely. It's only for affiliates."),
+ ]),
+
 # ───────────── PAYROLL & TIMECARDS ─────────────
 dict(slug="hcm-role-in-payroll", topic="payroll", topic_label="Payroll & Timecards",
  title_pre="Your role in", title_em="payroll", name="The HCM's role in payroll",
@@ -472,6 +624,11 @@ _IC = ["the Individual Compensation quick action name", "plan names (Lump sum pa
 _TERM = ["the Terminate Employment section names", "the revoke access, rehire, and payroll eligibility field labels", "whether the seniority dates screen still appears"]
 _COST = ["where Costing for Persons sits in Redwood", "the Advanced Search and Effective As-of Date labels", "the Actions and Edit menu labels"]
 VERIFY = {
+ "create-position": ["the Workforce Structures > Positions path", "the Term/Flex field name and rules", "the part-time hours threshold", "VTS (Vanderbilt Temporary Services) naming"],
+ "update-position": ["the Update action and reason names for a reclassification", "which fields sync from position to assignment"],
+ "position-best-practices": [],
+ "create-requisition": ["the Hiring > Requisitions path", "the configuration labels for candidate selection process and background check account (VAN000, VAN09)", "Cielo billing terms"],
+ "convert-pending-worker": ["the Pending Workers path and section names", "the hire reasons", "the assignment status labels", "the new hire report field"],
  "weekly-time-card-check": _UKG, "review-approve-time-cards": _UKG, "enter-pto": _UKG,
  "off-cycle-payment": ["the off-cycle request form link and its current criteria"],
  "change-salary": ["the Change Salary section names", "the reason list values", "the amount and percentage field labels"],
