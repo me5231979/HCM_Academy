@@ -167,7 +167,6 @@ footer p{ color:rgba(255,255,255,.7); font-size:.83rem; max-width:620px; margin:
 footer a{ color:var(--gold); }
 
 @media (max-width:860px){ .card,.card:not(.multi) > .sect{ grid-template-columns:1fr; } .card:not(.multi) > .sect > .aids-wrap{ grid-column:1; grid-row:auto; } .card:not(.multi) > .sect:not(:has(.aids-wrap)) > .links{ columns:1; } }
-@media (max-width:760px){ .chips{ flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; } }
 @media (max-width:960px){ .pillars{ grid-template-columns:1fr 1fr; } }
 @media (max-width:640px){ .grid{ grid-template-columns:1fr; } .logo img{ height:28px; } }
 @media (max-width:420px){ .logo span{ display:none; } .pillars{ grid-template-columns:1fr; } }
@@ -220,16 +219,15 @@ footer a{ color:var(--gold); }
 .pmeta .bar{ margin-top:8px; height:6px; }
 .progress .demo{ margin-top:14px; }
 .tabbar{ position:sticky; top:76px; z-index:4; background:var(--cream); margin-top:26px; padding-top:4px; }
-.chips{ display:grid; grid-auto-flow:column; grid-auto-columns:minmax(0,1fr); gap:4px; border-bottom:1px solid var(--sand); margin:0; }
-.chips button{ font:inherit; font-size:.88rem; min-height:48px; padding:10px 12px; cursor:pointer; background:none; border:0; border-radius:6px 6px 0 0;
-  border-bottom:3px solid transparent; margin-bottom:-1px; color:rgba(28,28,28,.8); display:grid; grid-template-columns:1fr auto; align-content:start; gap:4px 6px; text-align:left; min-height:68px;
-  transition:color .15s, border-color .15s, background-color .15s; }
-.chips button .tn{ font-family:var(--cond); font-weight:700; color:var(--black); font-size:1rem; line-height:1.2; }
-.chips button .tl{ grid-column:1 / -1; line-height:1.25; }
-.chips button .tc{ font-size:.72rem; font-weight:600; color:rgba(28,28,28,.75); background:#EFEDE8; border-radius:999px; padding:2px 7px; line-height:1.4; }
-.chips button.done .tc{ background:#E3F0E4; color:var(--done-ink); }
-.chips button:hover{ color:var(--black); background:rgba(255,255,255,.6); }
-.chips button[aria-selected="true"]{ color:var(--black); font-weight:600; border-bottom-color:var(--gold); background:#fff; }
+.chips{ display:flex; gap:2px; border-bottom:1px solid var(--sand); margin:0; overflow-x:auto; scrollbar-width:none; }
+.chips::-webkit-scrollbar{ display:none; }
+.chips button{ font:inherit; font-size:.92rem; white-space:nowrap; display:inline-flex; align-items:baseline; gap:7px; flex:0 0 auto; min-height:46px; padding:12px 14px 11px;
+  cursor:pointer; background:none; border:0; border-bottom:2px solid transparent; margin-bottom:-1px; color:rgba(28,28,28,.72); transition:color .15s, border-color .15s; }
+.chips button .tc{ font-size:.75rem; font-weight:500; color:rgba(28,28,28,.72); font-variant-numeric:tabular-nums; }
+.chips button.done .tc{ color:var(--done-ink); font-weight:600; }
+.chips button:hover{ color:var(--black); border-bottom-color:#D9CFBC; }
+.chips button[aria-selected="true"]{ color:var(--black); font-weight:600; border-bottom:3px solid var(--gold); padding-bottom:10px; }
+.chips button[aria-selected="true"] .tc{ color:rgba(28,28,28,.8); }
 .chips button:focus-visible{ outline:2px solid var(--oak); outline-offset:-2px; }
 .count{ margin-top:12px; }
 .grid{ margin-top:14px !important; }
@@ -268,7 +266,6 @@ footer a{ color:var(--gold); }
 .grid.searching .pnav{ display:none; }
 .allres{ box-shadow:var(--shadow); }
 @media (max-width:760px){
-  .chips{ grid-auto-columns:minmax(132px,1fr); overflow-x:auto; scrollbar-width:thin; }
   .tabbar{ top:64px; }
   .progress .row{ grid-template-columns:auto 1fr; }
   .progress #finalBtn{ grid-column:1 / -1; }
@@ -628,12 +625,13 @@ footer a{ color:var(--gold); }
     topic = id; if (q.value){ q.value = ''; } update();
     var tb = document.getElementById('tab-' + id);
     if (focus && tb) tb.focus();
+    if (tb){ var ch = tb.parentNode; ch.scrollLeft = Math.max(0, tb.offsetLeft - ch.offsetLeft - 24); }
   }
   function addChip(c){
     var b = document.createElement('button');
     b.type = 'button'; b.dataset.topic = c.id; b.id = 'tab-' + c.id;
     b.setAttribute('role', 'tab'); b.setAttribute('aria-controls', c.id);
-    b.innerHTML = '<span class="tn">' + c.querySelector('.no').textContent + '</span><span class="tc"></span><span class="tl">' + c.dataset.short + '</span>';
+    b.innerHTML = '<span class="tl">' + c.dataset.short + '</span><span class="tc"></span>';
     b.addEventListener('click', function(){ select(c.id); });
     b.addEventListener('keydown', function(e){
       var i = cards.indexOf(c), n = cards.length, k = e.key, j = -1;
