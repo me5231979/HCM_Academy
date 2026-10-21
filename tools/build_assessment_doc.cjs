@@ -4,7 +4,7 @@ const {CheckBox,Table,TableRow,TableCell,WidthType,ShadingType,VerticalAlign,Doc
 const path=require('path'), vm=require('vm'), root=path.join(__dirname,'..');
 const ctx={window:{}}; vm.runInNewContext(fs.readFileSync(path.join(root,'assets/assessments.js'),'utf8'),ctx);
 const A=ctx.window.HCM_ASSESS;
-const TOPICS=[['start','00 Start Here'],['recruiting','01 Recruitment & Hiring'],['payroll','02 Payroll & Timecards'],['positions','03 Onboarding, Offboarding, Transfers & Positions'],['leave','04 Leave'],['costing','05 Costing'],['students','06 Student & Faculty'],['records','07 Document Records & Reporting']];
+const TOPICS=[['start','00 Start Here'],['recruiting','01 Positions, Recruitment & Hiring'],['payroll','02 Payroll & Timecards'],['positions','03 Assignments'],['leave','04 Leave'],['costing','05 Costing'],['students','06 Student & Faculty'],['records','07 Document Records & Reporting']];
 const group=list=>TOPICS.map(([id,name])=>[name,list.filter(x=>x.topic===id).map(x=>[x.draft?1:0,x.q,x.o,x.a,x.why])]).filter(g=>g[1].length);
 const PRE=group(A.pre), FIN=group(A.final);
 const NPASS=Math.ceil(A.final.length*A.pass);
