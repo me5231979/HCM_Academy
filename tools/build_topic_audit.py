@@ -55,7 +55,8 @@ def rows_html(rows, n0):
         status = "Live" if r["slug"] else "Coming soon"
         out.append(f'<tr><td class="no">{n}</td><td class="ti{" in" if r["sub_item"] else ""}"><b>{E(r["title"])}</b><span>{E(r["desc"])}</span></td>'
                    f'<td><span class="st {"live" if r["slug"] else "soon"}">{status}</span></td><td><span class="src {r["src"]}">{E(r["label"])}</span></td>'
-                   f'<td class="tm">{E(r["time"])}</td><td class="aud">{box(f"C{n:03d}K")}Keep {box(f"C{n:03d}C")}Change {box(f"C{n:03d}R")}Remove{note(f"C{n:03d}N")}</td></tr>')
+                   f'<td class="tm">{E(r["time"])}</td><td class="aud">{box(f"C{n:03d}K")}Keep {box(f"C{n:03d}C")}Change {box(f"C{n:03d}R")}Remove {box(f"C{n:03d}M")}Merge'
+                   f'<div class="mw">If Merge, with: <span class="mf"><i class="tok">QAC{n:03d}M</i><i class="tok end">QZC{n:03d}M</i></span></div>{note(f"C{n:03d}N")}</td></tr>')
         FIELDS[f"C{n:03d}"] = r["title"]
     return "\n".join(out), n
 
@@ -81,7 +82,7 @@ doc = f'''<!DOCTYPE html>
   <img src="../../assets/img/vu-lockup-black.png" alt="Vanderbilt University" class="lockup" />
   <p class="eyebrow">HCM Academy &middot; V.01 draft &middot; October 2026</p>
   <h1>Topic <em>audit</em>.</h1>
-  <p class="lede">Every topic, subtopic, and course topic in HCM Academy. For each one, check Keep, Change, or Remove and add a note. Use the topic-level boxes to flag a topic that should be renamed, reordered, or is missing subtopics.</p>
+  <p class="lede">Every topic, subtopic, and course topic in HCM Academy. For each one, check Keep, Change, Remove, or Merge (and name the topic to merge with), then add a note. Use the topic-level boxes to flag a topic that should be renamed, reordered, or is missing subtopics.</p>
   <div class="stats"><div><b>{total}</b><span>course topics</span></div><div><b>{counts["vu"]}</b><span>live from Vanderbilt SME sources</span></div><div><b>{counts["oracle"]}</b><span>live from Oracle docs, pending SME review</span></div><div><b>{counts["none"]}</b><span>coming soon, no content yet</span></div></div>
   <ol class="sum">{summary}</ol>
   <div class="legend"><span class="src vu">Vanderbilt SME sources</span> Built from SME sessions, training transcripts, Vanderbilt guides, or the Guidde walkthrough.

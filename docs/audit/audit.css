@@ -45,7 +45,7 @@ thead{ display:table-header-group; }
 th{ text-align:left; background:var(--black); color:#fff; font:600 7.4pt var(--sans); padding:4px 6px; }
 td{ padding:5px 6px; border-bottom:.6pt solid var(--rule); vertical-align:top; }
 tr{ break-inside:avoid; }
-th:nth-child(1),td.no{ width:.32in; } th:nth-child(3){ width:.85in; } th:nth-child(4){ width:1.55in; } th:nth-child(5){ width:.55in; } th:nth-child(6){ width:3.1in; }
+th:nth-child(1),td.no{ width:.32in; } th:nth-child(3){ width:.85in; } th:nth-child(4){ width:1.55in; } th:nth-child(5){ width:.55in; } th:nth-child(6){ width:3.4in; }
 td.no{ font:700 9pt var(--cond); color:var(--mute); }
 td.ti b{ display:block; font-weight:600; }
 td.ti span{ display:block; color:var(--mute); font-size:7.6pt; }
@@ -66,3 +66,5 @@ td.aud .note{ margin-top:7px; height:.2in; border-bottom:.6pt solid #B9B1A2; }
 .tok{ position:absolute; left:0; top:0; font:normal 1px/1 Arial,sans-serif; letter-spacing:0; text-transform:none; color:#fff; white-space:nowrap; }
 .tok.end{ left:auto; right:0; }
 .fl{ height:.3in; border-bottom:.8pt solid var(--black); margin-bottom:4px; }
+.mw{ display:flex; align-items:baseline; gap:6px; margin-top:6px; font-size:7.6pt; color:var(--mute); }
+.mf{ position:relative; flex:1; height:12px; border-bottom:.6pt solid #B9B1A2; }
