@@ -124,3 +124,12 @@ The PDF is a fillable form: 348 clickable checkboxes (Keep, Change, Remove, Merg
 and per topic, plus reviewer, area, and date).
 Rebuild: `python3 tools/build_topic_audit.py && node tools/render_topic_audit.cjs && python3 tools/make_audit_fillable.py`
 (the last step needs PyMuPDF: `pip install pymupdf`).
+
+## Section audit workbook (sign up, then audit)
+
+`docs/HCM_Academy_Section_Audit.xlsx` (built by `python3 tools/build_section_audit.py`):
+Start here (instructions), Sign-up (two reviewer slots per section, target date, status,
+progress formula, section verdict), one tab per section with every course topic (Decision:
+Keep / Change / Remove / Merge, Merge with, accuracy of steps, job aid, and quiz, notes,
+priority, PCB status), and a Summary with live counts. Share it from SharePoint or OneDrive
+so reviewers edit one copy.
