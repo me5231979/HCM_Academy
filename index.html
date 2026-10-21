@@ -154,12 +154,12 @@ a.btn{ display:inline-flex; align-items:center; justify-content:center; text-dec
 .aids{ list-style:none; }
 .aids li{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:8px 0; border-top:1px solid var(--gray); font-size:.9rem; }
 .aids li[hidden],.sect[hidden]{ display:none; }
-.allres{ margin-top:40px; background:#fff; border:1px solid var(--sand); border-top:3px solid var(--gold); border-radius:4px; padding:26px 24px; }
-.allres h2{ font-size:clamp(1.6rem,3.4vw,2.2rem); margin-top:12px; }
-.allres > p:not(.mono){ color:rgba(28,28,28,.8); margin-top:8px; }
-.allres .aids{ margin-top:14px; columns:2; column-gap:32px; }
-.allres .aids li{ break-inside:avoid; }
-@media (max-width:760px){ .allres .aids{ columns:1; } }
+.playbook{ margin-top:32px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px 16px; padding:14px 18px; border:1px solid var(--sand); border-left:3px solid var(--gold); border-radius:4px; background:#fff; }
+.playbook p{ display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 12px; }
+.playbook b{ font-family:var(--cond); font-weight:700; letter-spacing:.05em; text-transform:uppercase; font-size:.85rem; }
+.playbook span:not(.pb-soon){ color:rgba(28,28,28,.8); font-size:.92rem; }
+.pb-soon{ display:inline-flex; align-items:center; font-weight:600; font-size:.7rem; background:#EFEDE8; color:rgba(28,28,28,.78); border-radius:999px; padding:2px 9px; white-space:nowrap; }
+.pb-soon .lk{ width:11px; height:11px; margin-right:4px; }
 /* footer */
 footer{ padding:40px 0; text-align:center; }
 footer img{ width:90px; height:auto; margin:0 auto; }
@@ -176,10 +176,10 @@ footer a{ color:var(--gold); }
 .card{ display:block !important; }
 .card[hidden]{ display:none !important; }
 .card > .sect{ display:block !important; }
-.card .links,.card .aids,.allres .aids{ display:grid !important; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px; columns:auto !important; margin-top:8px; padding:0; }
-.card .links li,.card .aids li,.allres .aids li{ border:1px solid var(--gray); border-radius:4px; background:#fff; padding:12px 14px;
+.card .links,.card .aids{ display:grid !important; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:10px; columns:auto !important; margin-top:8px; padding:0; }
+.card .links li,.card .aids li{ border:1px solid var(--gray); border-radius:4px; background:#fff; padding:12px 14px;
   display:flex; flex-direction:column; justify-content:space-between; align-items:flex-start; gap:8px; font-size:.92rem; font-weight:500; position:static; }
-.card .aids li,.allres .aids li{ background:var(--cream); }
+.card .aids li{ background:var(--cream); }
 .card .links li[hidden],.card .aids li[hidden]{ display:none !important; }
 .card .links li.sub::before{ display:none; }
 .card .links li.cbtn{ padding:0; }
@@ -197,7 +197,7 @@ footer a{ color:var(--gold); }
 .card .subhead{ margin-top:26px; }
 .card .links li.group ~ li:not(.sub){ grid-column-start:1; margin-top:14px; }
 .card .links li.group ~ li:not(.sub) ~ li:not(.sub){ grid-column-start:auto; }
-@media (max-width:560px){ .card .links,.card .aids,.allres .aids{ grid-template-columns:1fr; } }
+@media (max-width:560px){ .card .links,.card .aids{ grid-template-columns:1fr; } }
 
 /* ── polish pass: header, search, progress, tabs, tiles ── */
 :root{ --done-ink:#1B5E20; --shadow:0 1px 2px rgba(28,28,28,.06),0 4px 14px rgba(28,28,28,.06); --shadow-hi:0 2px 4px rgba(28,28,28,.08),0 10px 24px rgba(28,28,28,.10); }
@@ -254,17 +254,16 @@ footer a{ color:var(--gold); }
 .aids li.locked .tt,.aids li.locked .ds,.aids li.locked .tm,.aids li.locked .fm{ color:#5E5E5E; }
 .aids li .soon .lk{ width:11px; height:11px; margin-right:4px; vertical-align:-1px; }
 .prestart.nudge{ outline:3px solid var(--gold); outline-offset:2px; }
-.card .aids li,.allres .aids li{ position:relative; padding-left:40px; border-style:dashed; }
-.card .aids li::before,.allres .aids li::before{ content:''; position:absolute; left:14px; top:14px; width:16px; height:18px;
+.card .aids li{ position:relative; padding-left:40px; border-style:dashed; }
+.card .aids li::before{ content:''; position:absolute; left:14px; top:14px; width:16px; height:18px;
   background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23946E24' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z'/%3E%3Cpath d='M14 3v6h6M8 13h8M8 17h5'/%3E%3C/svg%3E"); }
-.card .aids li .soon,.allres .aids li .soon{ font-family:var(--sans); font-weight:600; font-size:.7rem; text-transform:none; letter-spacing:.02em; background:#fff; border-radius:999px; padding:2px 9px; color:rgba(28,28,28,.78); }
+.card .aids li .soon{ font-family:var(--sans); font-weight:600; font-size:.7rem; text-transform:none; letter-spacing:.02em; background:#fff; border-radius:999px; padding:2px 9px; color:rgba(28,28,28,.78); }
 .pnav{ display:flex; justify-content:space-between; gap:12px; margin-top:28px; padding-top:20px; border-top:1px solid var(--gray); }
 .pnav button{ font:inherit; font-size:.9rem; font-weight:600; min-height:44px; padding:10px 16px; border-radius:999px; border:1px solid #B8AD98; background:#fff; color:var(--black); cursor:pointer; transition:border-color .15s, background-color .15s; }
 .pnav button:hover{ border-color:var(--black); }
 .pnav button.next{ margin-left:auto; background:var(--black); border-color:var(--black); color:#fff; }
 .pnav button.next:hover{ background:var(--oak); border-color:var(--oak); }
 .grid.searching .pnav{ display:none; }
-.allres{ box-shadow:var(--shadow); }
 @media (max-width:760px){
   .tabbar{ top:64px; }
   .progress .row{ grid-template-columns:auto 1fr; }
@@ -276,16 +275,16 @@ footer a{ color:var(--gold); }
 /* ── row layout: every course, job aid, and resource is a full-width row ── */
 .rowhead[hidden],.card ul[hidden]{ display:none !important; }
 .sr-l{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
-.card .links,.card .aids,.allres .aids{ display:flex !important; flex-direction:column; gap:0 !important; border:1px solid var(--gray); border-top:0; border-radius:0 0 6px 6px; overflow:hidden; background:#fff; margin-top:0 !important; }
+.card .links,.card .aids{ display:flex !important; flex-direction:column; gap:0 !important; border:1px solid var(--gray); border-top:0; border-radius:0 0 6px 6px; overflow:hidden; background:#fff; margin-top:0 !important; }
 .rowhead{ display:grid; grid-template-columns:22px minmax(0,1fr) 90px 150px 120px; gap:16px; padding:9px 18px; margin-top:10px;
   background:var(--black); color:#fff; border-radius:6px 6px 0 0; font-family:var(--cond); font-weight:700; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; }
 .rowhead span:first-child{ grid-column:1 / 3; }
-.aids-wrap .rowhead,.allres .rowhead{ background:#3A3A38; }
-.card .links li,.card .aids li,.allres .aids li{ display:grid !important; grid-template-columns:minmax(0,1fr) 90px 150px 120px; align-items:center; gap:16px;
+.aids-wrap .rowhead{ background:#3A3A38; }
+.card .links li,.card .aids li{ display:grid !important; grid-template-columns:minmax(0,1fr) 90px 150px 120px; align-items:center; gap:16px;
   border:0 !important; border-top:1px solid var(--gray) !important; border-radius:0 !important; padding:14px 18px; margin:0 !important; background:#fff; box-shadow:none !important; transform:none !important; }
-.card .links li:first-child,.card .aids li:first-child,.allres .aids li:first-child{ border-top:0 !important; }
-.card .aids li,.allres .aids li{ padding-left:56px; background:#fff; }
-.card .aids li::before,.allres .aids li::before{ left:24px; top:50%; transform:translateY(-50%); }
+.card .links li:first-child,.card .aids li:first-child:first-child{ border-top:0 !important; }
+.card .aids li{ padding-left:56px; background:#fff; }
+.card .aids li::before{ left:24px; top:50%; transform:translateY(-50%); }
 .card .links li.cbtn{ padding:0 !important; display:block !important; }
 .course-btn{ display:grid !important; grid-template-columns:22px minmax(0,1fr) 90px 150px 120px !important; align-items:center !important; gap:16px !important; padding:14px 18px !important; width:100%; transition:background-color .15s; }
 .course-btn .ck{ grid-row:auto !important; top:0 !important; }
@@ -296,8 +295,8 @@ footer a{ color:var(--gold); }
 .tm,.fm{ font-size:.86rem; color:rgba(28,28,28,.8); }
 .tm::before{ content:''; display:inline-block; width:12px; height:12px; margin-right:6px; vertical-align:-1px;
   background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2.4' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7v5l3 2'/%3E%3C/svg%3E"); }
-.course-btn .soon,.card .aids li .soon,.allres .aids li .soon{ justify-self:start; margin-top:0 !important; }
-.card .aids li .soon,.allres .aids li .soon{ background:#EFEDE8 !important; }
+.course-btn .soon,.card .aids li .soon{ justify-self:start; margin-top:0 !important; }
+.card .aids li .soon{ background:#EFEDE8 !important; }
 .course-btn .soon{ grid-column:auto !important; }
 .tm,.fm{ white-space:nowrap; }
 .aids .tm::before{ display:none; }
@@ -310,14 +309,14 @@ footer a{ color:var(--gold); }
 .card .links li.group ~ li:not(.sub) .course-btn{ border-top:1px solid var(--sand); }
 @media (max-width:760px){
   .rowhead{ display:none; }
-  .card .links,.card .aids,.allres .aids{ border-top:1px solid var(--gray); border-radius:6px; margin-top:10px !important; }
+  .card .links,.card .aids{ border-top:1px solid var(--gray); border-radius:6px; margin-top:10px !important; }
   .course-btn,.card .links li.sub .course-btn{ grid-template-columns:22px auto 1fr !important; row-gap:8px !important; column-gap:12px !important; }
   .course-btn .nm{ grid-column:2 / -1; }
   .course-btn .tm{ grid-column:2 !important; } .course-btn .fm{ grid-column:3 !important; } .course-btn .soon{ grid-column:2 / -1 !important; justify-self:start; }
-  .card .aids li,.allres .aids li{ grid-template-columns:auto 1fr; row-gap:8px; column-gap:12px; }
-  .card .aids li .nm,.allres .aids li .nm{ grid-column:1 / -1; }
-  .card .aids li .soon,.allres .aids li .soon{ grid-column:1 / -1; justify-self:start; }
-  .card .aids li::before,.allres .aids li::before{ top:22px; transform:none; }
+  .card .aids li{ grid-template-columns:auto 1fr; row-gap:8px; column-gap:12px; }
+  .card .aids li .nm{ grid-column:1 / -1; }
+  .card .aids li .soon{ grid-column:1 / -1; justify-self:start; }
+  .card .aids li::before{ top:22px; transform:none; }
 }
 .course-btn.course-link{ text-decoration:none; color:inherit; }
 .course-link:not([data-done="true"]) .soon{ background:var(--black) !important; color:#fff !important; }
@@ -588,17 +587,9 @@ footer a{ color:var(--gold); }
           </div>
         </section>
       </div>
-      <div class="allres" id="resources">
-        <p class="mono eyebrow">Get answers</p>
-        <h2>Help for every <em>topic</em>.</h2>
-        <p>Every course includes a printable job aid. Alongside the courses, each topic will have these resources.</p>
-        <div class="rowhead" aria-hidden="true"><span>Resource</span><span>Time</span><span>Applies to</span><span>Status</span></div><ul class="aids">
-          <li><span class="nm"><span class="tt">Decision trees for common transaction choices</span><span class="ds">Answer a few questions and get the right transaction.</span></span><span class="tm"><span class="sr-l">Time: </span>Varies</span><span class="fm"><span class="sr-l">Format: </span>All topics</span><span class="soon">Coming soon</span></li>
-          <li><span class="nm"><span class="tt">Process maps and workflows</span><span class="ds">See every step and hand-off in a process.</span></span><span class="tm"><span class="sr-l">Time: </span>Varies</span><span class="fm"><span class="sr-l">Format: </span>All topics</span><span class="soon">Coming soon</span></li>
-          <li><span class="nm"><span class="tt">Scenario-based learning exercises</span><span class="ds">Practice real situations before you meet them on the job.</span></span><span class="tm"><span class="sr-l">Time: </span>Varies</span><span class="fm"><span class="sr-l">Format: </span>All topics</span><span class="soon">Coming soon</span></li>
-          <li><span class="nm"><span class="tt">Frequently Asked Questions (FAQ) repository</span><span class="ds">Answers to the questions HCMs ask most.</span></span><span class="tm"><span class="sr-l">Time: </span>Varies</span><span class="fm"><span class="sr-l">Format: </span>All topics</span><span class="soon">Coming soon</span></li>
-          <li><span class="nm"><span class="tt">Knowledge base articles for common errors and troubleshooting</span><span class="ds">Fixes for common Oracle errors and how to avoid them.</span></span><span class="tm"><span class="sr-l">Time: </span>Varies</span><span class="fm"><span class="sr-l">Format: </span>All topics</span><span class="soon">Coming soon</span></li>
-        </ul>
+      <div class="playbook" id="playbook">
+        <p><b>HCM Playbook</b><span>Quick references for the work, in one place.</span></p>
+        <span class="pb-soon">Coming soon</span>
       </div>
     </div>
   </section>
@@ -763,6 +754,7 @@ footer a{ color:var(--gold); }
     ptext.textContent = n + ' of ' + total + ' courses complete.';
     pbar.style.width = (total ? n / total * 100 : 0) + '%';
     document.getElementById('preStart').hidden = preDone;
+    var pb = document.querySelector('.pb-soon'); if (pb){ if (preDone) pb.textContent = 'Coming soon'; else pb.innerHTML = LOCK + 'Locked'; }
     document.querySelectorAll('.aids li .soon').forEach(function(sp){
       if (!sp.dataset.label) sp.dataset.label = sp.textContent;
       if (preDone) sp.textContent = sp.dataset.label; else sp.innerHTML = LOCK + 'Locked';

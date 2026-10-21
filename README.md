@@ -14,7 +14,7 @@ Kept deliberately short:
 
 1. **Hero**: what an HCM is (people embedded in the business who own the people work for their area) and what the Academy is for: learn, share, meet, get answers.
 2. **Choose a topic**: a progress panel, a search box that searches every topic, and a row of horizontal topic tabs (built from the cards, so a new card gets a tab automatically; its `data-short` attribute is the tab label, and each tab shows its completed/total count). One topic shows at a time, full width, with training topics and job aids side by side. There are eight topics (Start Here plus seven topic areas). Each card, or each subsection in it (Compensation Management; Position Management, Assignment Changes, Offboarding), lists its training topics. Job aids are not listed separately: every course carries its own printable job aid.
-   Below the cards, "Help for every topic" lists the resource types planned across all topics.
+   Below the cards, a one-line "HCM Playbook" strip marks where quick references will live (coming soon). Planned resource types: decision trees, process maps, scenario exercises, an FAQ, and fixes for common errors.
 3. **Footer**: contact and accessibility statement.
 
 ## Assessments and completion
