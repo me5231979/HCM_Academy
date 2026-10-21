@@ -876,6 +876,6 @@ _UKG_SLUGS = {"weekly-time-card-check", "review-approve-time-cards", "enter-pto"
 VERIFY = {k: (v if k in _UKG_SLUGS else list(v) + ["that a regular HCM (not a super-user) sees Our Workforce and this quick action"]) for k, v in VERIFY.items()}
 
 # Courses drafted from Oracle documentation and official sources (see tools/courses_researched.py).
-from courses_researched import COURSES_R, VERIFY_R  # noqa: E402
-COURSES += COURSES_R
+from courses_researched import COURSES_R, VERIFY_R, PARKED_R  # noqa: E402
+COURSES += [c for c in COURSES_R if c["slug"] not in PARKED_R]
 VERIFY.update(VERIFY_R)

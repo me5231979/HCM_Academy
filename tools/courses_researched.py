@@ -1,5 +1,6 @@
 # Micro-courses drafted from Oracle documentation and official sources (not SME sessions).
-# Each carries a draft note until a Vanderbilt SME reviews it. Edit here, then run:
+# Each carries a draft note until a Vanderbilt SME reviews it. Slugs in PARKED_R are
+# kept as drafts only (not built); their landing rows stay Coming soon until there is content. Edit here, then run:
 #   python3 tools/build_courses.py
 COURSES_R = [{'slug': 'hcm-structure',
   'topic': 'start',
@@ -2887,3 +2888,4 @@ VERIFY_R = {'hcm-structure': ['Which person types and work relationship types Va
  'student-faculty-approvals': ['Approval routing for each student and faculty transaction type.',
                                'Who has Transaction Console and Quick Convert access at Vanderbilt.',
                                'Whether approval notifications reach HCMs by email as well as the bell.']}
+PARKED_R = ['shared-calendar', 'confidentiality-agreement', 'hire-union', 'out-of-state-risk', 'pay-transparency', 'payroll-cadence-by-state', 'regional-benefits-leave', 'leave-status-updates', 'leave-monthly-vs-biweekly', 'student-expense-only', 'service-free-stipend', 'faculty-hiring-process', 'hire-faculty', 'emeritus', 'ferdc', 'student-faculty-approvals']
