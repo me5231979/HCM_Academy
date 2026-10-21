@@ -63,10 +63,15 @@ def page(c, n, total):
             f'<li class="dstep"><h3><span class="dn">{i:02d}</span>{E(x["t"])}</h3><p>{E(x["d"])}</p>'
             f'<img src="img/{E(x["img"])}" alt="Screenshot: {E(x["t"].rstrip("."))}" width="1400" height="1138" loading="lazy" /></li>'
             for i, x in enumerate(det["steps"], 1))
+        em = det.get("embed"); embed = ""
+        if em:
+            embed = (f'<figure class="video doc"><div class="frame"><iframe src="{E(em["src"])}" title="Video and steps: {E(em["title"])}" loading="lazy" '
+                     'allow="autoplay; fullscreen; clipboard-write" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>'
+                     f'<figcaption>Interactive version: watch the video and follow the steps. <a href="{E(em["link"])}" target="_blank" rel="noopener">Open it in Guidde<span class="sr"> (opens in a new tab)</span></a>.</figcaption></figure>')
         detailed_html = (f'<article class="jobaid ja-detail" aria-label="Detailed job aid">'
                          f'<div class="ja-head"><img src="../../assets/img/vu-lockup-black.png" alt="Vanderbilt University" width="100" height="26" /><span class="mono">HCM Academy detailed job aid &middot; {E(c["topic_label"])}</span></div>'
                          f'<h2>{E(det["title"])}</h2><p class="ja-use">Step by step with screenshots. {E(det["source"])}</p>'
-                         f'<ol class="dsteps">{items}</ol>'
+                         f'{embed}<ol class="dsteps">{items}</ol>'
                          f'<div class="ja-foot"><span>V.01 draft.</span><span>Questions: pcb@vanderbilt.edu</span></div></article>')
         ja_intro = "<p>Two parts: a one-page <b>quick guide</b>, then a <b>detailed job aid</b> with a screenshot for every step. Print either one, or save it as a PDF.</p>"
         ja_buttons = f'<button type="button" class="btn" data-print="quick">{PRINT}Print quick guide</button><button type="button" class="btn ghost" data-print>{PRINT}Print quick guide and detailed job aid</button>'

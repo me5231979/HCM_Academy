@@ -429,7 +429,10 @@ dict(slug="weekly-time-card-check", topic="payroll", topic_label="Payroll & Time
  title_pre="The weekly time card", title_em="check", name="Weekly time card check",
  system="UKG (Kronos)", time="6 min", sources=[JEN, BRIANA], pending="Steps 3 and 4 fill in once Jennifer Garcia's UKG walkthrough is recorded.",
  video=dict(src="https://embed.app.guidde.com/playbooks/3dMkzbLwg6tb8LikiegtXm?mode=videoOnly", title="Weekly time card check in UKG"),
- detailed=dict(title="Managing time cards and PTO in UKG", source="Guidde walkthrough by Briana Knowles. Names, IDs, and usernames are blurred.", steps=[
+ detailed=dict(title="Managing time cards and PTO in UKG", source="Guidde walkthrough by Briana Knowles. Names, IDs, and usernames are blurred.",
+  embed=dict(src="https://embed.app.guidde.com/playbooks/3dMkzbLwg6tb8LikiegtXm?mode=videoAndDoc", title="Managing Time Cards and PTO in Kronos UKG (video and steps)",
+             link="https://app.guidde.com/share/playbooks/3dMkzbLwg6tb8LikiegtXm?mode=videoAndDoc"),
+  steps=[
   dict(t="Open UKG from Oracle.", d="On the Oracle Home page, on the Me tab, under Apps, select UKG (Kronos) Timesheets.", img="step-01.jpg"),
   dict(t="Open the pay period list.", d="On the UKG Home page, scroll down to Links and select By Pay Period. Timesheets (By Pay Period) opens on the most recently completed pay period.", img="step-02.jpg"),
   dict(t="Filter to your employees.", d="Use the filter row under the column headings. In this example, type the business unit under Business Unit, then select Refresh (the circular arrow at the right) to update the list.", img="step-03.jpg"),
