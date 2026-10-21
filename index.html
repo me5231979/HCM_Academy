@@ -48,6 +48,14 @@ header .wrap{ display:flex; align-items:center; justify-content:space-between; g
 .logo span{ color:var(--gold); border-left:1px solid rgba(207,174,112,.35); padding-left:14px; white-space:nowrap; }
 header .cta{ background:var(--gold); color:var(--black); text-decoration:none; font-weight:600; font-size:.9rem; padding:11px 20px; border-radius:4px; white-space:nowrap; }
 header .cta:hover{ background:var(--highlight); }
+.hdr-actions{ display:flex; gap:10px; }
+header .cta.ghost,.hbtn.ghost{ background:transparent; color:var(--gold); border:1px solid var(--gold); }
+header .cta.ghost:hover,.hbtn.ghost:hover{ background:rgba(207,174,112,.12); }
+.hero-actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+.hbtn{ display:inline-flex; align-items:center; min-height:46px; padding:11px 22px; border-radius:4px; background:var(--gold); color:var(--black); border:1px solid var(--gold); font-weight:600; font-size:.95rem; text-decoration:none; }
+.hbtn:hover{ background:var(--highlight); }
+.pb-go[aria-disabled="true"]{ cursor:not-allowed; }
+@media (max-width:600px){ header .cta.ghost{ display:none; } }
 
 /* hero: the HCM role and what the Academy is for */
 .dark{ background:var(--black); color:#fff; }
@@ -336,7 +344,7 @@ footer a{ color:var(--gold); }
       <img src="assets/img/vu-lockup-white.png" alt="" width="138" height="36" />
       <span class="mono" aria-hidden="true">HCM Academy</span>
     </a>
-    <a class="cta" href="#topics">Browse courses</a>
+    <div class="hdr-actions"><a class="cta ghost pb-go" href="playbook/">HCM Playbook</a><a class="cta" href="#topics">Browse courses</a></div>
   </div>
 </header>
 
@@ -347,6 +355,7 @@ footer a{ color:var(--gold); }
       <h1 id="heroTitle">The people behind every hire, paycheck, and <em>change</em>.</h1>
       <p><b>HCMs work inside the business.</b> They sit in schools, departments, and units across Vanderbilt, close to the managers and employees they support, and they own the people work for their area: hiring, pay and timecards, positions and transfers, leave, costing, student jobs, and records and reporting.</p>
       <p>HCM Academy is your place as an HCM. Come here to learn the work, share what works, meet the people doing the same job across campus, and get answers when something comes up.</p>
+      <div class="hero-actions"><a class="hbtn" href="#topics">Browse courses</a><a class="hbtn ghost pb-go" href="playbook/">Open the HCM Playbook</a></div>
       <ul class="pillars" aria-label="What HCM Academy is for">
         <li><span class="mono">Learn</span><span>Courses for each part of the role</span></li>
         <li><span class="mono">Share</span><span>Tips and fixes from other HCMs</span></li>
@@ -792,8 +801,8 @@ footer a{ color:var(--gold); }
   });
 
   /* until the pre-assessment is taken, course rows point the learner back to it */
-  document.querySelector('.grid').addEventListener('click', function(e){
-    var b = e.target.closest('.course-btn[aria-disabled="true"]'); if (!b) return;
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('.course-btn[aria-disabled="true"],.pb-go[aria-disabled="true"]'); if (!b) return;
     e.preventDefault(); e.stopImmediatePropagation();
     var box = document.getElementById('preStart'), go = box.querySelector('a');
     box.classList.add('nudge'); setTimeout(function(){ box.classList.remove('nudge'); }, 1600);
@@ -816,6 +825,7 @@ footer a{ color:var(--gold); }
     ptext.textContent = n + ' of ' + total + ' courses complete.';
     pbar.style.width = (total ? n / total * 100 : 0) + '%';
     document.getElementById('preStart').hidden = preDone;
+    document.querySelectorAll('.pb-go').forEach(function(a){ if (preDone){ a.removeAttribute('aria-disabled'); a.removeAttribute('aria-describedby'); } else { a.setAttribute('aria-disabled', 'true'); a.setAttribute('aria-describedby', 'preStartText'); } });
     var pb = document.querySelector('.pb-soon'), pbl = document.querySelector('.pb-links'); if (pb){ pb.hidden = preDone; pbl.hidden = !preDone; if (!preDone) pb.innerHTML = LOCK + 'Locked'; }
     document.querySelectorAll('.aids li .soon').forEach(function(sp){
       if (!sp.dataset.label) sp.dataset.label = sp.textContent;
