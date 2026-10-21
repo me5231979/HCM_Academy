@@ -115,3 +115,9 @@ the Weekly time card check detailed job aid), and a back cover.
   `python3 tools/build_playbook.py && node tools/render_playbook.cjs`
   The renderer tightens type on any page that would overflow and reports pages that
   still do. Courses marked Pending SME review carry that tag in the playbook too.
+
+## Topic audit PDF
+
+`docs/HCM_Academy_Topic_Audit.pdf`: every topic, subtopic, and course topic with status,
+source, time, and Keep / Change / Remove boxes plus note lines, for reviewers to mark up.
+Rebuild: `python3 tools/build_topic_audit.py && node tools/render_topic_audit.cjs`
