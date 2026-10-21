@@ -101,3 +101,16 @@ GitHub Pages: Settings, Pages, Deploy from a branch, pick the branch and `/ (roo
 The site then lives at `https://me5231979.github.io/HCM_Academy/`.
 
 An internal training prototype, not an official Vanderbilt University site.
+
+## HCM Playbook
+
+Every course job aid combined into one branded, printable book: cover, how to use,
+contents with page numbers, a divider for each topic, one page per quick guide (plus
+the Weekly time card check detailed job aid), and a back cover.
+
+- Web view: `playbook/index.html`; PDF: `playbook/HCM_Playbook.pdf` (linked from the
+  HCM Playbook strip on the landing page once the pre-assessment is taken).
+- Rebuild after any course change:
+  `python3 tools/build_playbook.py && node tools/render_playbook.cjs`
+  The renderer tightens type on any page that would overflow and reports pages that
+  still do. Courses marked Pending SME review carry that tag in the playbook too.
