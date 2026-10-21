@@ -37,6 +37,12 @@ def page(c, n, total):
     pending = f'<p class="draft"><b>V.01 draft</b>{E(c["pending"])}</p>' if c.get("pending") else \
               '<p class="draft"><b>V.01 draft</b>Built from SME sessions and Vanderbilt guides. Validate with the HCM group before release.</p>'
     intro = "".join(f"<p>{E(p)}</p>" for p in c["intro"])
+    video = ""
+    if c.get("video"):
+        v = c["video"]
+        video = (f'<figure class="video"><div class="frame"><iframe src="{E(v["src"])}" title="Video: {E(v["title"])}" loading="lazy" '
+                 'allow="autoplay; fullscreen; clipboard-write" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>'
+                 '<figcaption>Watch first, then read the details below.</figcaption></figure>')
     vf = VERIFY.get(c["slug"])
     if vf:
         pending += f'<p class="draft"><b>Screen check</b>Confirm in Vanderbilt\'s Oracle or UKG during a recorded demo: {E("; ".join(vf))}.</p>'
@@ -78,7 +84,7 @@ def page(c, n, total):
   <div class="wrap">
     <p class="mono crumb">{E(c["topic_label"])} &middot; Course {n} of {total}</p>
     <h1 id="t">{title_html}</h1>
-    <ul class="meta" aria-label="Course details"><li class="v">V.01 draft</li><li>{E(c["time"])}</li><li>{E(c["system"])}</li><li>3-question check</li><li>Printable job aid</li></ul>
+    <ul class="meta" aria-label="Course details"><li class="v">V.01 draft</li><li>{E(c["time"])}</li>{'<li>Video</li>' if c.get("video") else ''}<li>{E(c["system"])}</li><li>3-question check</li><li>Printable job aid</li></ul>
   </div>
   <nav class="parts" aria-label="Course parts"><ol>
     <li><a href="#intro"><span>1</span>Intro</a></li><li><a href="#steps"><span>2</span>Walk through</a></li><li><a href="#check"><span>3</span>Check</a></li><li><a href="#jobaid"><span>4</span>Job aid</a></li>
@@ -96,6 +102,7 @@ def page(c, n, total):
     <section class="part" id="intro" aria-labelledby="h1">
       <p class="mono num">1 &middot; Intro</p>
       <h2 id="h1">When to <em>use</em> it.</h2>
+      {video}
       {intro}
       <p class="use"><b>Use this when</b>{E(c["use_when"])}</p>
     </section>

@@ -63,6 +63,7 @@ dict(slug="hcm-role-in-payroll", topic="payroll", topic_label="Payroll & Timecar
 dict(slug="weekly-time-card-check", topic="payroll", topic_label="Payroll & Timecards",
  title_pre="The weekly time card", title_em="check", name="Weekly time card check",
  system="UKG (Kronos)", time="6 min", sources=[JEN, BRIANA], pending="Steps 3 and 4 fill in once Jennifer Garcia's UKG walkthrough is recorded.",
+ video=dict(src="https://embed.app.guidde.com/playbooks/3dMkzbLwg6tb8LikiegtXm?mode=videoOnly", title="Weekly time card check in UKG"),
  intro=["If you support weekly or biweekly employees, run this check every week so no one is paid late or wrong.",
         "In UKG, employees and managers approve time cards, then payroll signs them off before payroll runs. Your check makes sure nothing is stuck before sign-off."],
  use_when="Every week, for your weekly and biweekly (non-exempt) employees.",

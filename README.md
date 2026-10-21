@@ -53,6 +53,11 @@ landing page (shared `localStorage` key `hcm-done`, id `c-<slug>`).
   `python3 tools/build_courses.py` to regenerate every page. The script also
   updates each course's row on the landing page (name, overview, time).
 - Shared look and behavior: `courses/course.css`, `courses/course.js`.
+- **Videos**: to start a course with a Guidde (or other) embed, add
+  `video=dict(src="<embed URL>", title="<what it shows>")` to that course in
+  `tools/course_content.py` and rebuild. The video appears at the top of the
+  intro (16:9, full width, hidden when printing) and the course header lists
+  "Video". First one: Weekly time card check.
 - Sources: Briana Knowles (Oct 20), Alex Enferadi (Oct 20), Jennifer Garcia
   (Oct 19) sessions; the Costing for Persons guide (2022); the Document Records
   guide; the Award Compensation Elements guide (2023). Open items are flagged

@@ -150,10 +150,15 @@ footer a{ color:var(--gold); }
 @media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } *{ transition:none !important; } }
 
 /* print: only the job aid, one page */
+/* embedded walkthrough video (16:9) */
+.video{ margin-top:18px; }
+.video .frame{ position:relative; aspect-ratio:16 / 9; background:var(--black); border-radius:6px; overflow:hidden; box-shadow:var(--shadow); }
+.video iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+.video figcaption{ margin-top:8px; font-size:.85rem; color:rgba(28,28,28,.75); }
 @media print{
   @page{ size:letter; margin:.4in; }
   body{ background:#fff; font-size:10pt; }
-  header.top,.hero,nav.parts,footer,.skip,.part:not(#jobaid),#jobaid > :not(.ja-preview),.draft{ display:none !important; }
+  header.top,.hero,nav.parts,footer,.skip,.video,.part:not(#jobaid),#jobaid > :not(.ja-preview),.draft{ display:none !important; }
   #jobaid{ border:0; box-shadow:none; padding:0; margin:0; }
   .ja-preview{ border:0; padding:0; background:#fff; margin:0; }
   .jobaid{ border:0; padding:0; font-size:8.5pt; line-height:1.3; }
