@@ -128,7 +128,7 @@ Rebuild: `python3 tools/build_topic_audit.py && node tools/render_topic_audit.cj
 ## Section audit workbook (sign up, then audit)
 
 `docs/HCM_Academy_Section_Audit.xlsx` (built by `python3 tools/build_section_audit.py`):
-Start here (instructions), Sign-up (two reviewer slots per section, target date, status,
+Start here (instructions), Sign-up (up to five reviewer slots per section, a signed-up count, target date, status,
 progress formula, section verdict), one tab per section with every course topic (Decision:
 Keep / Change / Remove / Merge, Merge with, accuracy of steps, job aid, and quiz, notes,
 priority, PCB status), and a Summary with live counts. Share it from SharePoint or OneDrive

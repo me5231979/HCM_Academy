@@ -106,24 +106,38 @@ for sec in SECTIONS:
 
 def q(sec): return "'" + sec["sheet"].replace("'", "''") + "'"
 
-# Sign-up
-SU_COLS = [("Section", 30), ("Course topics", 9), ("Live / coming soon", 13), ("Est. review time", 11), ("Reviewer 1", 18), ("Reviewer 1 email", 24),
-           ("Reviewer 2", 18), ("Reviewer 2 email", 24), ("Target date", 12), ("Audit status", 13), ("Audited so far", 11), ("Section verdict", 20), ("Section notes", 40), ("Go to section", 12)]
-SU_IN = {"Reviewer 1", "Reviewer 1 email", "Reviewer 2", "Reviewer 2 email", "Target date", "Audit status", "Section verdict", "Section notes"}
+# Sign-up: up to MAX_REVIEWERS reviewers per section
+MAX_REVIEWERS = 5
+REV = [(f"Reviewer {k}", 18) for k in range(1, MAX_REVIEWERS + 1)]
+SU_COLS = ([("Section", 30), ("Course topics", 9), ("Live / coming soon", 13), ("Est. review time", 11)]
+           + [x for k in range(1, MAX_REVIEWERS + 1) for x in ((f"Reviewer {k}", 18), (f"Reviewer {k} email", 24))]
+           + [("Reviewers signed up", 10), ("Target date", 12), ("Audit status", 13), ("Audited so far", 11), ("Section verdict", 20), ("Section notes", 40), ("Go to section", 12)])
+SU_IN = {n for n, _ in SU_COLS if n.startswith("Reviewer ") and n != "Reviewers signed up"} | {"Target date", "Audit status", "Section verdict", "Section notes"}
+COL = {n: i + 1 for i, (n, _) in enumerate(SU_COLS)}
+LET = lambda n: su.cell(row=1, column=COL[n]).column_letter
 su = wb.create_sheet("Sign-up", 0); header(su, SU_COLS); su.freeze_panes = "B2"
+name_lets = None
 for i, sec in enumerate(SECTIONS, 2):
     live = sum(1 for r in sec["rows"] if r["slug"])
     mins = sum(int(re.match(r"\d+", r["time"]).group()) for r in sec["rows"] if r["slug"] and re.match(r"\d+", r["time"]))
-    su.append([f'{sec["no"]} {sec["name"]}', sec["n"], f'{live} / {sec["n"] - live}', f"about {round(mins * 1.5 / 5) * 5} min", "", "", "", "", "", "Not started",
-               f'=IFERROR(COUNTA({q(sec)}!{sec["dec_col"]}2:{sec["dec_col"]}{sec["n"]+1})/{sec["n"]},0)', "", "", "Open tab"])
-    link = su.cell(row=i, column=14); link.hyperlink = f"#{q(sec)}!A1"
-style_rows(su, SU_COLS, SU_IN, 2, len(SECTIONS) + 1)
-for r in range(2, len(SECTIONS) + 2):
-    su.cell(row=r, column=11).number_format = "0%"; su.cell(row=r, column=14).font = F(color="1F4E8C", underline="single")
-    su.cell(row=r, column=9).number_format = "mm/dd/yyyy"
-dropdown(su, SU_COLS, "Audit status", REF["E"], 2, len(SECTIONS) + 1); dropdown(su, SU_COLS, "Section verdict", REF["F"], 2, len(SECTIONS) + 1)
-su.conditional_formatting.add(f"J2:J{len(SECTIONS)+1}", CellIsRule(operator="equal", formula=['"Done"'], fill=PatternFill("solid", fgColor="E3F0E4")))
-su.conditional_formatting.add(f"E2:E{len(SECTIONS)+1}", FormulaRule(formula=["LEN(E2)=0"], fill=PatternFill("solid", fgColor="FBEFD5")))
+    row = [""] * len(SU_COLS)
+    row[COL["Section"] - 1] = f'{sec["no"]} {sec["name"]}'; row[COL["Course topics"] - 1] = sec["n"]
+    row[COL["Live / coming soon"] - 1] = f'{live} / {sec["n"] - live}'; row[COL["Est. review time"] - 1] = f"about {round(mins * 1.5 / 5) * 5} min"
+    row[COL["Audit status"] - 1] = "Not started"; row[COL["Go to section"] - 1] = "Open tab"
+    row[COL["Audited so far"] - 1] = f'=IFERROR(COUNTA({q(sec)}!{sec["dec_col"]}2:{sec["dec_col"]}{sec["n"]+1})/{sec["n"]},0)'
+    su.append(row)
+    name_lets = [LET(f"Reviewer {k}") for k in range(1, MAX_REVIEWERS + 1)]
+    su.cell(row=i, column=COL["Reviewers signed up"], value="=" + "+".join(f'(LEN({c}{i})>0)' for c in name_lets) + f'&" of {MAX_REVIEWERS}"')
+    su.cell(row=i, column=COL["Go to section"]).hyperlink = f"#{q(sec)}!A1"
+last = len(SECTIONS) + 1
+style_rows(su, SU_COLS, SU_IN, 2, last)
+for r in range(2, last + 1):
+    su.cell(row=r, column=COL["Audited so far"]).number_format = "0%"; su.cell(row=r, column=COL["Target date"]).number_format = "mm/dd/yyyy"
+    su.cell(row=r, column=COL["Go to section"]).font = F(color="1F4E8C", underline="single")
+dropdown(su, SU_COLS, "Audit status", REF["E"], 2, last); dropdown(su, SU_COLS, "Section verdict", REF["F"], 2, last)
+su.conditional_formatting.add(f'{LET("Audit status")}2:{LET("Audit status")}{last}', CellIsRule(operator="equal", formula=['"Done"'], fill=PatternFill("solid", fgColor="E3F0E4")))
+for c in name_lets:   # highlight open reviewer slots
+    su.conditional_formatting.add(f"{c}2:{c}{last}", FormulaRule(formula=[f"LEN({c}2)=0"], fill=PatternFill("solid", fgColor="FBEFD5")))
 su.row_dimensions[1].height = 34
 
 # Summary
@@ -131,9 +145,9 @@ SM_COLS = [("Section", 30), ("Reviewers", 26), ("Course topics", 9), ("Audited",
 sm = wb.create_sheet("Summary"); header(sm, SM_COLS); sm.freeze_panes = "B2"
 for i, sec in enumerate(SECTIONS, 2):
     d = f'{q(sec)}!{sec["dec_col"]}2:{sec["dec_col"]}{sec["n"]+1}'; pr = f'{q(sec)}!P2:P{sec["n"]+1}'
-    sm.append([f'{sec["no"]} {sec["name"]}', f"=TRIM('Sign-up'!E{i}&IF(LEN('Sign-up'!G{i})>0,\", \"&'Sign-up'!G{i},\"\"))", sec["n"], f"=COUNTA({d})",
+    sm.append([f'{sec["no"]} {sec["name"]}', "=MID(" + "&".join(f"IF(LEN('Sign-up'!{c}{i})>0,\", \"&'Sign-up'!{c}{i},\"\")" for c in name_lets) + ",3,500)", sec["n"], f"=COUNTA({d})",
                f"=IFERROR(D{i}/C{i},0)", f'=COUNTIF({d},"Keep")', f'=COUNTIF({d},"Change")', f'=COUNTIF({d},"Remove")', f'=COUNTIF({d},"Merge")',
-               f'=COUNTIF({pr},"High")', f"='Sign-up'!J{i}"])
+               f'=COUNTIF({pr},"High")', f"='Sign-up'!{LET('Audit status')}{i}"])
 t = len(SECTIONS) + 2
 sm.append(["All sections", "", f"=SUM(C2:C{t-1})", f"=SUM(D2:D{t-1})", f"=IFERROR(D{t}/C{t},0)"] + [f"=SUM({c}2:{c}{t-1})" for c in "FGHIJ"] + [""])
 style_rows(sm, SM_COLS, set(), 2, t)
@@ -144,7 +158,7 @@ for c in range(1, len(SM_COLS) + 1): sm.cell(row=t, column=c).font = F(bold=True
 H = wb.create_sheet("Start here", 0); H.column_dimensions["A"].width = 6; H.column_dimensions["B"].width = 110
 H["B1"] = "HCM Academy section audit"; H["B1"].font = Font(name="Georgia", size=22, color=BLACK)
 H["B2"] = "Sign up for a section, then audit every course topic in it. V.01 draft."; H["B2"].font = F(italic=True, color="5E5B55")
-steps = [("1", "Sign up. On the Sign-up tab, put your name and email in Reviewer 1 or Reviewer 2 for a section that still has an open slot (highlighted). Two reviewers per section, at most."),
+steps = [("1", "Sign up. On the Sign-up tab, put your name and email in the next open Reviewer slot (highlighted) for a section. Up to five reviewers per section; split the course topics between you and put your name in the Reviewer column of each row you audit."),
          ("2", "Set a target date and change Audit status to In progress."),
          ("3", "Open your section's tab (Go to section link). For each course topic, open the course (Link), then fill in the cream columns: your name, a Decision (Keep, Change, Remove, Merge), Merge with (if Merge), whether the steps, job aid, and quiz are accurate, and your notes."),
          ("4", "'Open items to confirm' lists what we already know needs a Vanderbilt check. Answer those in your notes when you can."),
