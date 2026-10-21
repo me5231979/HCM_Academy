@@ -29,7 +29,7 @@ h1,h2,h3{ font-weight:400; }
 .sum li i{ font-style:normal; font:700 9pt var(--cond); color:var(--mute); }
 .legend{ margin-top:.22in; font-size:8pt; color:var(--mute); line-height:1.9; }
 .sign{ position:absolute; bottom:.35in; left:0; right:0; display:grid; grid-template-columns:2fr 2fr 1fr; gap:.3in; }
-.sign div{ border-top:.8pt solid var(--black); padding-top:4px; font:700 7.5pt var(--cond); letter-spacing:.12em; text-transform:uppercase; color:var(--mute); }
+.sign > div{ padding-top:0; font:700 7.5pt var(--cond); letter-spacing:.12em; text-transform:uppercase; color:var(--mute); }
 .ret{ position:absolute; bottom:0; font-size:8pt; color:var(--mute); }
 .topic{ break-before:page; }
 .thead{ display:flex; gap:.2in; align-items:flex-end; border-bottom:1.5pt solid var(--black); padding-bottom:.08in; }
@@ -60,3 +60,9 @@ td.tm{ white-space:nowrap; color:var(--mute); }
 .bx{ display:inline-block; width:9px; height:9px; border:.8pt solid var(--black); margin:0 3px -1px 6px; }
 td.aud .bx:first-child{ margin-left:0; }
 td.aud .note{ margin-top:7px; height:.2in; border-bottom:.6pt solid #B9B1A2; }
+
+/* hidden position markers for the fillable-form pass (removed from the final PDF) */
+.bx,.note,.fl{ position:relative; }
+.tok{ position:absolute; left:0; top:0; font:normal 1px/1 Arial,sans-serif; letter-spacing:0; text-transform:none; color:#fff; white-space:nowrap; }
+.tok.end{ left:auto; right:0; }
+.fl{ height:.3in; border-bottom:.8pt solid var(--black); margin-bottom:4px; }

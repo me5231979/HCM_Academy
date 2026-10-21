@@ -41,6 +41,9 @@ for m in re.finditer(r'<section class="card[^"]*" id="([a-z]+)" data-short="([^"
     topics.append(t)
 total = sum(counts.values())
 
+def box(fid): return f'<span class="bx"><i class="tok">QB{fid}</i></span>'
+def note(fid): return f'<div class="note"><i class="tok">QA{fid}</i><i class="tok end">QZ{fid}</i></div>'
+
 def rows_html(rows, n0):
     out, n = [], n0
     for r in rows:
@@ -52,10 +55,12 @@ def rows_html(rows, n0):
         status = "Live" if r["slug"] else "Coming soon"
         out.append(f'<tr><td class="no">{n}</td><td class="ti{" in" if r["sub_item"] else ""}"><b>{E(r["title"])}</b><span>{E(r["desc"])}</span></td>'
                    f'<td><span class="st {"live" if r["slug"] else "soon"}">{status}</span></td><td><span class="src {r["src"]}">{E(r["label"])}</span></td>'
-                   f'<td class="tm">{E(r["time"])}</td><td class="aud"><span class="bx"></span>Keep <span class="bx"></span>Change <span class="bx"></span>Remove<div class="note"></div></td></tr>')
+                   f'<td class="tm">{E(r["time"])}</td><td class="aud">{box(f"C{n:03d}K")}Keep {box(f"C{n:03d}C")}Change {box(f"C{n:03d}R")}Remove{note(f"C{n:03d}N")}</td></tr>')
+        FIELDS[f"C{n:03d}"] = r["title"]
     return "\n".join(out), n
 
 body, n = [], 0
+FIELDS = {}
 for t in topics:
     live = sum(1 for s in t["subs"] for r in s["rows"] if r.get("slug")); allr = sum(1 for s in t["subs"] for r in s["rows"] if "title" in r and not r["see"])
     secs = []
@@ -64,7 +69,7 @@ for t in topics:
         secs.append((f'<h3>{E(s["name"])}</h3>' if s["name"] else "") +
                     '<table><thead><tr><th>#</th><th>Course topic</th><th>Status</th><th>Source</th><th>Time</th><th>Audit</th></tr></thead><tbody>' + h + '</tbody></table>')
     body.append(f'<section class="topic"><div class="thead"><span class="tno">{E(t["no"])}</span><div><h2>{E(t["name"])}</h2><p>{E(t["blurb"])} <b>{live} of {allr} live.</b></p></div></div>'
-                f'<div class="tq">Topic level: <span class="bx"></span>Right topic <span class="bx"></span>Rename <span class="bx"></span>Reorder <span class="bx"></span>Missing subtopics<div class="note"></div></div>'
+                f'<div class="tq">Topic level: {box("T"+t["no"]+"A")}Right topic {box("T"+t["no"]+"B")}Rename {box("T"+t["no"]+"C")}Reorder {box("T"+t["no"]+"D")}Missing subtopics{note("T"+t["no"]+"N")}</div>'
                 + "".join(secs) + '</section>')
 
 summary = "".join(f'<li><b>{E(t["no"])}</b><span>{E(t["name"])}</span><i>{sum(1 for s in t["subs"] for r in s["rows"] if r.get("slug"))} / {sum(1 for s in t["subs"] for r in s["rows"] if "title" in r and not r["see"])}</i></li>' for t in topics)
@@ -82,11 +87,13 @@ doc = f'''<!DOCTYPE html>
   <div class="legend"><span class="src vu">Vanderbilt SME sources</span> Built from SME sessions, training transcripts, Vanderbilt guides, or the Guidde walkthrough.
     <span class="src oracle">Oracle docs, pending SME review</span> Built from Oracle documentation and official sources; confirm it matches Vanderbilt practice.
     <span class="src none">No content yet</span> Listed on the site as Coming soon.</div>
-  <div class="sign"><div>Reviewer</div><div>Area or role</div><div>Date</div></div>
+  <div class="sign"><div><div class="fl"><i class="tok">QAS1</i><i class="tok end">QZS1</i></div>Reviewer</div><div><div class="fl"><i class="tok">QAS2</i><i class="tok end">QZS2</i></div>Area or role</div><div><div class="fl"><i class="tok">QAS3</i><i class="tok end">QZS3</i></div>Date</div></div>
   <p class="ret">Return to pcb@vanderbilt.edu. Online: me5231979.github.io/HCM_Academy</p>
 </section>
 {chr(10).join(body)}
 </body></html>'''
 os.makedirs(os.path.join(ROOT, "docs", "audit"), exist_ok=True)
 open(os.path.join(ROOT, "docs", "audit", "index.html"), "w", encoding="utf-8").write(doc)
+import json
+json.dump({**FIELDS, **{f"T{t['no']}": t["name"] for t in topics}}, open(os.path.join(ROOT, "docs", "audit", "fields.json"), "w"))
 print(f"audit: {len(topics)} topics, {total} course topics ({counts})")

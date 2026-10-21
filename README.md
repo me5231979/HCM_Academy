@@ -120,4 +120,7 @@ the Weekly time card check detailed job aid), and a back cover.
 
 `docs/HCM_Academy_Topic_Audit.pdf`: every topic, subtopic, and course topic with status,
 source, time, and Keep / Change / Remove boxes plus note lines, for reviewers to mark up.
-Rebuild: `python3 tools/build_topic_audit.py && node tools/render_topic_audit.cjs`
+The PDF is a fillable form: 269 clickable checkboxes and 90 text fields (notes per course topic
+and per topic, plus reviewer, area, and date).
+Rebuild: `python3 tools/build_topic_audit.py && node tools/render_topic_audit.cjs && python3 tools/make_audit_fillable.py`
+(the last step needs PyMuPDF: `pip install pymupdf`).
