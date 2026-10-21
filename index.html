@@ -617,8 +617,7 @@ footer a{ color:var(--gold); }
   <div class="mbody">
     <p class="mono">Before we begin</p>
     <h2 id="preTitle" tabindex="-1">Take the pre-assessment.</h2>
-    <p>A few questions on each subject show what you already know, so you can focus your time where it helps most. It is not graded.</p>
-    <p class="mock-note">Mock-up: these are placeholder questions, one per subject. Real questions will replace them.</p>
+    <p>Two questions on each subject show what you already know, so you can focus your time where it helps most. It is not graded.</p>
     <form id="preForm" novalidate><div class="qs" id="preQs"></div>
       <div class="mact"><button type="submit" class="btn">Submit pre-assessment</button><button type="button" class="btn ghost" id="preSkip">Skip for now (demo only)</button><span class="merr" id="preErr" role="alert"></span></div>
     </form>
@@ -631,7 +630,6 @@ footer a{ color:var(--gold); }
     <p class="mono">Final assessment</p>
     <h2 id="finTitle" tabindex="-1">You finished every course.</h2>
     <p>Answer the questions below. You need a score of 90% or higher to complete HCM Academy. You can retake it if you need to.</p>
-    <p class="mock-note">Mock-up: placeholder questions. Pick &ldquo;Sample correct answer&rdquo; to see a pass, or miss two to see the retake screen.</p>
     <form id="finForm" novalidate><div class="qs" id="finQs"></div>
       <div class="mact"><button type="submit" class="btn">Submit final assessment</button><button type="button" class="btn ghost" id="finLater">Close</button><span class="merr" id="finErr" role="alert"></span></div>
     </form>
@@ -725,12 +723,13 @@ footer a{ color:var(--gold); }
   update();
 })();
 </script>
+<script src="assets/assessments.js"></script>
 <script>
 /* Mock-up: pre-assessment, course completion, final assessment (90% to pass).
    Saved in this browser only (localStorage hcm-*); nothing is sent anywhere. */
 (function(){
   'use strict';
-  var PASS = 0.9, FINAL_Q = 10;
+  var BANK = window.HCM_ASSESS || { pass:0.9, pre:[], final:[] }, PASS = BANK.pass;
   var store = {
     get: function(k, d){ try { var v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch(e){ return d; } },
     set: function(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} },
@@ -795,28 +794,30 @@ footer a{ color:var(--gold); }
     if (!wasAll && done.length === buttons.length && !finalPassed) openFinal();
   }
 
-  /* question builder (placeholder content) */
-  function buildQs(box, prefix, count){
+  /* question builder: questions come from assets/assessments.js; option order is shuffled each time */
+  function topicName(id){ var t = topics.filter(function(x){ return x.id === id; })[0]; return t ? t.name : id; }
+  function shuffle(a){ for (var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function buildQs(box, prefix, list){
     box.innerHTML = '';
-    for (var i = 0; i < count; i++){
-      var tp = topics[i % topics.length], fs = document.createElement('fieldset'), lg = document.createElement('legend');
+    list.forEach(function(q, i){
+      var fs = document.createElement('fieldset'), lg = document.createElement('legend');
       lg.innerHTML = '<span class="t"></span>';
-      lg.querySelector('.t').textContent = tp.name;
-      lg.appendChild(document.createTextNode('Question ' + (i + 1) + ': placeholder question about this subject.'));
-      fs.appendChild(lg); fs.dataset.topic = tp.name;
-      ['Sample correct answer','Sample wrong answer A','Sample wrong answer B','Sample wrong answer C'].forEach(function(o, j){
+      lg.querySelector('.t').textContent = topicName(q.topic);
+      lg.appendChild(document.createTextNode((i + 1) + '. ' + q.q));
+      fs.appendChild(lg); fs.dataset.topic = q.topic;
+      shuffle(q.o.map(function(o, j){ return j; })).forEach(function(j){
         var l = document.createElement('label'), r = document.createElement('input');
-        r.type = 'radio'; r.name = prefix + i; r.value = j === 0 ? '1' : '0';
-        l.appendChild(r); l.appendChild(document.createTextNode(o)); fs.appendChild(l);
+        r.type = 'radio'; r.name = prefix + i; r.value = j === q.a ? '1' : '0';
+        l.appendChild(r); l.appendChild(document.createTextNode(q.o[j])); fs.appendChild(l);
       });
       box.appendChild(fs);
-    }
+    });
   }
   function grade(form, box){
     var sets = box.querySelectorAll('fieldset'), right = 0, missed = [], unanswered = 0;
     sets.forEach(function(fs){
       var c = fs.querySelector('input:checked');
-      if (!c) unanswered++; else if (c.value === '1') right++; else missed.push(fs.dataset.topic);
+      if (!c) unanswered++; else if (c.value === '1') right++; else if (missed.indexOf(fs.dataset.topic) < 0) missed.push(fs.dataset.topic);
     });
     return { right:right, total:sets.length, missed:missed, unanswered:unanswered };
   }
@@ -825,7 +826,7 @@ footer a{ color:var(--gold); }
   /* pre-assessment: pops up before the learner begins */
   var preDlg = document.getElementById('preDlg'), preForm = document.getElementById('preForm'), preRes = document.getElementById('preRes');
   function openPre(){
-    buildQs(document.getElementById('preQs'), 'pre', topics.length);
+    buildQs(document.getElementById('preQs'), 'pre', BANK.pre);
     preForm.hidden = false; preRes.hidden = true; document.getElementById('preErr').textContent = '';
     openDlg(preDlg, 'preTitle');
   }
@@ -839,7 +840,7 @@ footer a{ color:var(--gold); }
     preRes.innerHTML = '<div class="result"><div class="score"></div><p></p><ul></ul></div><div class="mact"><button type="button" class="btn" id="preGo">Start learning</button></div>';
     preRes.querySelector('.score').textContent = g.right + ' of ' + g.total;
     preRes.querySelector('p').textContent = g.missed.length ? 'Thanks. These subjects are a good place to start:' : 'Thanks. You know the basics across every subject; take the courses in any order.';
-    g.missed.forEach(function(m){ var li = document.createElement('li'); li.textContent = m; preRes.querySelector('ul').appendChild(li); });
+    g.missed.forEach(function(m){ var li = document.createElement('li'); li.textContent = topicName(m); preRes.querySelector('ul').appendChild(li); });
     document.getElementById('preGo').addEventListener('click', function(){ preDlg.close(); document.getElementById('topicsTitle').focus(); });
     document.getElementById('preGo').focus();
   });
@@ -848,7 +849,7 @@ footer a{ color:var(--gold); }
   /* final assessment: unlocks after every course, 90% to pass */
   var finDlg = document.getElementById('finDlg'), finForm = document.getElementById('finForm'), finRes = document.getElementById('finRes');
   function openFinal(){
-    buildQs(document.getElementById('finQs'), 'fin', FINAL_Q);
+    buildQs(document.getElementById('finQs'), 'fin', BANK.final);
     finForm.hidden = false; finRes.hidden = true; document.getElementById('finErr').textContent = '';
     openDlg(finDlg, 'finTitle');
   }
@@ -858,11 +859,12 @@ footer a{ color:var(--gold); }
     if (g.unanswered){ document.getElementById('finErr').textContent = 'Answer all ' + g.total + ' questions to submit (' + g.unanswered + ' left).'; return; }
     var pct = Math.round(g.right / g.total * 100), ok = g.right / g.total >= PASS;
     finForm.hidden = true; finRes.hidden = false;
-    finRes.innerHTML = '<div class="result' + (ok ? ' pass' : '') + '"><div class="score"></div><p></p></div><div class="mact"></div>';
+    finRes.innerHTML = '<div class="result' + (ok ? ' pass' : '') + '"><div class="score"></div><p></p><ul></ul></div><div class="mact"></div>';
     finRes.querySelector('.score').textContent = pct + '%';
-    finRes.querySelector('p').textContent = ok
+    finRes.querySelector('p').textContent = (g.right + ' of ' + g.total + ' correct. ') + (ok
       ? 'You passed. HCM Academy is marked complete.'
-      : 'You need 90% to complete HCM Academy. Review the subjects you missed and try again.';
+      : 'You need ' + Math.round(PASS * 100) + '% to complete HCM Academy. Review these subjects and try again:');
+    if (!ok) g.missed.forEach(function(m){ var li = document.createElement('li'); li.textContent = topicName(m); finRes.querySelector('ul').appendChild(li); });
     var act = finRes.querySelector('.mact'), b = document.createElement('button');
     b.type = 'button'; b.className = 'btn';
     if (ok){

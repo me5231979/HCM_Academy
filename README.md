@@ -17,14 +17,15 @@ Kept deliberately short:
    Below the cards, "Help for every topic" lists the resource types planned across all topics.
 3. **Footer**: contact and accessibility statement.
 
-## Assessments and completion (mock-up)
+## Assessments and completion
 
-- **Pre-assessment** pops up on the first visit: one placeholder question per topic, not graded, and it lists the topics to start with.
-- **Course completion**: every course line is a button; clicking it toggles a green check circle (mock-up stand-in for finishing the real course).
-- **Final assessment** opens automatically once every course is complete (also from the progress panel). 90% or higher marks HCM Academy complete; below that offers a retake. Pass mark: `PASS` in the last script.
+- Questions live in `assets/assessments.js` (one file for both the site and the review document). Each question has a topic (the card id), the options, the correct option, optional feedback, and `draft: true` when its topic has no course yet and an SME must confirm it.
+- **Pre-assessment** pops up on the first visit: 16 questions, two per topic, not graded. Topics with a missed question are listed as the place to start.
+- **Course completion**: passing a course's 3-question check marks it complete. Rows without a course yet are click-to-complete stand-ins.
+- **Final assessment** opens once every course is complete (also from the progress panel): 20 questions; 90% (18 of 20) marks HCM Academy complete. Below that, it lists the topics to review and offers a retake. Answer order is shuffled each time. Pass mark: `pass` in `assets/assessments.js`.
 - **Demo controls** in the progress panel: Mark all complete, Reset demo.
 - Progress is saved only in this browser (`localStorage` keys `hcm-pre`, `hcm-done`, `hcm-final`); nothing is sent anywhere.
-- To add real questions, replace `buildQs` placeholder text with a question bank per topic.
+- **Review document**: `node tools/build_assessment_doc.cjs` rebuilds `docs/HCM_Academy_Assessments_Draft.docx` from the same questions, with answers, Approve/Edit/Remove checkboxes, and notes boxes.
 
 ## Course rows
 
