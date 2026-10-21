@@ -20,7 +20,7 @@
 </header>
 <section class="hero" aria-labelledby="t">
   <div class="wrap">
-    <p class="mono crumb">Costing Management &middot; Course 14 of 16</p>
+    <p class="mono crumb">Costing Management &middot; Course 14 of 17</p>
     <h1 id="t">When costing must be <em>updated</em>.</h1>
     <ul class="meta" aria-label="Course details"><li class="v">V.01 draft</li><li>6 min</li><li>Oracle HCM</li><li>3-question check</li><li>Printable job aid</li></ul>
   </div>
@@ -30,7 +30,7 @@
 </section>
 <main id="main" data-slug="when-to-update-costing">
   <div class="wrap">
-    <p class="draft"><b>V.01 draft</b>Built from SME sessions and Vanderbilt guides. Validate with the HCM group before release.</p>
+    <p class="draft"><b>V.01 draft</b>Built from SME sessions and Vanderbilt guides. Validate with the HCM group before release.</p><p class="draft"><b>Screen check</b>Confirm in Vanderbilt's Oracle or UKG during a recorded demo: where Costing for Persons sits in Redwood; the Advanced Search and Effective As-of Date labels; the Actions and Edit menu labels.</p>
     <section class="part" id="intro" aria-labelledby="h1">
       <p class="mono num">1 &middot; Intro</p>
       <h2 id="h1">When to <em>use</em> it.</h2>
@@ -42,12 +42,14 @@
       <h2 id="h2">Events that need a costing <em>check</em>.</h2>
       <p>Check off each item as you read.</p>
       <ol class="steps">
-<li><label><input type="checkbox" /><span class="st"><strong>New hire: is the default OK, or does costing need a program code?</strong><span class="sd">Check on day one so the first paycheck charges the right place.</span></span></label></li>
-<li><label><input type="checkbox" /><span class="st"><strong>Team change within the work unit: is the program code still correct?</strong><span class="sd">The work unit default doesn&#x27;t change, but the program code may.</span></span></label></li>
-<li><label><input type="checkbox" /><span class="st"><strong>Transfer to another department: the new work unit default, or a new entry?</strong><span class="sd">Old assignment costing may still point at the old department&#x27;s accounts. End date it or update it.</span></span></label></li>
-<li><label><input type="checkbox" /><span class="st"><strong>Bonus, lump sum, or interim pay: should it charge a different COA than salary?</strong><span class="sd">If yes, cost the element so only that payment goes to the other COA. The salary stays where it is.</span></span></label></li>
-<li><label><input type="checkbox" /><span class="st"><strong>Another work unit pays a bonus for your employee: whose COA, and who enters it?</strong><span class="sd">Agree with the other unit before the payment is entered.</span></span></label></li>
-<li><label><input type="checkbox" /><span class="st"><strong>Split funding (for example, another area pays 20%): split costing setup.</strong><span class="sd">Enter two or more lines that total 100%.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>How to check costing for any event below.</strong><span class="sd">Open Costing for Persons (My Client Groups &gt; Quick Actions &gt; Costing for Persons), search the person with Advanced Search and the Effective As-of Date set to the first day of the pay period the change affects, select the assignment, and read the Cost Accounts on the right. Click History (top right) to see every past and future costing period.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>New hire: is the default OK, or does costing need a program code?</strong><span class="sd">Check on day one so the first paycheck charges the right place. Search on the hire date; a new hire won&#x27;t appear if you search on an earlier date.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Team change within the work unit: is the program code still correct?</strong><span class="sd">The work unit default doesn&#x27;t change, but the program code may. If it changed, use Edit &gt; Update from the first day of the pay period the team change takes effect.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Transfer to another department: the new work unit default, or a new entry?</strong><span class="sd">Old assignment costing may still point at the old department&#x27;s accounts. If the new department uses its default, End Date the old costing; if it needs specific costing, Update it.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Bonus, lump sum, or interim pay: should it charge a different COA than salary?</strong><span class="sd">If yes, cost the element (Create Costing of Element) so only that payment goes to the other COA. The salary stays where it is.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Another work unit pays a bonus for your employee: whose COA, and who enters it?</strong><span class="sd">Agree with the other unit before the payment is entered, then cost the element to their COA.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Split funding (for example, another area pays 20%): split costing setup.</strong><span class="sd">Enter two or more lines on the assignment that total 100%. Vanderbilt won&#x27;t let any remainder fall to a default.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Before every HCM Transaction Cutoff: review costing for your unit.</strong><span class="sd">Run the HCM Assignment Cost Allocation Plan and HCM Element Cost Allocation Plan reports (Departmental Playbook) to confirm the right costing will apply before payroll runs.</span></span></label></li>
       </ol>
       <p class="stepcount" id="stepcount" aria-live="polite"></p>
       
@@ -72,12 +74,14 @@
           <h2>When costing must be updated</h2>
           <p class="ja-use"><b>Use when:</b> A job, team, or funding change happens to one of your employees. &middot; <b>System:</b> Oracle HCM</p>
           <ol>
+<li>How to check costing for any event below.</li>
 <li>New hire: is the default OK, or does costing need a program code?</li>
 <li>Team change within the work unit: is the program code still correct?</li>
 <li>Transfer to another department: the new work unit default, or a new entry?</li>
 <li>Bonus, lump sum, or interim pay: should it charge a different COA than salary?</li>
 <li>Another work unit pays a bonus for your employee: whose COA, and who enters it?</li>
 <li>Split funding (for example, another area pays 20%): split costing setup.</li>
+<li>Before every HCM Transaction Cutoff: review costing for your unit.</li>
           </ol>
           
           <h3>Watch-outs</h3>

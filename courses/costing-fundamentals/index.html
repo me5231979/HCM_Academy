@@ -20,7 +20,7 @@
 </header>
 <section class="hero" aria-labelledby="t">
   <div class="wrap">
-    <p class="mono crumb">Costing Management &middot; Course 13 of 16</p>
+    <p class="mono crumb">Costing Management &middot; Course 13 of 17</p>
     <h1 id="t">Costing <em>fundamentals</em>.</h1>
     <ul class="meta" aria-label="Course details"><li class="v">V.01 draft</li><li>7 min</li><li>Oracle HCM</li><li>3-question check</li><li>Printable job aid</li></ul>
   </div>
@@ -30,7 +30,7 @@
 </section>
 <main id="main" data-slug="costing-fundamentals">
   <div class="wrap">
-    <p class="draft"><b>V.01 draft</b>Built from SME sessions and Vanderbilt guides. Validate with the HCM group before release.</p>
+    <p class="draft"><b>V.01 draft</b>Built from SME sessions and Vanderbilt guides. Validate with the HCM group before release.</p><p class="draft"><b>Screen check</b>Confirm in Vanderbilt's Oracle or UKG during a recorded demo: where Costing for Persons sits in Redwood; the Advanced Search and Effective As-of Date labels; the Actions and Edit menu labels.</p>
     <section class="part" id="intro" aria-labelledby="h1">
       <p class="mono num">1 &middot; Intro</p>
       <h2 id="h1">When to <em>use</em> it.</h2>
@@ -42,11 +42,14 @@
       <h2 id="h2">How Oracle picks the account, then your <em>decision</em>.</h2>
       <p>Check off each item as you read.</p>
       <ol class="steps">
-<li><label><input type="checkbox" /><span class="st"><strong>Know the order Oracle checks.</strong><span class="sd">Oracle uses the most specific costing it finds. Lower levels win, and anything left blank inherits from the level above.</span><ul><li>Element (one payment, such as a bonus) costed? Use it.</li><li>Otherwise, assignment (the person&#x27;s job) costed? Use it.</li><li>Otherwise, use the default for the assignment&#x27;s work unit.</li></ul></span></label></li>
-<li><label><input type="checkbox" /><span class="st"><strong>Open the employee&#x27;s assignment and check its costing.</strong><span class="sd">Costing for Persons shows every costing entry for the person&#x27;s assignments and elements.</span></span></label></li>
-<li><label><input type="checkbox" /><span class="st"><strong>Blank? Salary charges to the work unit&#x27;s default COA.</strong><span class="sd">For example, work unit 46100, program 000. Nothing is wrong. The default is doing its job.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Know the three levels Vanderbilt uses.</strong><span class="sd">Vanderbilt&#x27;s guide calls this the labor cost inheritance pyramid. Oracle uses the most specific costing it finds; anything left blank inherits from the level below it.</span><ul><li>Element (one type of pay on an assignment, such as a lump sum): if costed, that pay goes to the element&#x27;s account.</li><li>Assignment (the person&#x27;s job): if costed, all pay on the job follows it, except elements costed on their own.</li><li>Work unit default: every assignment sits in one work unit. With no specific costing, pay goes to the work unit&#x27;s entity and financial unit, general unrestricted funds (05), the natural account for that type of pay, and program and activity 000.</li></ul></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Open Costing for Persons.</strong><span class="sd">Sign in to Oracle Cloud with your VUnetID. In current Oracle, go to My Client Groups &gt; Quick Actions (click Show More) &gt; Costing for Persons; it&#x27;s listed under Payroll. Vanderbilt&#x27;s 2022 guide shows the same quick action under Our Workforce &gt; Show More &gt; Payroll. A person search page opens.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Search the person with Advanced Search and the right Effective As-of Date.</strong><span class="sd">Costing is date-effective, so the date you search on is the date your entry applies to. Type the person&#x27;s name in the search box, then click the Advanced Search link under it. In the filters, open Effective As-of Date, enter the date, click OK, then run the search. If the date is earlier than the person&#x27;s record (for example, before their hire), you get &quot;no data returned&quot;.</span><ul><li>Use today&#x27;s date (or the first day of the current pay period) to see what applies now.</li></ul></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Select the person, then select the Assignment on the left.</strong><span class="sd">The left side, Costing for a Person Overview, lists the Payroll Relationship, Elements, and Assignments. A green check next to an assignment or element means it has costing for the date you searched. The right side, Cost Accounts, shows the costing lines.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Read what you see.</strong><span class="sd">&quot;No data to display&quot; on the right means no specific costing: salary charges to the work unit&#x27;s default COA (for example, work unit 46100, program 000). That is not an error. Lines on the right show the accounts and percentages currently charged.</span></span></label></li>
 <li><label><input type="checkbox" /><span class="st"><strong>Ask your finance partner whether your department splits the work unit by program code.</strong><span class="sd">Some departments track teams separately (for example, Team A = 100, Team B = 200).</span><ul><li>No split: leave the default. Nothing to enter.</li><li>Split: enter costing for each person. Otherwise they default to program 000.</li></ul></span></label></li>
-<li><label><input type="checkbox" /><span class="st"><strong>Ask whether finance wants any role tracked separately.</strong><span class="sd">If yes, enter costing with the COA they give you. See Enter or edit costing for the steps.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Ask whether finance wants any role or payment tracked separately.</strong><span class="sd">If yes, get the COA or POET string from finance and enter it (see Enter costing for a person). To check a whole unit at once, run the HCM Assignment Cost Allocation Plan report from the Departmental Playbook.</span></span></label></li>
+<li><label><input type="checkbox" /><span class="st"><strong>Click Done.</strong><span class="sd">Done (top right) closes the person and returns you to the Home page. Viewing changes nothing.</span></span></label></li>
       </ol>
       <p class="stepcount" id="stepcount" aria-live="polite"></p>
       
@@ -71,11 +74,14 @@
           <h2>Costing fundamentals</h2>
           <p class="ja-use"><b>Use when:</b> You need to decide whether an employee needs costing entered or can stay on the default. &middot; <b>System:</b> Oracle HCM</p>
           <ol>
-<li>Know the order Oracle checks.<ul><li>Element (one payment, such as a bonus) costed? Use it.</li><li>Otherwise, assignment (the person&#x27;s job) costed? Use it.</li><li>Otherwise, use the default for the assignment&#x27;s work unit.</li></ul></li>
-<li>Open the employee&#x27;s assignment and check its costing.</li>
-<li>Blank? Salary charges to the work unit&#x27;s default COA.</li>
+<li>Know the three levels Vanderbilt uses.<ul><li>Element (one type of pay on an assignment, such as a lump sum): if costed, that pay goes to the element&#x27;s account.</li><li>Assignment (the person&#x27;s job): if costed, all pay on the job follows it, except elements costed on their own.</li><li>Work unit default: every assignment sits in one work unit. With no specific costing, pay goes to the work unit&#x27;s entity and financial unit, general unrestricted funds (05), the natural account for that type of pay, and program and activity 000.</li></ul></li>
+<li>Open Costing for Persons.</li>
+<li>Search the person with Advanced Search and the right Effective As-of Date.<ul><li>Use today&#x27;s date (or the first day of the current pay period) to see what applies now.</li></ul></li>
+<li>Select the person, then select the Assignment on the left.</li>
+<li>Read what you see.</li>
 <li>Ask your finance partner whether your department splits the work unit by program code.<ul><li>No split: leave the default. Nothing to enter.</li><li>Split: enter costing for each person. Otherwise they default to program 000.</li></ul></li>
-<li>Ask whether finance wants any role tracked separately.</li>
+<li>Ask whether finance wants any role or payment tracked separately.</li>
+<li>Click Done.</li>
           </ol>
           
           <h3>Watch-outs</h3>

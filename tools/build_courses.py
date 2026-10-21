@@ -4,7 +4,7 @@ Writes courses/<slug>/index.html. Run: python3 tools/build_courses.py"""
 import html, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from course_content import COURSES  # noqa: E402
+from course_content import COURSES, VERIFY  # noqa: E402
 ROOT = os.path.dirname(HERE)
 E = lambda s: html.escape(s, quote=True)
 
@@ -36,6 +36,9 @@ def page(c, n, total):
     pending = f'<p class="draft"><b>V.01 draft</b>{E(c["pending"])}</p>' if c.get("pending") else \
               '<p class="draft"><b>V.01 draft</b>Built from SME sessions and Vanderbilt guides. Validate with the HCM group before release.</p>'
     intro = "".join(f"<p>{E(p)}</p>" for p in c["intro"])
+    vf = VERIFY.get(c["slug"])
+    if vf:
+        pending += f'<p class="draft"><b>Screen check</b>Confirm in Vanderbilt\'s Oracle or UKG during a recorded demo: {E("; ".join(vf))}.</p>'
     quiz = []
     for qi, q in enumerate(c["quiz"]):
         opts = "".join(f'<label><input type="radio" name="q{qi}" value="{oi}" />{E(o)}</label>' for oi, o in enumerate(q["o"]))
