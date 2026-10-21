@@ -32,6 +32,7 @@
       });
       qs.appendChild(fs);
     });
+    if (!list.length) qs.innerHTML = '<p class="score">The questions didn\'t load. Reload the page, or contact pcb@vanderbilt.edu.</p>';
     qsec.hidden = false; res.hidden = true;
   }
 
