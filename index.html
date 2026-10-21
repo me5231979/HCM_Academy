@@ -116,6 +116,8 @@ header .cta:hover{ background:var(--highlight); }
 .btn:hover{ background:var(--oak); border-color:var(--oak); }
 .btn.ghost{ background:#fff; color:var(--black); border-color:#B8AD98; }
 .btn.ghost:hover{ border-color:var(--oak); color:var(--black); background:#fff; }
+a.btn{ display:inline-flex; align-items:center; justify-content:center; text-decoration:none; }
+.btn[aria-disabled="true"]{ background:#fff; color:rgba(28,28,28,.72); border:1px dashed #B8AD98; cursor:not-allowed; }
 .btn[disabled]{ background:#fff; color:rgba(28,28,28,.72); border:1px dashed #B8AD98; cursor:not-allowed; }
 .demo{ display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; margin-top:14px; padding-top:14px; border-top:1px solid var(--gray); font-size:.85rem; color:rgba(28,28,28,.75); }
 .demo b{ font-family:var(--cond); font-weight:700; letter-spacing:.05em; text-transform:uppercase; font-size:.72rem; color:var(--black); }
@@ -136,27 +138,6 @@ header .cta:hover{ background:var(--highlight); }
 .course-btn:is([aria-pressed="true"],[data-done="true"]) .soon{ color:var(--done); }
 .course-btn:hover .ck{ border-color:var(--done); }
 
-dialog.modal{ margin:auto; border:0; border-top:4px solid var(--gold); border-radius:6px; padding:0; width:min(680px,calc(100vw - 32px)); max-height:calc(100dvh - 48px); color:var(--black); background:#fff; }
-dialog.modal::backdrop{ background:rgba(28,28,28,.72); }
-.mbody{ padding:clamp(22px,4vw,36px); }
-.mbody .mono{ color:var(--oak); }
-.mbody h2{ font-size:clamp(1.6rem,4vw,2.2rem); margin-top:10px; }
-.mbody h2:focus{ outline:none; }
-.mbody > p{ margin-top:12px; color:rgba(28,28,28,.82); }
-.mock-note{ margin-top:14px; padding:10px 12px; border:1px dashed #B8AD98; border-radius:4px; font-size:.85rem; color:rgba(28,28,28,.8); }
-.qs{ margin-top:20px; display:flex; flex-direction:column; gap:14px; }
-.qs fieldset{ border:1px solid var(--gray); border-radius:4px; padding:14px 16px; }
-.qs legend{ font-weight:600; padding:0 6px; font-size:.95rem; }
-.qs legend .t{ display:block; font-family:var(--cond); font-weight:700; font-size:.7rem; letter-spacing:.05em; text-transform:uppercase; color:var(--oak); }
-.qs label{ display:flex; gap:10px; align-items:center; padding:6px 0; font-size:.95rem; cursor:pointer; min-height:32px; }
-.qs input{ width:18px; height:18px; accent-color:var(--black); }
-.mact{ display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; align-items:center; }
-.merr{ color:var(--black); font-weight:600; font-size:.9rem; }
-.result{ margin-top:18px; padding:16px; border-radius:4px; background:var(--cream); }
-.result .score{ font-family:var(--cond); font-weight:700; font-size:2.4rem; line-height:1; }
-.result.pass{ background:#EEF5EF; }
-.result.pass .score{ color:var(--done); }
-.result ul{ margin:10px 0 0 18px; font-size:.92rem; }
 
 .links li.group{ font-weight:600; color:var(--black); padding-bottom:4px; }
 .subhead{ font-family:var(--serif); font-weight:400; font-size:1.15rem; margin-top:22px; padding-top:16px; border-top:2px solid var(--sand); }
@@ -387,10 +368,10 @@ footer a{ color:var(--gold); }
             <p class="ptext" id="ptext">0 of 0 courses complete.</p>
             <div class="bar" aria-hidden="true"><span id="pbar"></span></div>
           </div>
-          <button type="button" class="btn" id="finalBtn" disabled>Final assessment unlocks when every course is complete</button>
+          <a class="btn" id="finalBtn" aria-disabled="true">Final assessment unlocks when every course is complete</a>
         </div>
         <p class="passed" id="passed" hidden><span class="ck" style="background:var(--done);border-color:var(--done);top:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="opacity:1"><path d="M5 12l5 5 9-10"/></svg></span>HCM Academy complete. You passed the final assessment.</p>
-        <div class="demo"><b>Mock-up</b> Click any course to mark it complete.
+        <div class="demo"><b>Mock-up</b> Click any course that is coming soon to mark it complete.
           <button type="button" id="demoAll">Mark all complete</button>
           <button type="button" id="demoReset">Reset demo</button>
         </div>
@@ -409,6 +390,13 @@ footer a{ color:var(--gold); }
           <span class="no" aria-hidden="true">00</span>
           <h3>Start Here: HCM Foundations</h3>
           <p>The structure, workflow, and responsibilities every HCM needs first.</p>
+          <div class="sect">
+            <p class="lbl">Begin here</p>
+            <div class="rowhead" aria-hidden="true"><span>Assessment</span><span>Time</span><span>Format</span><span>Status</span></div>
+            <ul class="links">
+              <li data-assess="pre"><span class="nm"><span class="tt">Pre-assessment</span><span class="ds">Two questions on each topic. Your results show which topics to start with.</span></span><span class="tm"><span class="sr-l">Time: </span>5 min</span><span class="fm"><span class="sr-l">Format: </span>Not graded</span><span class="soon">Start</span></li>
+            </ul>
+          </div>
           <div class="sect">
             <p class="lbl">Training topics <span class="lc">6</span></p>
             <div class="rowhead" aria-hidden="true"><span>Course</span><span>Time</span><span>Format</span><span>Status</span></div>
@@ -613,29 +601,6 @@ footer a{ color:var(--gold); }
   </div>
 </footer>
 
-<dialog class="modal" id="preDlg" aria-labelledby="preTitle">
-  <div class="mbody">
-    <p class="mono">Before we begin</p>
-    <h2 id="preTitle" tabindex="-1">Take the pre-assessment.</h2>
-    <p>Two questions on each subject show what you already know, so you can focus your time where it helps most. It is not graded.</p>
-    <form id="preForm" novalidate><div class="qs" id="preQs"></div>
-      <div class="mact"><button type="submit" class="btn">Submit pre-assessment</button><button type="button" class="btn ghost" id="preSkip">Skip for now (demo only)</button><span class="merr" id="preErr" role="alert"></span></div>
-    </form>
-    <div id="preRes" hidden></div>
-  </div>
-</dialog>
-
-<dialog class="modal" id="finDlg" aria-labelledby="finTitle">
-  <div class="mbody">
-    <p class="mono">Final assessment</p>
-    <h2 id="finTitle" tabindex="-1">You finished every course.</h2>
-    <p>Answer the questions below. You need a score of 90% or higher to complete HCM Academy. You can retake it if you need to.</p>
-    <form id="finForm" novalidate><div class="qs" id="finQs"></div>
-      <div class="mact"><button type="submit" class="btn">Submit final assessment</button><button type="button" class="btn ghost" id="finLater">Close</button><span class="merr" id="finErr" role="alert"></span></div>
-    </form>
-    <div id="finRes" hidden></div>
-  </div>
-</dialog>
 <script>
 (function(){
   'use strict';
@@ -681,7 +646,7 @@ footer a{ color:var(--gold); }
   });
 
   function update(){
-    var term = norm(q.value), courses = 0, aidsShown = 0, shownCards = 0;
+    var term = norm(q.value), courses = 0, aidsShown = 0, shownCards = 0, assess = 0;
     chips.querySelectorAll('button').forEach(function(b){ var on = !term && b.dataset.topic === topic; b.setAttribute('aria-selected', on ? 'true' : 'false'); b.tabIndex = on || (term && b === chips.firstChild) ? 0 : -1; });
     grid.classList.toggle('searching', !!term);
     cards.forEach(function(c){
@@ -693,7 +658,7 @@ footer a{ color:var(--gold); }
         var sub = s.querySelector('.subhead'), subHit = headHit || (sub && norm(sub.textContent).indexOf(term) > -1), any = 0;
         s.querySelectorAll('.links li:not(.group)').forEach(function(li){
           var hit = subHit || norm(li.textContent).indexOf(term) > -1;
-          li.hidden = !hit; if (hit){ lineHits++; any++; }
+          li.hidden = !hit; if (hit){ any++; if (li.dataset.assess){ if (inTopic) assess++; } else lineHits++; }
         });
         var aidHits = 0;
         s.querySelectorAll('.aids li').forEach(function(li){
@@ -714,7 +679,7 @@ footer a{ color:var(--gold); }
     none.hidden = shownCards > 0;
     var pl = function(n, w){ return n + ' ' + w + (n === 1 ? '' : 's'); };
     count.textContent = term
-      ? 'Search results: ' + pl(courses, 'course') + ' in ' + pl(shownCards, 'topic') + '. Clear the search to go back to the tabs.'
+      ? 'Search results: ' + pl(courses, 'course') + (assess ? ' and ' + pl(assess, 'assessment') : '') + ' in ' + pl(shownCards, 'topic') + '. Clear the search to go back to the tabs.'
       : pl(courses, 'course') + ' in this topic. Each course includes its own printable job aid.';
   }
   q.addEventListener('input', update);
@@ -723,13 +688,11 @@ footer a{ color:var(--gold); }
   update();
 })();
 </script>
-<script src="assets/assessments.js"></script>
 <script>
-/* Mock-up: pre-assessment, course completion, final assessment (90% to pass).
+/* Mock-up: course completion and links to the assessment pages (assessment/pre, assessment/final).
    Saved in this browser only (localStorage hcm-*); nothing is sent anywhere. */
 (function(){
   'use strict';
-  var BANK = window.HCM_ASSESS || { pass:0.9, pre:[], final:[] }, PASS = BANK.pass;
   var store = {
     get: function(k, d){ try { var v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch(e){ return d; } },
     set: function(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e){} },
@@ -738,12 +701,19 @@ footer a{ color:var(--gold); }
   var CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>';
   var cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
   var topics = cards.map(function(c){ return { id:c.id, name:c.querySelector('h3').textContent }; });
-  var done = store.get('hcm-done', []), finalPassed = store.get('hcm-final', false);
-  var buttons = [];
+  var done = store.get('hcm-done', []), finalPassed = store.get('hcm-final', false), preDone = store.get('hcm-pre', false);
+  var buttons = [], preLink = null;
 
   /* turn every course line into a completion toggle */
   cards.forEach(function(c){
     c.querySelectorAll('.links li:not(.group)').forEach(function(li, i){
+      if (li.dataset.assess){
+        preLink = document.createElement('a'); preLink.href = 'assessment/' + li.dataset.assess + '/'; preLink.className = 'course-btn course-link assess-link';
+        preLink.innerHTML = '<span class="ck" aria-hidden="true">' + CHECK + '</span>';
+        while (li.firstChild) preLink.appendChild(li.firstChild);
+        li.appendChild(preLink); li.classList.add('cbtn');
+        return;
+      }
       var slug = li.dataset.course, id = slug ? 'c-' + slug : c.id + '-' + i;
       var b = document.createElement(slug ? 'a' : 'button');
       if (slug){ b.href = 'courses/' + slug + '/'; b.className = 'course-btn course-link'; } else { b.type = 'button'; b.className = 'course-btn'; }
@@ -768,12 +738,14 @@ footer a{ color:var(--gold); }
     var n = done.length, total = buttons.length, all = n === total;
     ptext.textContent = n + ' of ' + total + ' courses complete.';
     pbar.style.width = (total ? n / total * 100 : 0) + '%';
-    finalBtn.disabled = !all || finalPassed;
+    if (preLink){ preLink.dataset.done = preDone ? 'true' : 'false'; preLink.querySelector('.soon').textContent = preDone ? 'Taken' : 'Start'; }
+    if (all && !finalPassed){ finalBtn.href = 'assessment/final/'; finalBtn.removeAttribute('aria-disabled'); }
+    else { finalBtn.removeAttribute('href'); finalBtn.setAttribute('aria-disabled', 'true'); }
     finalBtn.textContent = finalPassed ? 'Final assessment passed' : all ? 'Take the final assessment' : 'Final assessment unlocks when every course is complete';
     passed.hidden = !finalPassed;
     var ring = document.getElementById('pring'); if (ring) ring.style.strokeDashoffset = 119.4 * (1 - (total ? n / total : 0));
     cards.forEach(function(c){
-      var bs = c.querySelectorAll('.course-btn'), d = c.querySelectorAll('.course-btn:is([aria-pressed="true"],[data-done="true"])').length,
+      var bs = c.querySelectorAll('.course-btn:not(.assess-link)'), d = c.querySelectorAll('.course-btn:not(.assess-link):is([aria-pressed="true"],[data-done="true"])').length,
           tab = document.querySelector('#chips button[data-topic="' + c.id + '"]'), tc = tab && tab.querySelector('.tc'),
           full = bs.length && d === bs.length;
       if (tc) tc.textContent = !bs.length ? 'Soon' : full ? '\u2713 Done' : d + '/' + bs.length;
@@ -791,107 +763,21 @@ footer a{ color:var(--gold); }
     store.set('hcm-done', done); render();
     var b = buttons.filter(function(x){ return x.dataset.id === id; })[0];
     pstatus.textContent = b.querySelector('.tt').textContent + (i > -1 ? ' marked not complete. ' : ' complete. ') + ptext.textContent;
-    if (!wasAll && done.length === buttons.length && !finalPassed) openFinal();
+    if (!wasAll && done.length === buttons.length && !finalPassed) pstatus.textContent += ' The final assessment is unlocked.';
   }
-
-  /* question builder: questions come from assets/assessments.js; option order is shuffled each time */
-  function topicName(id){ var t = topics.filter(function(x){ return x.id === id; })[0]; return t ? t.name : id; }
-  function shuffle(a){ for (var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
-  function buildQs(box, prefix, list){
-    box.innerHTML = '';
-    list.forEach(function(q, i){
-      var fs = document.createElement('fieldset'), lg = document.createElement('legend');
-      lg.innerHTML = '<span class="t"></span>';
-      lg.querySelector('.t').textContent = topicName(q.topic);
-      lg.appendChild(document.createTextNode((i + 1) + '. ' + q.q));
-      fs.appendChild(lg); fs.dataset.topic = q.topic;
-      shuffle(q.o.map(function(o, j){ return j; })).forEach(function(j){
-        var l = document.createElement('label'), r = document.createElement('input');
-        r.type = 'radio'; r.name = prefix + i; r.value = j === q.a ? '1' : '0';
-        l.appendChild(r); l.appendChild(document.createTextNode(q.o[j])); fs.appendChild(l);
-      });
-      box.appendChild(fs);
-    });
-  }
-  function grade(form, box){
-    var sets = box.querySelectorAll('fieldset'), right = 0, missed = [], unanswered = 0;
-    sets.forEach(function(fs){
-      var c = fs.querySelector('input:checked');
-      if (!c) unanswered++; else if (c.value === '1') right++; else if (missed.indexOf(fs.dataset.topic) < 0) missed.push(fs.dataset.topic);
-    });
-    return { right:right, total:sets.length, missed:missed, unanswered:unanswered };
-  }
-  function openDlg(d, title){ if (!d.open) d.showModal(); setTimeout(function(){ document.getElementById(title).focus(); }, 0); }
-
-  /* pre-assessment: pops up before the learner begins */
-  var preDlg = document.getElementById('preDlg'), preForm = document.getElementById('preForm'), preRes = document.getElementById('preRes');
-  function openPre(){
-    buildQs(document.getElementById('preQs'), 'pre', BANK.pre);
-    preForm.hidden = false; preRes.hidden = true; document.getElementById('preErr').textContent = '';
-    openDlg(preDlg, 'preTitle');
-  }
-  preDlg.addEventListener('cancel', function(e){ e.preventDefault(); });
-  preForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    var g = grade(preForm, document.getElementById('preQs'));
-    if (g.unanswered){ document.getElementById('preErr').textContent = 'Answer all ' + g.total + ' questions to continue (' + g.unanswered + ' left).'; return; }
-    store.set('hcm-pre', true);
-    preForm.hidden = true; preRes.hidden = false;
-    preRes.innerHTML = '<div class="result"><div class="score"></div><p></p><ul></ul></div><div class="mact"><button type="button" class="btn" id="preGo">Start learning</button></div>';
-    preRes.querySelector('.score').textContent = g.right + ' of ' + g.total;
-    preRes.querySelector('p').textContent = g.missed.length ? 'Thanks. These subjects are a good place to start:' : 'Thanks. You know the basics across every subject; take the courses in any order.';
-    g.missed.forEach(function(m){ var li = document.createElement('li'); li.textContent = topicName(m); preRes.querySelector('ul').appendChild(li); });
-    document.getElementById('preGo').addEventListener('click', function(){ preDlg.close(); document.getElementById('topicsTitle').focus(); });
-    document.getElementById('preGo').focus();
-  });
-  document.getElementById('preSkip').addEventListener('click', function(){ store.set('hcm-pre', true); preDlg.close(); });
-
-  /* final assessment: unlocks after every course, 90% to pass */
-  var finDlg = document.getElementById('finDlg'), finForm = document.getElementById('finForm'), finRes = document.getElementById('finRes');
-  function openFinal(){
-    buildQs(document.getElementById('finQs'), 'fin', BANK.final);
-    finForm.hidden = false; finRes.hidden = true; document.getElementById('finErr').textContent = '';
-    openDlg(finDlg, 'finTitle');
-  }
-  finForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    var g = grade(finForm, document.getElementById('finQs'));
-    if (g.unanswered){ document.getElementById('finErr').textContent = 'Answer all ' + g.total + ' questions to submit (' + g.unanswered + ' left).'; return; }
-    var pct = Math.round(g.right / g.total * 100), ok = g.right / g.total >= PASS;
-    finForm.hidden = true; finRes.hidden = false;
-    finRes.innerHTML = '<div class="result' + (ok ? ' pass' : '') + '"><div class="score"></div><p></p><ul></ul></div><div class="mact"></div>';
-    finRes.querySelector('.score').textContent = pct + '%';
-    finRes.querySelector('p').textContent = (g.right + ' of ' + g.total + ' correct. ') + (ok
-      ? 'You passed. HCM Academy is marked complete.'
-      : 'You need ' + Math.round(PASS * 100) + '% to complete HCM Academy. Review these subjects and try again:');
-    if (!ok) g.missed.forEach(function(m){ var li = document.createElement('li'); li.textContent = topicName(m); finRes.querySelector('ul').appendChild(li); });
-    var act = finRes.querySelector('.mact'), b = document.createElement('button');
-    b.type = 'button'; b.className = 'btn';
-    if (ok){
-      finalPassed = true; store.set('hcm-final', true); render();
-      b.textContent = 'Done'; b.addEventListener('click', function(){ finDlg.close(); passed.focus(); });
-    } else {
-      b.textContent = 'Retake the final assessment'; b.addEventListener('click', openFinal);
-    }
-    act.appendChild(b); b.focus();
-  });
-  document.getElementById('finLater').addEventListener('click', function(){ finDlg.close(); });
-  finalBtn.addEventListener('click', openFinal);
-  passed.setAttribute('tabindex', '-1');
 
   /* demo controls */
   document.getElementById('demoAll').addEventListener('click', function(){
     done = buttons.map(function(b){ return b.dataset.id; }); store.set('hcm-done', done); render();
-    pstatus.textContent = 'All courses marked complete.';
-    if (!finalPassed) openFinal();
+    pstatus.textContent = 'All courses marked complete. The final assessment is unlocked.';
   });
   document.getElementById('demoReset').addEventListener('click', function(){
-    store.clear(); done = []; finalPassed = false; render(); openPre();
+    store.clear(); done = []; finalPassed = false; preDone = false; render(); pstatus.textContent = 'Demo reset.';
   });
 
   document.getElementById('progress').hidden = false;
+  store.set('hcm-total', buttons.length); /* lets the final assessment page check that every course is complete */
   render();
-  if (!store.get('hcm-pre', false)) openPre();
 })();
 </script>
 </body>

@@ -1,9 +1,14 @@
 /* HCM Academy pre-assessment and final assessment questions.
-   Single source for the landing page (index.html) and the review document
+   Single source for the assessment pages (assessment/pre, assessment/final) and the review document
    (node tools/build_assessment_doc.cjs). topic = the card id on the landing page.
    a = index of the correct option. draft = topic has no course yet; confirm with the SME. */
 window.HCM_ASSESS = {
   pass: 0.9,
+  topics: {
+    start: 'Start Here: HCM Foundations', recruiting: 'Recruitment & Hiring', payroll: 'Payroll & Timecards',
+    positions: 'Onboarding, Offboarding, Transfers & Managing Positions', leave: 'Leave Management',
+    costing: 'Costing Management', students: 'Student & Faculty Hiring and Assignment Changes', records: 'Document Records & Reporting'
+  },
   pre: [
     {"topic":"start","q":"What is the HCM role?","o":["The Oracle system that runs payroll","People in the business who own the people transactions for their area","The central HR team that approves all hires"],"a":1},
     {"topic":"start","q":"Where do you start most Oracle transactions for an employee?","o":["Our Workforce > Quick Actions","The UKG main menu","The payroll calendar"],"a":0},
