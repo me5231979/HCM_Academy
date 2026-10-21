@@ -63,7 +63,12 @@
   if (store.get('hcm-done', []).indexOf(id) > -1){ document.querySelector('a[href="#check"]').classList.add('ok'); }
 
   /* print the job aid */
-  document.querySelectorAll('[data-print]').forEach(function(b){ b.addEventListener('click', function(){ window.print(); }); });
+  document.querySelectorAll('[data-print]').forEach(function(b){ b.addEventListener('click', function(){
+    var quick = b.getAttribute('data-print') === 'quick';
+    document.documentElement.classList.toggle('print-quick', quick);
+    window.print();
+  }); });
+  window.addEventListener('afterprint', function(){ document.documentElement.classList.remove('print-quick'); });
 
   /* highlight the part in view */
   var links = document.querySelectorAll('nav.parts a');

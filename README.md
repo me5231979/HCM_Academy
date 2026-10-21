@@ -58,6 +58,13 @@ landing page (shared `localStorage` key `hcm-done`, id `c-<slug>`).
   `tools/course_content.py` and rebuild. The video appears at the top of the
   intro (16:9, full width, hidden when printing) and the course header lists
   "Video". First one: Weekly time card check.
+- **Detailed job aids**: a course can add `detailed=dict(title, source, steps=[dict(t, d, img)])`
+  with screenshots in `courses/<slug>/img/`. The one-page job aid becomes the
+  **Quick guide** and the detailed job aid follows it (its own print pages).
+  Two print buttons: quick guide only, or both. First one: Weekly time card
+  check, from Briana Knowles's Guidde walkthrough. Blur names, employee IDs,
+  usernames, and assignment numbers in any screenshot before adding it; the
+  site is public.
 - Sources: Briana Knowles (Oct 20), Alex Enferadi (Oct 20), Jennifer Garcia
   (Oct 19) sessions; HCM training sessions 1 and 2 (Andres Castro, Stephanie Commo, Sep 8 and 9, 2026) for positions, requisitions, and pending worker conversion; the Costing for Persons guide (2022); the Document Records
   guide; the Award Compensation Elements guide (2023). Open items are flagged

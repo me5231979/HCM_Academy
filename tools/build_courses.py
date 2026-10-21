@@ -56,6 +56,23 @@ def page(c, n, total):
     if c.get("docs"):
         items = "".join(f'<li><a href="{E(u)}" target="_blank" rel="noopener">{E(l)}<span class="sr"> (opens in a new tab)</span></a></li>' for l, u in c["docs"])
         docs_box = f'<div class="docs"><h3>{BOOK}Official documentation</h3><p>Vendor documentation describes the standard process. Vanderbilt\'s setup, codes, and rules in this course take priority.</p><ul>{items}</ul></div>'
+    det = c.get("detailed")
+    detailed_html = ""
+    if det:
+        items = "".join(
+            f'<li class="dstep"><h3><span class="dn">{i:02d}</span>{E(x["t"])}</h3><p>{E(x["d"])}</p>'
+            f'<img src="img/{E(x["img"])}" alt="Screenshot: {E(x["t"].rstrip("."))}" width="1400" height="1138" loading="lazy" /></li>'
+            for i, x in enumerate(det["steps"], 1))
+        detailed_html = (f'<article class="jobaid ja-detail" aria-label="Detailed job aid">'
+                         f'<div class="ja-head"><img src="../../assets/img/vu-lockup-black.png" alt="Vanderbilt University" width="100" height="26" /><span class="mono">HCM Academy detailed job aid &middot; {E(c["topic_label"])}</span></div>'
+                         f'<h2>{E(det["title"])}</h2><p class="ja-use">Step by step with screenshots. {E(det["source"])}</p>'
+                         f'<ol class="dsteps">{items}</ol>'
+                         f'<div class="ja-foot"><span>V.01 draft.</span><span>Questions: pcb@vanderbilt.edu</span></div></article>')
+        ja_intro = "<p>Two parts: a one-page <b>quick guide</b>, then a <b>detailed job aid</b> with a screenshot for every step. Print either one, or save it as a PDF.</p>"
+        ja_buttons = f'<button type="button" class="btn" data-print="quick">{PRINT}Print quick guide</button><button type="button" class="btn ghost" data-print>{PRINT}Print quick guide and detailed job aid</button>'
+    else:
+        ja_intro = "<p>A one-page version of the steps and watch-outs. Print it or save it as a PDF.</p>"
+        ja_buttons = f'<button type="button" class="btn" data-print>{PRINT}Print job aid</button>'
     st = c.get("steps_title", "Step by step")
     w = st.rsplit(" ", 1)
     steps_h = f'{E(w[0])} <em>{E(w[1])}</em>.'
@@ -128,11 +145,11 @@ def page(c, n, total):
     <section class="part" id="jobaid" aria-labelledby="h4">
       <p class="mono num">4 &middot; Job aid</p>
       <h2 id="h4">Keep it <em>handy</em>.</h2>
-      <p>A one-page version of the steps and watch-outs. Print it or save it as a PDF.</p>
-      <div class="acts"><button type="button" class="btn" data-print>{PRINT}Print job aid</button><a class="btn ghost" href="{back}">Back to all courses</a></div>
+      {ja_intro}
+      <div class="acts">{ja_buttons}<a class="btn ghost" href="{back}">Back to all courses</a></div>
       <div class="ja-preview">
-        <article class="jobaid" aria-label="Job aid preview">
-          <div class="ja-head"><img src="../../assets/img/vu-lockup-black.png" alt="Vanderbilt University" width="100" height="26" /><span class="mono">HCM Academy job aid &middot; {E(c["topic_label"])}</span></div>
+        <article class="jobaid" aria-label="{"Quick guide" if det else "Job aid"} preview">
+          <div class="ja-head"><img src="../../assets/img/vu-lockup-black.png" alt="Vanderbilt University" width="100" height="26" /><span class="mono">HCM Academy {"quick guide" if det else "job aid"} &middot; {E(c["topic_label"])}</span></div>
           <h2>{E(c["name"])}</h2>
           <p class="ja-use"><b>Use when:</b> {E(c["use_when"])} &middot; <b>System:</b> {E(c["system"])}</p>
           <ol>
@@ -143,6 +160,7 @@ def page(c, n, total):
           <ul class="jw">{watch}</ul>
           <div class="ja-foot"><span>V.01 draft. Sources: {E(src)}.</span><span>Questions: pcb@vanderbilt.edu</span></div>
         </article>
+        {detailed_html}
       </div>
     </section>
   </div>

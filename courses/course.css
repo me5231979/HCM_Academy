@@ -150,6 +150,13 @@ footer a{ color:var(--gold); }
 @media (prefers-reduced-motion:reduce){ html{ scroll-behavior:auto; } *{ transition:none !important; } }
 
 /* print: only the job aid, one page */
+/* detailed job aid: one numbered step per block, each with a screenshot */
+.ja-detail{ margin-top:24px; }
+.dsteps{ list-style:none; margin:14px 0 0; padding:0; display:grid; gap:22px; }
+.dstep h3{ display:flex; align-items:baseline; gap:10px; font-size:1rem; }
+.dstep .dn{ font-family:var(--cond); font-weight:700; color:#fff; background:var(--oak); border-radius:3px; padding:1px 7px; font-size:.85rem; }
+.dstep p{ margin-top:6px; max-width:none; }
+.dstep img{ display:block; width:100%; height:auto; margin-top:10px; border:1px solid var(--sand); border-radius:6px; }
 /* embedded walkthrough video (16:9) */
 .video{ margin-top:18px; }
 .video .frame{ position:relative; aspect-ratio:16 / 9; background:var(--black); border-radius:6px; overflow:hidden; box-shadow:var(--shadow); }
@@ -165,6 +172,12 @@ footer a{ color:var(--gold); }
   .jobaid li{ margin:0 0 2px; } .jobaid ul,.jobaid ol{ margin-top:2px; margin-bottom:4px; }
   .jobaid table.ref th{ background:#1C1C1C !important; color:#fff !important; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   .ja-head{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  .ja-detail{ break-before:page; margin-top:0; }
+  .print-quick .ja-detail{ display:none !important; }
+  .dsteps{ gap:14px; }
+  .dstep{ break-inside:avoid; }
+  .dstep img{ width:72%; }
+  .dstep .dn{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
 }
 
 /* assessment pages (assessment/pre, assessment/final) */
