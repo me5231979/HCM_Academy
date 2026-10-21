@@ -66,11 +66,12 @@ landing page (shared `localStorage` key `hcm-done`, id `c-<slug>`).
   with screenshots in `courses/<slug>/img/`. The one-page job aid becomes the
   **Quick guide** and the detailed job aid follows it (its own print pages).
   Two print buttons: quick guide only, or both. First one: Weekly time card
-  check, from Briana Knowles's Guidde walkthrough. Blur names, employee IDs,
+  check, from the Guidde walkthrough. Blur names, employee IDs,
   usernames, and assignment numbers in any screenshot before adding it; the
   site is public.
-- Sources: Briana Knowles (Oct 20), Alex Enferadi (Oct 20), Jennifer Garcia
-  (Oct 19) sessions; HCM training sessions 1 and 2 (Andres Castro, Stephanie Commo, Sep 8 and 9, 2026) for positions, requisitions, and pending worker conversion; the Costing for Persons guide (2022); the Document Records
+- Sources: HCM, costing, and payroll SME sessions (Oct 19 and 20); HCM training
+  sessions 1 and 2 (Sep 8 and 9, 2026) for positions, requisitions, and pending worker conversion;
+  no individual names are published on the site; the Costing for Persons guide (2022); the Document Records
   guide; the Award Compensation Elements guide (2023). Open items are flagged
   in each course's draft note and watch-outs.
 - Landing rows link to a course with `data-course="<slug>"` on the `<li>`.

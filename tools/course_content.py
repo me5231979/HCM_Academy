@@ -10,14 +10,14 @@ CUTOFF = "Exempt (monthly) payroll cutoff is around the 18th, usually the 15th t
 FINANCE = "Oracle needs little in comments and attachments, but many departmental finance approvers want more. Confirm what your finance partner expects before you submit."
 SUBMIT_D = "Submit sends the transaction into approval. If your finance partner wants a note or a document, click Continue first to reach the comments and attachments step."
 
-BRIANA = "Briana Knowles walkthrough, Oct 20"
-ALEX = "Alex Enferadi session, Oct 20"
-JEN = "Jennifer Garcia session, Oct 19"
+BRIANA = "HCM SME walkthrough, Oct 20"
+ALEX = "Costing SME session, Oct 20"
+JEN = "Payroll SME session, Oct 19"
 COSTGUIDE = "Training Guide: Enter or Edit Costing for Persons (updated 01/27/2022)"
 DOCGUIDE = "Personnel Files: Document Records, Oracle User Guide"
 AWARDGUIDE = "Award Compensation Elements Resource Guide (updated 01/17/2023)"
-S1 = "HCM training session 1, positions and pending workers (Andres Castro, Stephanie Commo), Sep 8, 2026"
-S2 = "HCM training session 2, requisitions (Stephanie Commo), Sep 9, 2026"
+S1 = "HCM training session 1, positions and pending workers, Sep 8, 2026"
+S2 = "HCM training session 2, requisitions and assignment changes, Sep 9, 2026"
 
 D = "https://docs.oracle.com/en/cloud/"
 DOC = {
@@ -427,9 +427,9 @@ dict(slug="hcm-role-in-payroll", topic="payroll", topic_label="Payroll & Timecar
 
 dict(slug="weekly-time-card-check", topic="payroll", topic_label="Payroll & Timecards",
  title_pre="The weekly time card", title_em="check", name="Weekly time card check",
- system="UKG (Kronos)", time="6 min", sources=[JEN, BRIANA], pending="Steps 3 and 4 fill in once Jennifer Garcia's UKG walkthrough is recorded.",
+ system="UKG (Kronos)", time="6 min", sources=[JEN, BRIANA],
  video=dict(src="https://embed.app.guidde.com/playbooks/3dMkzbLwg6tb8LikiegtXm?mode=videoOnly", title="Weekly time card check in UKG"),
- detailed=dict(title="Managing time cards and PTO in UKG", source="Guidde walkthrough by Briana Knowles. Names, IDs, and usernames are blurred.", steps=[
+ detailed=dict(title="Managing time cards and PTO in UKG", source="Guidde walkthrough. Names, IDs, and usernames are blurred.", steps=[
   dict(t="Open UKG from Oracle.", d="On the Oracle Home page, on the Me tab, under Apps, select UKG (Kronos) Timesheets.", img="step-01.jpg"),
   dict(t="Open the pay period list.", d="On the UKG Home page, scroll down to Links and select By Pay Period. Timesheets (By Pay Period) opens on the most recently completed pay period.", img="step-02.jpg"),
   dict(t="Filter to your employees.", d="Use the filter row under the column headings. In this example, type the business unit under Business Unit, then select Refresh (the circular arrow at the right) to update the list.", img="step-03.jpg"),
