@@ -42,7 +42,7 @@ current catalog (videos and e-learning). Edit them in place: each row is
 
 ## Micro-courses (V.01)
 
-22 short courses live in `courses/<slug>/`. Each has four parts: a brief intro,
+32 short courses live in `courses/<slug>/`. Each has four parts: a brief intro,
 a step-by-step walkthrough (a checklist where each step has a plain-language explanation
 and the course ends with links to official Oracle or UKG documentation), a 3-question knowledge check with
 feedback, and a printable one-page job aid (Print button; print CSS shows only
