@@ -42,13 +42,17 @@ current catalog (videos and e-learning). Edit them in place: each row is
 
 ## Micro-courses (V.01)
 
-32 short courses live in `courses/<slug>/`. Each has four parts: a brief intro,
+79 short courses live in `courses/<slug>/`. Each has four parts: a brief intro,
 a step-by-step walkthrough (a checklist where each step has a plain-language explanation
 and the course ends with links to official Oracle or UKG documentation), a 3-question knowledge check with
 feedback, and a printable one-page job aid (Print button; print CSS shows only
 the job aid). Passing all three questions marks the course complete on the
 landing page (shared `localStorage` key `hcm-done`, id `c-<slug>`).
 
+- Every landing row is a micro-learning course (format "Micro-learning", 3 to 10 minutes).
+- Courses drafted from Oracle documentation and official sources (not SME sessions) live in
+  `tools/courses_researched.py`; each shows a draft note and a Screen check list until a
+  Vanderbilt SME reviews it.
 - Content lives in `tools/course_content.py`. Edit there, then run
   `python3 tools/build_courses.py` to regenerate every page. The script also
   updates each course's row on the landing page (name, overview, time).

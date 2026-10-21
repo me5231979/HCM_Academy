@@ -101,7 +101,7 @@ def page(c, n, total):
   <div class="wrap">
     <p class="mono crumb">{E(c["topic_label"])} &middot; Course {n} of {total}</p>
     <h1 id="t">{title_html}</h1>
-    <ul class="meta" aria-label="Course details"><li class="v">V.01 draft</li><li>{E(c["time"])}</li>{'<li>Video</li>' if c.get("video") else ''}<li>{E(c["system"])}</li><li>3-question check</li><li>Printable job aid</li></ul>
+    <ul class="meta" aria-label="Course details"><li class="v">V.01 draft</li><li>Micro-learning</li><li>{E(c["time"])}</li>{'<li>Video</li>' if c.get("video") else ''}<li>{E(c["system"])}</li><li>3-question check</li><li>Printable job aid</li></ul>
   </div>
   <nav class="parts" aria-label="Course parts"><ol>
     <li><a href="#intro"><span>1</span>Intro</a></li><li><a href="#steps"><span>2</span>Walk through</a></li><li><a href="#check"><span>3</span>Check</a></li><li><a href="#jobaid"><span>4</span>Job aid</a></li>

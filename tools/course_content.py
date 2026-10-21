@@ -760,7 +760,7 @@ dict(slug="when-to-update-costing", topic="costing", topic_label="Costing Manage
 
 dict(slug="enter-edit-costing", topic="costing", topic_label="Costing Management",
  title_pre="Enter costing for a", title_em="person", name="Enter costing for a person",
- system="Oracle HCM (Costing for Persons)", time="12 min", sources=[COSTGUIDE, BRIANA, ALEX],
+ system="Oracle HCM (Costing for Persons)", time="10 min", sources=[COSTGUIDE, BRIANA, ALEX],
  intro=["Use Costing for Persons to enter or change where an assignment, or a single pay element, is charged. In many areas the finance partner does this, so confirm who owns it in your department.",
         "Get the COA or POET string from your finance partner before you start."],
  use_when="The default won't work and the person or a payment needs specific costing.",
@@ -874,3 +874,8 @@ VERIFY = {
 # is My Client Groups). Confirm a regular HCM, not only a super-user, sees it and the quick action.
 _UKG_SLUGS = {"weekly-time-card-check", "review-approve-time-cards", "enter-pto"}
 VERIFY = {k: (v if k in _UKG_SLUGS else list(v) + ["that a regular HCM (not a super-user) sees Our Workforce and this quick action"]) for k, v in VERIFY.items()}
+
+# Courses drafted from Oracle documentation and official sources (see tools/courses_researched.py).
+from courses_researched import COURSES_R, VERIFY_R  # noqa: E402
+COURSES += COURSES_R
+VERIFY.update(VERIFY_R)
