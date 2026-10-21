@@ -256,6 +256,7 @@ footer a{ color:var(--gold); }
 .card .links li.cbtn:has(.course-btn[aria-disabled="true"]):hover{ transform:none; box-shadow:0 1px 2px rgba(28,28,28,.05); }
 .aids li.locked .tt,.aids li.locked .ds,.aids li.locked .tm,.aids li.locked .fm{ color:#5E5E5E; }
 .aids li .soon .lk{ width:11px; height:11px; margin-right:4px; vertical-align:-1px; }
+.see-link .ck{ border-style:dotted; }
 .prestart.nudge{ outline:3px solid var(--gold); outline-offset:2px; }
 .card .aids li{ position:relative; padding-left:40px; border-style:dashed; }
 .card .aids li::before{ content:''; position:absolute; left:14px; top:14px; width:16px; height:18px;
@@ -454,6 +455,12 @@ footer a{ color:var(--gold); }
               <li data-course="rehire-eligibility"><span class="nm"><span class="tt">Rehires and eligibility for rehire</span><span class="ds">A candidate you want to hire used to work at Vanderbilt, or you are terminating someone and need to set the rehire field.</span></span><span class="tm"><span class="sr-l">Time: </span>5 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-learning</span><span class="soon">Coming soon</span></li>
               <li class="group">Hiring scenarios by worker type</li>
               <li class="sub" data-course="hire-staff"><span class="nm"><span class="tt">Staff</span><span class="ds">You need to hire a staff member and want to see every step from requisition to start date.</span></span><span class="tm"><span class="sr-l">Time: </span>6 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-learning</span><span class="soon">Coming soon</span></li>
+              <li class="sub" data-see="students"><span class="nm"><span class="tt">Faculty</span><span class="ds">Covered in 06, Student &amp; Faculty Hiring and Assignments.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span><span class="soon">In 06</span></li>
+              <li class="sub" data-see="students"><span class="nm"><span class="tt">Emeritus</span><span class="ds">Covered in 06, Student &amp; Faculty Hiring and Assignments.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span><span class="soon">In 06</span></li>
+              <li class="sub" data-see="students"><span class="nm"><span class="tt">FERDC</span><span class="ds">Covered in 06, Student &amp; Faculty Hiring and Assignments.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span><span class="soon">In 06</span></li>
+              <li class="sub" data-see="students"><span class="nm"><span class="tt">Student Workers</span><span class="ds">Covered in 06, Student &amp; Faculty Hiring and Assignments.</span></span><span class="tm"><span class="sr-l">Time: </span>6 min</span><span class="fm"><span class="sr-l">Format: </span><span class="soon">In 06</span></li>
+              <li class="sub" data-see="students"><span class="nm"><span class="tt">Student Expense Only</span><span class="ds">Covered in 06, Student &amp; Faculty Hiring and Assignments.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span><span class="soon">In 06</span></li>
+              <li class="sub" data-see="students"><span class="nm"><span class="tt">Service Free Stipend</span><span class="ds">Covered in 06, Student &amp; Faculty Hiring and Assignments.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span><span class="soon">In 06</span></li>
               <li class="sub" data-course="hire-interns"><span class="nm"><span class="tt">Interns (Paid and Unpaid)</span><span class="ds">Someone wants to bring on an intern, and you need to know whether the person must be paid and how to set them up.</span></span><span class="tm"><span class="sr-l">Time: </span>6 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-learning</span><span class="soon">Coming soon</span></li>
               <li class="sub"><span class="nm"><span class="tt">Union Employees</span><span class="ds">Hiring into union positions and the rules that apply.</span></span><span class="tm"><span class="sr-l">Time: </span>10 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-learning</span><span class="soon">Coming soon</span></li>
               <li class="sub" data-course="hire-non-worker"><span class="nm"><span class="tt">Non-Workers</span><span class="ds">Someone needs access but isn't an employee and won't be paid.</span></span><span class="tm"><span class="sr-l">Time: </span>3 min</span><span class="fm"><span class="sr-l">Format: </span>Micro-learning</span><span class="soon">Coming soon</span></li>
@@ -707,7 +714,7 @@ footer a{ color:var(--gold); }
         var sub = s.querySelector('.subhead'), subHit = headHit || (sub && norm(sub.textContent).indexOf(term) > -1), any = 0;
         s.querySelectorAll('.links li:not(.group)').forEach(function(li){
           var hit = subHit || norm(li.textContent).indexOf(term) > -1;
-          li.hidden = !hit; if (hit){ any++; if (li.dataset.assess){ if (inTopic) assess++; } else lineHits++; }
+          li.hidden = !hit; if (hit){ any++; if (li.dataset.assess){ if (inTopic) assess++; } else if (!li.dataset.see) lineHits++; }
         });
         var aidHits = 0;
         s.querySelectorAll('.aids li').forEach(function(li){
@@ -757,6 +764,14 @@ footer a{ color:var(--gold); }
   /* turn every course line into a completion toggle */
   cards.forEach(function(c){
     c.querySelectorAll('.links li:not(.group)').forEach(function(li, i){
+      if (li.dataset.see){
+        var see = document.createElement('a'); see.href = '#' + li.dataset.see; see.className = 'course-btn course-link assess-link see-link';
+        see.innerHTML = '<span class="ck" aria-hidden="true">' + CHECK + '</span>';
+        while (li.firstChild) see.appendChild(li.firstChild);
+        li.appendChild(see); li.classList.add('cbtn');
+        see.addEventListener('click', function(e){ e.preventDefault(); var t = document.getElementById('tab-' + li.dataset.see); if (t){ t.click(); t.focus(); } });
+        return;
+      }
       if (li.dataset.assess){
         preLink = document.createElement('a'); preLink.href = 'assessment/' + li.dataset.assess + '/'; preLink.className = 'course-btn course-link assess-link';
         preLink.innerHTML = '<span class="ck" aria-hidden="true">' + CHECK + '</span>';
