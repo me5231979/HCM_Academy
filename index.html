@@ -253,6 +253,8 @@ footer a{ color:var(--gold); }
 .course-btn[aria-disabled="true"] .ck{ border-style:dashed; }
 .course-btn .soon .lk{ width:11px; height:11px; margin-right:4px; flex-shrink:0; align-self:center; }
 .card .links li.cbtn:has(.course-btn[aria-disabled="true"]):hover{ transform:none; box-shadow:0 1px 2px rgba(28,28,28,.05); }
+.aids li.locked .tt,.aids li.locked .ds,.aids li.locked .tm,.aids li.locked .fm{ color:#5E5E5E; }
+.aids li .soon .lk{ width:11px; height:11px; margin-right:4px; vertical-align:-1px; }
 .prestart.nudge{ outline:3px solid var(--gold); outline-offset:2px; }
 .card .aids li,.allres .aids li{ position:relative; padding-left:40px; border-style:dashed; }
 .card .aids li::before,.allres .aids li::before{ content:''; position:absolute; left:14px; top:14px; width:16px; height:18px;
@@ -763,6 +765,11 @@ footer a{ color:var(--gold); }
     ptext.textContent = n + ' of ' + total + ' courses complete.';
     pbar.style.width = (total ? n / total * 100 : 0) + '%';
     document.getElementById('preStart').hidden = preDone;
+    document.querySelectorAll('.aids li .soon').forEach(function(sp){
+      if (!sp.dataset.label) sp.dataset.label = sp.textContent;
+      if (preDone) sp.textContent = sp.dataset.label; else sp.innerHTML = LOCK + 'Locked';
+      sp.closest('li').classList.toggle('locked', !preDone);
+    });
     if (preLink){ preLink.dataset.done = preDone ? 'true' : 'false'; preLink.querySelector('.soon').textContent = preDone ? 'Taken' : 'Start'; }
     if (all && !finalPassed){ finalBtn.href = 'assessment/final/'; finalBtn.removeAttribute('aria-disabled'); }
     else { finalBtn.removeAttribute('href'); finalBtn.setAttribute('aria-disabled', 'true'); }
